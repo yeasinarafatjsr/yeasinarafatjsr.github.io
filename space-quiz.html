@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>মহাকাশ কুইজ | Knowledge World</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 18px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 25px;
+        }
+
+        header p {
+            margin: 8px 0 0;
+            color: #cbd5e1;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 25px auto;
+            padding: 0 15px;
+        }
+
+        .quiz-box {
+            background: white;
+            padding: 22px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .question-number {
+            color: #2563eb;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .question {
+            font-size: 19px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .option {
+            display: block;
+            width: 100%;
+            padding: 13px;
+            margin: 10px 0;
+            border: 1px solid #d1d5db;
+            background: #f9fafb;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .option:hover {
+            background: #eef2ff;
+        }
+
+        .correct {
+            background: #dcfce7 !important;
+            border-color: #22c55e !important;
+        }
+
+        .wrong {
+            background: #fee2e2 !important;
+            border-color: #ef4444 !important;
+        }
+
+        .feedback {
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        .result {
+            display: none;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .result h2 {
+            color: #2563eb;
+        }
+
+        .score {
+            font-size: 30px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        button {
+            border: none;
+            border-radius: 10px;
+            padding: 13px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .restart {
+            background: #2563eb;
+            color: white;
+        }
+
+        .home {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <h1>🌌 Knowledge World</h1>
+
+    <p>মহাকাশ কুইজ</p>
+
+</header>
+
+
+<div class="container">
+
+    <div class="quiz-box">
+
+        <div class="question-number">
+            প্রশ্ন ১
+        </div>
+
+        <div class="question">
+            সৌরজগতের সবচেয়ে বড় গ্রহ কোনটি?
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, false)">
+            ক) পৃথিবী
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, true)">
+            খ) বৃহস্পতি
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, false)">
+            গ) মঙ্গল
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, false)">
+            ঘ) শুক্র
+        </button>
+
+        <div class="feedback"></div>
+
+    </div>
+
+
+    <div class="quiz-box">
+
+        <div class="question-number">
+            প্রশ্ন ২
+        </div>
+
+        <div class="question">
+            পৃথিবীর সবচেয়ে কাছের নক্ষত্র কোনটি?
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, true)">
+            ক) সূর্য
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, false)">
+            খ) চাঁদ
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, false)">
+            গ) সিরিয়াস
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, false)">
+            ঘ) ধ্রুবতারা
+        </button>
+
+        <div class="feedback"></div>
+
+    </div>
+
+
+    <div class="quiz-box">
+
+        <div class="question-number">
+            প্রশ্ন ৩
+        </div>
+
+        <div class="question">
+            পৃথিবীর একমাত্র প্রাকৃতিক উপগ্রহ কোনটি?
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, false)">
+            ক) মঙ্গল
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, false)">
+            খ) সূর্য
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, true)">
+            গ) চাঁদ
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, false)">
+            ঘ) শুক্র
+        </button>
+
+        <div class="feedback"></div>
+
+    </div>
+
+
+    <div class="quiz-box">
+
+        <div class="question-number">
+            প্রশ্ন ৪
+        </div>
+
+        <div class="question">
+            লাল গ্রহ নামে কোন গ্রহ পরিচিত?
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, false)">
+            ক) বৃহস্পতি
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, true)">
+            খ) মঙ্গল
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, false)">
+            গ) শনি
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, false)">
+            ঘ) নেপচুন
+        </button>
+
+        <div class="feedback"></div>
+
+    </div>
+
+
+    <div class="quiz-box">
+
+        <div class="question-number">
+            প্রশ্ন ৫
+        </div>
+
+        <div class="question">
+            সূর্য কী?
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, false)">
+            ক) গ্রহ
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, true)">
+            খ) নক্ষত্র
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, false)">
+            গ) উপগ্রহ
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, false)">
+            ঘ) ধূমকেতু
+        </button>
+
+        <div class="feedback"></div>
+
+    </div>
+
+
+    <div class="result" id="result">
+
+        <h2>🎉 কুইজ শেষ!</h2>
+
+        <div class="score" id="score">
+            ০ / ৫
+        </div>
+
+        <p id="message"></p>
+
+        <button class="restart" onclick="restartQuiz()">
+            🔄 আবার কুইজ দিন
+        </button>
+
+        <br>
+
+        <a class="home" href="index.html">
+            🏠 Knowledge World-এ ফিরে যান
+        </a>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    © 2026 Knowledge World
+
+</footer>
+
+
+<script>
+
+let score = 0;
+let answered = 0;
+
+
+function checkAnswer(button, isCorrect) {
+
+    let quizBox = button.parentElement;
+
+    let options = quizBox.querySelectorAll(".option");
+
+    let feedback = quizBox.querySelector(".feedback");
+
+
+    // একই প্রশ্নে একাধিকবার উত্তর দেওয়া বন্ধ
+    if (quizBox.dataset.answered === "true") {
+        return;
+    }
+
+    quizBox.dataset.answered = "true";
+
+    answered++;
+
+
+    if (isCorrect) {
+
+        button.classList.add("correct");
+
+        feedback.innerHTML = "✅ সঠিক উত্তর!";
+
+        feedback.style.color = "green";
+
+        score++;
+
+    } else {
+
+        button.classList.add("wrong");
+
+        feedback.innerHTML = "❌ ভুল উত্তর!";
+
+        feedback.style.color = "red";
+
+
+        // সঠিক উত্তরটি দেখানো
+        options.forEach(function(option) {
+
+            let answer = option.getAttribute("onclick");
+
+            if (answer && answer.includes("true")) {
+
+                option.classList.add("correct");
+
+            }
+
+        });
+
+    }
+
+
+    // সব প্রশ্নের উত্তর দেওয়া হলে ফলাফল দেখাবে
+    if (answered === 5) {
+
+        setTimeout(showResult, 500);
+
+    }
+
+}
+
+
+function showResult() {
+
+    let result = document.getElementById("result");
+
+    let scoreText = document.getElementById("score");
+
+    let message = document.getElementById("message");
+
+
+    scoreText.innerHTML = score + " / 5";
+
+
+    if (score === 5) {
+
+        message.innerHTML =
+            "🏆 অসাধারণ! মহাকাশ সম্পর্কে আপনার জ্ঞান খুব ভালো।";
+
+    } else if (score >= 3) {
+
+        message.innerHTML =
+            "👏 ভালো করেছেন! আরও কিছু পড়লে আরও ভালো করতে পারবেন।";
+
+    } else {
+
+        message.innerHTML =
+            "📚 আবার মহাকাশের Article পড়ে চেষ্টা করুন!";
+
+    }
+
+
+    result.style.display = "block";
+
+    result.scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+
+function restartQuiz() {
+
+    location.reload();
+
+}
+
+</script>
+
+</body>
+</html>
