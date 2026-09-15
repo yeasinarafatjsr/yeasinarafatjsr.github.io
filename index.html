@@ -413,6 +413,7 @@
 
 </footer>
 
+
 <script>
 
 function search() {
@@ -428,33 +429,33 @@ function search() {
         return;
     }
 
+    /* মহাকাশ */
     if (
         text.includes("মহাকাশ") ||
         text.includes("space") ||
         text.includes("নক্ষত্র") ||
         text.includes("গ্রহ")
     ) {
-
         window.location.href = "space.html";
         return;
     }
 
+    /* বিজ্ঞান */
     if (
         text.includes("বিজ্ঞান") ||
         text.includes("science")
     ) {
-
-        alert("🔬 বিজ্ঞান Article খুব শিগগিরই আসছে!");
+        window.location.href = "science.html";
         return;
     }
 
+    /* প্রযুক্তি */
     if (
         text.includes("প্রযুক্তি") ||
         text.includes("technology") ||
         text.includes("ইন্টারনেট")
     ) {
-
-        alert("💻 প্রযুক্তি Article খুব শিগগিরই আসছে!");
+        window.location.href = "technology.html";
         return;
     }
 
