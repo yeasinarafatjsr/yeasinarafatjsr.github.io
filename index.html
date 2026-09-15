@@ -420,16 +420,36 @@ function search() {
     let text =
         document.getElementById("searchBox").value.trim();
 
+    <script>
+
+function search() {
+
+    let text = document
+        .getElementById("searchBox")
+        .value
+        .trim()
+        .toLowerCase();
+
     if (text === "") {
 
         alert("দয়া করে কিছু লিখে Search করুন।");
+        return;
+
+    }
+
+    if (
+        text.includes("মহাকাশ") ||
+        text.includes("space") ||
+        text.includes("নক্ষত্র") ||
+        text.includes("গ্রহ")
+    ) {
+
+        window.location.href = "space.html";
 
     } else {
 
         alert(
-            "আপনি \"" +
-            text +
-            "\" সম্পর্কে জানতে চেয়েছেন।"
+            "দুঃখিত! এই বিষয়ে এখনো কোনো Article পাওয়া যায়নি।"
         );
 
     }
