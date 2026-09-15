@@ -1,42 +1,442 @@
 <!DOCTYPE html>
-<html>
+<html lang="bn">
 <head>
-    <title>আমার ওয়েবসাইট</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Knowledge World | জ্ঞানের দুনিয়া</title>
+
+    <meta name="description" content="Knowledge World - বিজ্ঞান, প্রযুক্তি, ইতিহাস, মহাকাশ ও সাধারণ জ্ঞানের সহজ তথ্যভাণ্ডার।">
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #222;
+            line-height: 1.7;
+        }
+
+        header {
+            background: #172554;
+            color: white;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 18px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
             text-align: center;
-            margin: 0;
-            padding: 50px 20px;
-            background: #f2f2f2;
+            padding: 80px 20px;
         }
 
-        h1 {
-            font-size: 35px;
+        .hero h1 {
+            font-size: 45px;
+            margin-bottom: 10px;
         }
 
-        p {
-            font-size: 18px;
+        .hero p {
+            font-size: 19px;
+            margin-bottom: 28px;
         }
 
-        button {
-            padding: 12px 25px;
-            font-size: 17px;
+        .search {
+            max-width: 600px;
+            margin: auto;
+            display: flex;
+        }
+
+        .search input {
+            flex: 1;
+            padding: 15px;
             border: none;
-            border-radius: 8px;
+            border-radius: 8px 0 0 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search button {
+            padding: 15px 22px;
+            border: none;
+            background: #f59e0b;
+            color: white;
+            font-weight: bold;
+            border-radius: 0 8px 8px 0;
             cursor: pointer;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 55px 20px;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title h2 {
+            font-size: 30px;
+            color: #172554;
+        }
+
+        .title p {
+            color: #666;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 18px;
+        }
+
+        .category {
+            background: white;
+            padding: 25px 15px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            font-size: 18px;
+            transition: 0.2s;
+        }
+
+        .category:hover {
+            transform: translateY(-4px);
+        }
+
+        .articles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            color: #172554;
+            margin-bottom: 10px;
+        }
+
+        .read {
+            display: inline-block;
+            margin-top: 12px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .about {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .contact {
+            text-align: center;
+        }
+
+        .contact a {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 22px;
+            background: #172554;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        footer {
+            background: #172554;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        @media (max-width: 650px) {
+
+            .nav {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 6px;
+                font-size: 13px;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <h1>আমার ওয়েবসাইটে স্বাগতম! 🎉</h1>
+<header>
 
-    <p>এটা আমার প্রথম ওয়েবসাইট।</p>
+    <div class="nav">
 
-    <button>যোগাযোগ করুন</button>
+        <div class="logo">
+            🧠 Knowledge World
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#categories">বিষয়সমূহ</a>
+            <a href="#articles">Articles</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+    </div>
+
+</header>
+
+
+<section class="hero" id="home">
+
+    <h1>🧠 Knowledge World</h1>
+
+    <p>জানুন • শিখুন • জ্ঞানকে ছড়িয়ে দিন 🌍</p>
+
+    <div class="search">
+
+        <input
+            type="text"
+            id="searchBox"
+            placeholder="আপনি কী জানতে চান?"
+        >
+
+        <button onclick="search()">Search</button>
+
+    </div>
+
+</section>
+
+
+<section class="container" id="categories">
+
+    <div class="title">
+
+        <h2>📚 বিষয়সমূহ</h2>
+
+        <p>আপনার পছন্দের বিষয় থেকে জ্ঞান অর্জন করুন</p>
+
+    </div>
+
+
+    <div class="categories">
+
+        <div class="category">🔬<br>বিজ্ঞান</div>
+
+        <div class="category">💻<br>প্রযুক্তি</div>
+
+        <div class="category">🌌<br>মহাকাশ</div>
+
+        <div class="category">🏛️<br>ইতিহাস</div>
+
+        <div class="category">🌍<br>ভূগোল</div>
+
+        <div class="category">🧠<br>সাধারণ জ্ঞান</div>
+
+    </div>
+
+</section>
+
+
+<section class="container" id="articles">
+
+    <div class="title">
+
+        <h2>📖 জনপ্রিয় Article</h2>
+
+        <p>সহজ ভাষায় বিভিন্ন বিষয়ের তথ্য</p>
+
+    </div>
+
+
+    <div class="articles">
+
+        <div class="card">
+
+            <h3>🌌 মহাকাশ সম্পর্কে কিছু তথ্য</h3>
+
+            <p>
+                মহাবিশ্বে রয়েছে অসংখ্য নক্ষত্র,
+                গ্রহ ও গ্যালাক্সি। মহাকাশ সম্পর্কে
+                আরও অনেক মজার তথ্য জানুন।
+            </p>
+
+            <a class="read" href="#">
+                আরও পড়ুন →
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>💻 ইন্টারনেট কীভাবে কাজ করে?</h3>
+
+            <p>
+                আমরা প্রতিদিন ইন্টারনেট ব্যবহার করি।
+                কিন্তু ইন্টারনেটের পেছনে কীভাবে
+                তথ্য আদান-প্রদান হয়?
+            </p>
+
+            <a class="read" href="#">
+                আরও পড়ুন →
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>🔬 বিজ্ঞান আমাদের জীবনে</h3>
+
+            <p>
+                আমাদের দৈনন্দিন জীবনের বিভিন্ন
+                প্রযুক্তি ও আবিষ্কারের পেছনে
+                বিজ্ঞানের গুরুত্বপূর্ণ ভূমিকা রয়েছে।
+            </p>
+
+            <a class="read" href="#">
+                আরও পড়ুন →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="container" id="about">
+
+    <div class="title">
+
+        <h2>ℹ️ Knowledge World সম্পর্কে</h2>
+
+    </div>
+
+    <div class="about">
+
+        <p>
+            Knowledge World হলো একটি জ্ঞানভিত্তিক
+            ওয়েবসাইট। এখানে বিজ্ঞান, প্রযুক্তি,
+            ইতিহাস, মহাকাশ, ভূগোল এবং সাধারণ জ্ঞানসহ
+            বিভিন্ন বিষয়ে সহজ ভাষায় তথ্য প্রকাশ করা হবে।
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="container contact" id="contact">
+
+    <div class="title">
+
+        <h2>📩 Contact</h2>
+
+        <p>
+            Knowledge World সম্পর্কে যোগাযোগ করতে পারেন।
+        </p>
+
+    </div>
+
+    <a href="mailto:your-email@example.com">
+        Email করুন
+    </a>
+
+</section>
+
+
+<footer>
+
+    <h3>🧠 Knowledge World</h3>
+
+    <p>জ্ঞানই শক্তি।</p>
+
+    <p>© 2026 Knowledge World</p>
+
+</footer>
+
+
+<script>
+
+function search() {
+
+    let text =
+        document.getElementById("searchBox").value.trim();
+
+    if (text === "") {
+
+        alert("দয়া করে কিছু লিখে Search করুন।");
+
+    } else {
+
+        alert(
+            "আপনি \"" +
+            text +
+            "\" সম্পর্কে জানতে চেয়েছেন।"
+        );
+
+    }
+
+}
+
+</script>
 
 </body>
 </html>
