@@ -419,22 +419,53 @@
 
 function search() {
 
-    let text = document.getElementById("searchBox").value.trim();
+    let text = document
+        .getElementById("searchBox")
+        .value
+        .trim()
+        .toLowerCase();
 
     if (text === "") {
         alert("দয়া করে কিছু লিখে Search করুন।");
         return;
     }
 
-    if (text.includes("মহাকাশ") || text.includes("space")) {
+    if (
+        text.includes("মহাকাশ") ||
+        text.includes("space") ||
+        text.includes("নক্ষত্র") ||
+        text.includes("গ্রহ")
+    ) {
+
         window.location.href = "space.html";
         return;
     }
 
+    if (
+        text.includes("বিজ্ঞান") ||
+        text.includes("science")
+    ) {
+
+        alert("🔬 বিজ্ঞান Article খুব শিগগিরই আসছে!");
+        return;
+    }
+
+    if (
+        text.includes("প্রযুক্তি") ||
+        text.includes("technology") ||
+        text.includes("ইন্টারনেট")
+    ) {
+
+        alert("💻 প্রযুক্তি Article খুব শিগগিরই আসছে!");
+        return;
+    }
+
     alert("দুঃখিত! এই বিষয়ে এখনো কোনো Article পাওয়া যায়নি।");
+
 }
 
 </script>
+
 
 </body>
 </html>
