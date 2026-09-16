@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>বিজ্ঞান কুইজ | Knowledge World</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+header {
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+header p {
+    color: #cbd5e1;
+}
+
+.container {
+    max-width: 750px;
+    margin: 25px auto;
+    padding: 0 15px;
+}
+
+.setup,
+.quiz-box,
+.result {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.setup {
+    text-align: center;
+}
+
+.setup h2 {
+    color: #2563eb;
+}
+
+.start-button,
+.next-button,
+.submit-button,
+.restart-button {
+    border: none;
+    padding: 13px 22px;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.start-button {
+    background: #2563eb;
+}
+
+.next-button {
+    background: #16a34a;
+}
+
+.submit-button {
+    background: #dc2626;
+}
+
+.restart-button {
+    background: #2563eb;
+}
+
+#quizArea,
+#resultArea {
+    display: none;
+}
+
+.question-number {
+    color: #2563eb;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.question {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.option {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    background: #f8fafc;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 16px;
+}
+
+.option:hover {
+    background: #eef2ff;
+}
+
+.option.selected {
+    background: #dbeafe;
+    border: 2px solid #2563eb;
+}
+
+.progress {
+    margin: 15px 0;
+    color: #64748b;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.result {
+    text-align: center;
+}
+
+.score {
+    font-size: 34px;
+    font-weight: bold;
+    color: #2563eb;
+    margin: 20px 0;
+}
+
+.result p {
+    font-size: 18px;
+}
+
+.back {
+    display: inline-block;
+    margin-top: 20px;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #64748b;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>🔬 বিজ্ঞান কুইজ</h1>
+
+<p>Knowledge World</p>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- Quiz Setup -->
+
+<div class="setup" id="setup">
+
+<h2>🧠 বিজ্ঞান সম্পর্কে আপনার জ্ঞান যাচাই করুন</h2>
+
+<p>
+এই কুইজে মোট ৫০টি প্রশ্ন আছে।
+আপনি চাইলে সবগুলো অথবা যেগুলো পারেন সেগুলোর উত্তর দিতে পারবেন।
+</p>
+
+<h3>Negative Marking</h3>
+
+<p>
+ভুল উত্তরের জন্য ০.২৫ নম্বর কাটা হবে।
+আপনি কি Negative Marking চান?
+</p>
+
+<label>
+<input type="radio" name="negative" value="yes" checked>
+হ্যাঁ
+</label>
+
+&nbsp;&nbsp;
+
+<label>
+<input type="radio" name="negative" value="no">
+না
+</label>
+
+<br>
+
+<button class="start-button" onclick="startQuiz()">
+🚀 Quiz শুরু করুন
+</button>
+
+</div>
+
+
+<!-- Quiz -->
+
+<div id="quizArea">
+
+<div class="quiz-box">
+
+<div class="progress" id="progress"></div>
+
+<div class="question-number" id="questionNumber"></div>
+
+<div class="question" id="question"></div>
+
+<div id="options"></div>
+
+<div class="buttons">
+
+<button class="next-button" onclick="nextQuestion()">
+পরের প্রশ্ন →
+</button>
+
+<button class="submit-button" onclick="submitQuiz()">
+📝 Submit Quiz
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- Result -->
+
+<div id="resultArea">
+
+<div class="result">
+
+<h2>🎉 Quiz শেষ!</h2>
+
+<div class="score" id="score"></div>
+
+<p id="resultDetails"></p>
+
+<p id="resultMessage"></p>
+
+<button class="restart-button" onclick="location.reload()">
+🔄 আবার Quiz দিন
+</button>
+
+<br>
+
+<a href="quiz.html" class="back">
+🧠 Quiz Dashboard
+</a>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<footer>
+
+© 2026 Knowledge World
+
+</footer>
+
+
+<script>
+
+const questions = [
+
+{
+q: "পৃথিবীর উপগ্রহ কোনটি?",
+o: ["সূর্য", "চাঁদ", "মঙ্গল", "শুক্র"],
+a: 1
+},
+
+{
+q: "পানির রাসায়নিক সংকেত কী?",
+o: ["CO₂", "O₂", "H₂O", "NaCl"],
+a: 2
+},
+
+{
+q: "মানুষের শরীরে রক্ত পাম্প করে কোন অঙ্গ?",
+o: ["ফুসফুস", "হৃদপিণ্ড", "কিডনি", "মস্তিষ্ক"],
+a: 1
+},
+
+{
+q: "সূর্য কী?",
+o: ["গ্রহ", "উপগ্রহ", "নক্ষত্র", "গ্রহাণু"],
+a: 2
+},
+
+{
+q: "উদ্ভিদ কোন প্রক্রিয়ায় খাদ্য তৈরি করে?",
+o: ["শ্বসন", "সালোকসংশ্লেষণ", "পরিপাক", "বাষ্পীভবন"],
+a: 1
+},
+
+{
+q: "মানুষের শ্বাস নেওয়ার প্রধান অঙ্গ কোনটি?",
+o: ["হৃদপিণ্ড", "ফুসফুস", "যকৃত", "কিডনি"],
+a: 1
+},
+
+{
+q: "পৃথিবীর সবচেয়ে কাছের নক্ষত্র কোনটি?",
+o: ["সূর্য", "সিরিয়াস", "ধ্রুবতারা", "প্রক্সিমা সেন্টোরি"],
+a: 0
+},
+
+{
+q: "বলের SI একক কী?",
+o: ["ওয়াট", "জুল", "নিউটন", "পাস্কাল"],
+a: 2
+},
+
+{
+q: "আলোর গতি সবচেয়ে বেশি কোথায়?",
+o: ["পানিতে", "কাঁচে", "শূন্যস্থানে", "বাতাসে"],
+a: 2
+},
+
+{
+q: "মানুষের শরীরে মোট কত জোড়া ক্রোমোজোম থাকে?",
+o: ["২১", "২২", "২৩", "২৪"],
+a: 2
+},
+
+{
+q: "ভিটামিন C-এর অভাবে কোন রোগ হয়?",
+o: ["রিকেটস", "স্কার্ভি", "বেরিবেরি", "রাতকানা"],
+a: 1
+},
+
+{
+q: "পৃথিবীর বায়ুমণ্ডলে সবচেয়ে বেশি কোন গ্যাস?",
+o: ["অক্সিজেন", "কার্বন ডাই-অক্সাইড", "নাইট্রোজেন", "হাইড্রোজেন"],
+a: 2
+},
+
+{
+q: "বিদ্যুৎ প্রবাহের SI একক কী?",
+o: ["ভোল্ট", "অ্যাম্পিয়ার", "ওহম", "ওয়াট"],
+a: 1
+},
+
+{
+q: "তাপমাত্রা মাপার যন্ত্র কোনটি?",
+o: ["ব্যারোমিটার", "থার্মোমিটার", "অ্যামিটার", "ভোল্টমিটার"],
+a: 1
+},
+
+{
+q: "মানুষের মস্তিষ্ক কোন অঙ্গের অংশ?",
+o: ["পরিপাকতন্ত্র", "স্নায়ুতন্ত্র", "শ্বাসতন্ত্র", "রক্তসংবহন তন্ত্র"],
+a: 1
+},
+
+{
+q: "কোন গ্রহকে লাল গ্রহ বলা হয়?",
+o: ["শুক্র", "মঙ্গল", "বৃহস্পতি", "শনি"],
+a: 1
+},
+
+{
+q: "পৃথিবীর সবচেয়ে বড় মহাসাগর কোনটি?",
+o: ["আটলান্টিক", "ভারত মহাসাগর", "প্রশান্ত", "আর্কটিক"],
+a: 2
+},
+
+{
+q: "শব্দ কোন মাধ্যমে চলতে পারে না?",
+o: ["বায়ু", "পানি", "লোহা", "শূন্যস্থান"],
+a: 3
+},
+
+{
+q: "মানুষের দেহের সবচেয়ে বড় অঙ্গ কোনটি?",
+o: ["হৃদপিণ্ড", "ত্বক", "যকৃত", "ফুসফুস"],
+a: 1
+},
+
+{
+q: "অ্যাসিডের pH সাধারণত কত-এর কম?",
+o: ["৭", "৮", "১০", "১৪"],
+a: 0
+},
+
+{
+q: "কোন ধাতু সাধারণ তাপমাত্রায় তরল?",
+o: ["লোহা", "তামা", "পারদ", "অ্যালুমিনিয়াম"],
+a: 2
+},
+
+{
+q: "DNA-এর পূর্ণরূপ কী?",
+o: [
+"Deoxyribonucleic Acid",
+"Dynamic Nuclear Acid",
+"Double Nitrogen Acid",
+"Deoxygenated Nucleic Acid"
+],
+a: 0
+},
+
+{
+q: "মাধ্যাকর্ষণ শক্তির কারণে কী ঘটে?",
+o: [
+"বস্তু পৃথিবীর দিকে আকৃষ্ট হয়",
+"আলো তৈরি হয়",
+"শব্দ বন্ধ হয়",
+"পানি জমে যায়"
+],
+a: 0
+},
+
+{
+q: "কোন গ্রহের বলয় সবচেয়ে বিখ্যাত?",
+o: ["বুধ", "শুক্র", "শনি", "মঙ্গল"],
+a: 2
+},
+
+{
+q: "বিদ্যুৎ শক্তির বাণিজ্যিক একক কী?",
+o: ["কিলোওয়াট-ঘণ্টা", "নিউটন", "পাস্কাল", "অ্যাম্পিয়ার"],
+a: 0
+},
+
+{
+q: "মানুষের শরীরে রক্ত পরিশোধনে গুরুত্বপূর্ণ ভূমিকা রাখে কোন অঙ্গ?",
+o: ["কিডনি", "চোখ", "কান", "ত্বক"],
+a: 0
+},
+
+{
+q: "কোন ভিটামিন সূর্যের আলো থেকে শরীরে তৈরি হতে পারে?",
+o: ["ভিটামিন A", "ভিটামিন B", "ভিটামিন C", "ভিটামিন D"],
+a: 3
+},
+
+{
+q: "উদ্ভিদের সবুজ রঙের জন্য দায়ী কোন পদার্থ?",
+o: ["হিমোগ্লোবিন", "ক্লোরোফিল", "কেরাটিন", "ইনসুলিন"],
+a: 1
+},
+
+{
+q: "পৃথিবী সূর্যকে একবার প্রদক্ষিণ করতে প্রায় কত সময় নেয়?",
+o: ["২৪ ঘণ্টা", "৩০ দিন", "৩৬৫ দিন", "১২ ঘণ্টা"],
+a: 2
+},
+
+{
+q: "মানুষের স্বাভাবিক দেহের তাপমাত্রা প্রায় কত?",
+o: ["২৫°C", "৩৭°C", "৪৫°C", "৫০°C"],
+a: 1
+},
+
+{
+q: "অক্সিজেনের রাসায়নিক সংকেত কী?",
+o: ["O₂", "CO₂", "H₂", "N₂"],
+a: 0
+},
+
+{
+q: "কার্বন ডাই-অক্সাইডের সংকেত কী?",
+o: ["CO", "CO₂", "C₂O", "O₂"],
+a: 1
+},
+
+{
+q: "কোন শক্তি সূর্য থেকে পৃথিবীতে আসে?",
+o: ["সৌর শক্তি", "রাসায়নিক শক্তি", "পারমাণবিক বর্জ্য", "শব্দ শক্তি"],
+a: 0
+},
+
+{
+q: "রক্তে অক্সিজেন বহনে কোন পদার্থ গুরুত্বপূর্ণ?",
+o: ["হিমোগ্লোবিন", "ক্লোরোফিল", "ইনসুলিন", "ক্যালসিয়াম"],
+a: 0
+},
+
+{
+q: "কোন অঙ্গ রক্ত পাম্প করে?",
+o: ["মস্তিষ্ক", "হৃদপিণ্ড", "ফুসফুস", "পাকস্থলী"],
+a: 1
+},
+
+{
+q: "বায়ুচাপ মাপার যন্ত্র কোনটি?",
+o: ["থার্মোমিটার", "ব্যারোমিটার", "অ্যামিটার", "স্পিডোমিটার"],
+a: 1
+},
+
+{
+q: "কোন গ্রহ সূর্যের সবচেয়ে কাছের?",
+o: ["বুধ", "পৃথিবী", "মঙ্গল", "শুক্র"],
+a: 0
+},
+
+{
+q: "পৃথিবীর আকৃতি কেমন?",
+o: ["সম্পূর্ণ সমতল", "প্রায় গোলাকার", "ত্রিভুজাকার", "চৌকো"],
+a: 1
+},
+
+{
+q: "জলের স্ফুটনাঙ্ক সমুদ্রপৃষ্ঠে প্রায় কত?",
+o: ["৫০°C", "৭৫°C", "১০০°C", "১৫০°C"],
+a: 2
+},
+
+{
+q: "জলের হিমাঙ্ক কত?",
+o: ["০°C", "১০°C", "৫০°C", "১০০°C"],
+a: 0
+},
+
+{
+q: "মানুষের খাবার হজমের প্রধান স্থান কোনটি?",
+o: ["ক্ষুদ্রান্ত্র", "চোখ", "কান", "হৃদপিণ্ড"],
+a: 0
+},
+
+{
+q: "ইনসুলিন কোন অঙ্গ থেকে নিঃসৃত হয়?",
+o: ["অগ্ন্যাশয়", "হৃদপিণ্ড", "ফুসফুস", "কিডনি"],
+a: 0
+},
+
+{
+q: "কোন প্রাণী স্তন্যপায়ী?",
+o: ["মাছ", "ব্যাঙ", "তিমি", "সাপ"],
+a: 2
+},
+
+{
+q: "কোনটি নবায়নযোগ্য শক্তির উৎস?",
+o: ["কয়লা", "পেট্রোল", "সৌরশক্তি", "প্রাকৃতিক গ্যাস"],
+a: 2
+},
+
+{
+q: "ওজোন স্তর আমাদের কোন রশ্মি থেকে সুরক্ষা দেয়?",
+o: ["অতিবেগুনি রশ্মি", "শব্দ তরঙ্গ", "রেডিও তরঙ্গ", "দৃশ্যমান আলো"],
+a: 0
+},
+
+{
+q: "কোন গ্যাস মানুষ শ্বাস নেওয়ার সময় গ্রহণ করে?",
+o: ["অক্সিজেন", "কার্বন ডাই-অক্সাইড", "মিথেন", "হিলিয়াম"],
+a: 0
+},
+
+{
+q: "কোন যন্ত্র বৈদ্যুতিক প্রবাহ মাপে?",
+o: ["অ্যামিটার", "থার্মোমিটার", "ব্যারোমিটার", "ল্যাক্টোমিটার"],
+a: 0
+},
+
+{
+q: "পরমাণুর কেন্দ্রে কী থাকে?",
+o: ["শুধু ইলেকট্রন", "প্রোটন ও নিউট্রন", "শুধু নিউট্রন", "শুধু আলো"],
+a: 1
+},
+
+{
+q: "পৃথিবীর সবচেয়ে কাছের গ্রহগুলোর একটি কোনটি?",
+o: ["মঙ্গল", "বৃহস্পতি", "শনি", "নেপচুন"],
+a: 0
+},
+
+{
+q: "কোনটি জীববিজ্ঞানের শাখা?",
+o: ["উদ্ভিদবিজ্ঞান", "জ্যামিতি", "বীজগণিত", "জ্যোতির্বিজ্ঞান"],
+a: 0
+},
+
+{
+q: "এই ওয়েবসাইটের নাম কী?",
+o: ["Knowledge World", "Science Land", "Quiz House", "Learning Zone"],
+a: 0
+},
+
+{
+q: "এই ওয়েবসাইট কে তৈরি করেছে?",
+o: ["রাহিম", "করিম", "ইয়াছিন", "সুমন"],
+a: 2
+}
+
+];
+
+
+let currentQuestion = 0;
+let answers = [];
+let negativeMarking = true;
+
+
+function startQuiz() {
+
+    negativeMarking =
+        document.querySelector(
+            'input[name="negative"]:checked'
+        ).value === "yes";
+
+    document.getElementById("setup").style.display = "none";
+
+    document.getElementById("quizArea").style.display = "block";
+
+    showQuestion();
+
+}
+
+
+function showQuestion() {
+
+    let q = questions[currentQuestion];
+
+    document.getElementById("progress").innerHTML =
+        "প্রশ্ন " + (currentQuestion + 1) +
+        " / " + questions.length;
+
+    document.getElementById("questionNumber").innerHTML =
+        "🔬 প্রশ্ন " + (currentQuestion + 1);
+
+    document.getElementById("question").innerHTML =
+        q.q;
+
+    let optionsHTML = "";
+
+    q.o.forEach(function(option, index) {
+
+        let selected = answers
