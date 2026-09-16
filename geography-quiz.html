@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ভূগোল Quiz - Knowledge World</title>
+
+<style>
+*{box-sizing:border-box;}
+
+body{
+    margin:0;
+    font-family:Arial,"Noto Sans Bengali",sans-serif;
+    background:#f4f7fb;
+    color:#222;
+}
+
+header{
+    background:linear-gradient(135deg,#167d9a,#20a486);
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+}
+
+header h1{margin:0 0 8px;}
+
+.container{
+    max-width:900px;
+    margin:20px auto;
+    padding:15px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    margin-bottom:18px;
+    border-radius:14px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.question{
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.option{
+    display:block;
+    padding:11px;
+    margin:8px 0;
+    background:#f1f3f6;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.option:hover{background:#e5e7eb;}
+
+button{
+    border:0;
+    padding:13px 22px;
+    border-radius:9px;
+    cursor:pointer;
+    font-size:16px;
+    margin:5px;
+}
+
+.submit-btn{
+    background:#16806f;
+    color:white;
+}
+
+.home-btn{
+    background:#333;
+    color:white;
+}
+
+.result{
+    display:none;
+    text-align:center;
+}
+
+.hidden{display:none;}
+
+.warning{
+    background:#fff3cd;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:15px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🌍 ভূগোল Quiz</h1>
+    <p>Knowledge World</p>
+</header>
+
+<div class="container">
+
+<div id="startScreen" class="card">
+
+    <h2>🌍 ভূগোল Quiz-এ স্বাগতম!</h2>
+
+    <div class="warning">
+        💡 সব প্রশ্নের উত্তর দেওয়া বাধ্যতামূলক নয়। যেগুলো জানো, শুধু সেগুলোর উত্তর দাও।
+    </div>
+
+    <h3>Negative Marking</h3>
+
+    <label class="option">
+        <input type="radio" name="negative" value="yes" checked>
+        হ্যাঁ — ভুল উত্তরে −0.25
+    </label>
+
+    <label class="option">
+        <input type="radio" name="negative" value="no">
+        না — ভুল উত্তরে কোনো নম্বর কাটা হবে না
+    </label>
+
+    <br>
+
+    <button class="submit-btn" onclick="startQuiz()">
+        🚀 Quiz শুরু করুন
+    </button>
+
+</div>
+
+
+<div id="quizScreen" class="hidden">
+
+    <div class="card">
+        <h3>🌍 ভূগোলের ৫০টি প্রশ্ন</h3>
+        <p>যে প্রশ্নগুলোর উত্তর জানো, সেগুলোর উত্তর দাও।</p>
+    </div>
+
+    <div id="questionsContainer"></div>
+
+    <div class="card" style="text-align:center;">
+        <button class="submit-btn" onclick="submitQuiz()">
+            ✅ Quiz Submit করুন
+        </button>
+    </div>
+
+</div>
+
+
+<div id="resultScreen" class="card result">
+
+    <h2>🎉 Quiz Result</h2>
+
+    <h3>তোমার Score: <span id="score">0</span></h3>
+
+    <p>✅ সঠিক উত্তর: <span id="correctCount">0</span></p>
+
+    <p>❌ ভুল উত্তর: <span id="wrongCount">0</span></p>
+
+    <p>⚪ উত্তর দেওয়া হয়নি: <span id="unansweredCount">0</span></p>
+
+    <button class="submit-btn" onclick="restartQuiz()">
+        🔄 আবার খেলুন
+    </button>
+
+    <button class="home-btn" onclick="goHome()">
+        🏠 Quiz Home
+    </button>
+
+</div>
+
+</div>
+
+
+<script>
+
+const questions = [
+
+{
+question:"১. পৃথিবীর সবচেয়ে বড় মহাদেশ কোনটি?",
+options:["আফ্রিকা","এশিয়া","ইউরোপ","উত্তর আমেরিকা"],
+answer:1
+},
+
+{
+question:"২. পৃথিবীর সবচেয়ে ছোট মহাদেশ কোনটি?",
+options:["ইউরোপ","অ্যান্টার্কটিকা","অস্ট্রেলিয়া","দক্ষিণ আমেরিকা"],
+answer:2
+},
+
+{
+question:"৩. পৃথিবীর সবচেয়ে বড় মহাসাগর কোনটি?",
+options:["আটলান্টিক মহাসাগর","ভারত মহাসাগর","প্রশান্ত মহাসাগর","আর্কটিক মহাসাগর"],
+answer:2
+},
+
+{
+question:"৪. পৃথিবীর সবচেয়ে ছোট মহাসাগর কোনটি?",
+options:["আর্কটিক মহাসাগর","ভারত মহাসাগর","আটলান্টিক মহাসাগর","দক্ষিণ মহাসাগর"],
+answer:0
+},
+
+{
+question:"৫. পৃথিবীর দীর্ঘতম নদী হিসেবে প্রচলিতভাবে কোন নদীকে ধরা হয়?",
+options:["আমাজন","নীল নদ","ইয়াংসিকিয়াং","মিসিসিপি"],
+answer:1
+},
+
+{
+question:"৬. আমাজন নদী কোন মহাদেশে অবস্থিত?",
+options:["এশিয়া","আফ্রিকা","দক্ষিণ আমেরিকা","ইউরোপ"],
+answer:2
+},
+
+{
+question:"৭. পৃথিবীর সর্বোচ্চ পর্বতশৃঙ্গ কোনটি?",
+options:["কে-টু","মাউন্ট এভারেস্ট","কাঞ্চনজঙ্ঘা","মাকালু"],
+answer:1
+},
+
+{
+question:"৮. মাউন্ট এভারেস্ট কোন পর্বতমালায় অবস্থিত?",
+options:["আল্পস","আন্দিজ","হিমালয়","রকি"],
+answer:2
+},
+
+{
+question:"৯. সাহারা মরুভূমি কোন মহাদেশে?",
+options:["এশিয়া","আফ্রিকা","অস্ট্রেলিয়া","দক্ষিণ আমেরিকা"],
+answer:1
+},
+
+{
+question:"১০. পৃথিবীর বৃহত্তম উষ্ণ মরুভূমি কোনটি?",
+options:["গোবি","সাহারা","কালাহারি","আটাকামা"],
+answer:1
+},
+
+{
+question:"১১. বাংলাদেশ কোন মহাদেশে অবস্থিত?",
+options:["এশিয়া","ইউরোপ","আফ্রিকা","অস্ট্রেলিয়া"],
+answer:0
+},
+
+{
+question:"১২. বাংলাদেশের রাজধানী কোনটি?",
+options:["চট্টগ্রাম","খুলনা","ঢাকা","রাজশাহী"],
+answer:2
+},
+
+{
+question:"১৩. বাংলাদেশের দক্ষিণে কোন সাগর অবস্থিত?",
+options:["আরব সাগর","বঙ্গোপসাগর","ক্যারিবিয়ান সাগর","লাল সাগর"],
+answer:1
+},
+
+{
+question:"১৪. বাংলাদেশের প্রধান নদীগুলোর মধ্যে কোনটি?",
+options:["পদ্মা","থেমস","নাইল","ড্যানিউব"],
+answer:0
+},
+
+{
+question:"১৫. সুন্দরবন কোন দুই দেশের মধ্যে বিস্তৃত?",
+options:["বাংলাদেশ ও ভারত","বাংলাদেশ ও মিয়ানমার","ভারত ও নেপাল","ভারত ও পাকিস্তান"],
+answer:0
+},
+
+{
+question:"১৬. বাংলাদেশের সর্বোচ্চ পর্বতশৃঙ্গ কোন অঞ্চলে অবস্থিত?",
+options:["সিলেট","পার্বত্য চট্টগ্রাম","খুলনা","বরিশাল"],
+answer:1
+},
+
+{
+question:"১৭. পৃথিবীর বৃহত্তম দ্বীপ কোনটি?",
+options:["মাদাগাস্কার","গ্রিনল্যান্ড","বোর্নিও","নিউ গিনি"],
+answer:1
+},
+
+{
+question:"১৮. জাপান কোন মহাদেশে অবস্থিত?",
+options:["এশিয়া","ইউরোপ","আফ্রিকা","উত্তর আমেরিকা"],
+answer:0
+},
+
+{
+question:"১৯. মিশর কোন মহাদেশে অবস্থিত?",
+options:["এশিয়া","আফ্রিকা","ইউরোপ","দক্ষিণ আমেরিকা"],
+answer:1
+},
+
+{
+question:"২০. ব্রাজিল কোন মহাদেশে অবস্থিত?",
+options:["দক্ষিণ আমেরিকা","উত্তর আমেরিকা","আফ্রিকা","ইউরোপ"],
+answer:0
+},
+
+{
+question:"২১. যুক্তরাষ্ট্রের রাজধানী কোনটি?",
+options:["নিউ ইয়র্ক","লস অ্যাঞ্জেলেস","ওয়াশিংটন, ডি.সি.","শিকাগো"],
+answer:2
+},
+
+{
+question:"২২. ফ্রান্সের রাজধানী কোনটি?",
+options:["রোম","প্যারিস","বার্লিন","মাদ্রিদ"],
+answer:1
+},
+
+{
+question:"২৩. জাপানের রাজধানী কোনটি?",
+options:["কিয়োটো","টোকিও","ওসাকা","হিরোশিমা"],
+answer:1
+},
+
+{
+question:"২৪. ভারতের রাজধানী কোনটি?",
+options:["মুম্বাই","কলকাতা","নয়াদিল্লি","চেন্নাই"],
+answer:2
+},
+
+{
+question:"২৫. চীনের রাজধানী কোনটি?",
+options:["সাংহাই","বেইজিং","হংকং","নানজিং"],
+answer:1
+},
+
+{
+question:"২৬. নেপালের রাজধানী কোনটি?",
+options:["কাঠমান্ডু","পোখারা","ললিতপুর","ভক্তপুর"],
+answer:0
+},
+
+{
+question:"২৭. ভুটানের রাজধানী কোনটি?",
+options:["থিম্পু","পারো","পুনাখা","ফুয়েন্তশোলিং"],
+answer:0
+},
+
+{
+question:"২৮. পৃথিবীর সবচেয়ে বড় দেশ আয়তনে কোনটি?",
+options:["চীন","কানাডা","রাশিয়া","যুক্তরাষ্ট্র"],
+answer:2
+},
+
+{
+question:"২৯. আয়তনে বিশ্বের সবচেয়ে ছোট দেশ কোনটি?",
+options:["মোনাকো","ভ্যাটিকান সিটি","সান মারিনো","লিচেনস্টাইন"],
+answer:1
+},
+
+{
+question:"৩০. বিষুবরেখা পৃথিবীকে কোন দুই ভাগে ভাগ করে?",
+options:["পূর্ব ও পশ্চিম","উত্তর ও দক্ষিণ","স্থল ও জল","গ্রীষ্ম ও শীত"],
+answer:1
+},
+
+{
+question:"৩১. প্রধান মধ্যরেখা কোথা দিয়ে গেছে?",
+options:["ঢাকা","গ্রিনিচ","প্যারিস","রোম"],
+answer:1
+},
+
+{
+question:"৩২. পৃথিবীর উত্তর মেরু কোন মহাসাগরীয় অঞ্চলে?",
+options:["আর্কটিক","আটলান্টিক","প্রশান্ত","ভারত"],
+answer:0
+},
+
+{
+question:"৩৩. পৃথিবীর দক্ষিণ মেরু কোন মহাদেশে?",
+options:["আফ্রিকা","অ্যান্টার্কটিকা","এশিয়া","অস্ট্রেলিয়া"],
+answer:1
+},
+
+{
+question:"৩৪. নীল নদ কোন সাগরে গিয়ে পড়ে?",
+options:["লাল সাগর","ভূমধ্যসাগর","আরব সাগর","বঙ্গোপসাগর"],
+answer:1
+},
+
+{
+question:"৩৫. ভূমধ্যসাগর কোন দুটি মহাদেশের মধ্যে অবস্থিত?",
+options:["ইউরোপ ও আফ্রিকা","এশিয়া ও অস্ট্রেলিয়া","আফ্রিকা ও আমেরিকা","এশিয়া ও ইউরোপ"],
+answer:0
+},
+
+{
+question:"৩৬. আন্দিজ পর্বতমালা কোন মহাদেশে?",
+options:["এশিয়া","দক্ষিণ আমেরিকা","আফ্রিকা","ইউরোপ"],
+answer:1
+},
+
+{
+question:"৩৭. রকি পর্বতমালা প্রধানত কোন মহাদেশে?",
+options:["উত্তর আমেরিকা","দক্ষিণ আমেরিকা","এশিয়া","আফ্রিকা"],
+answer:0
+},
+
+{
+question:"৩৮. আল্পস পর্বতমালা কোন মহাদেশে?",
+options:["ইউরোপ","এশিয়া","আফ্রিকা","অস্ট্রেলিয়া"],
+answer:0
+},
+
+{
+question:"৩৯. গোবি মরুভূমি কোন মহাদেশে?",
+options:["আফ্রিকা","এশিয়া","ইউরোপ","দক্ষিণ আমেরিকা"],
+answer:1
+},
+
+{
+question:"৪০. কিলিমাঞ্জারো পর্বত কোন দেশে?",
+options:["কেনিয়া","তানজানিয়া","ইথিওপিয়া","মিশর"],
+answer:1
+},
+
+{
+question:"৪১. ভিক্টোরিয়া জলপ্রপাত কোন নদীর ওপর?",
+options:["জাম্বেজি","নীল","নাইজার","কঙ্গো"],
+answer:0
+},
+
+{
+question:"৪২. আফ্রিকার বৃহত্তম হ্রদ কোনটি?",
+options:["ভিক্টোরিয়া হ্রদ","বাইক্যাল হ্রদ","সুপিরিয়র হ্রদ","টিটিকাকা"],
+answer:0
+},
+
+{
+question:"৪৩. বিশ্বের গভীরতম স্বাদু পানির হ্রদ কোনটি?",
+options:["ভিক্টোরিয়া","বাইক্যাল","সুপিরিয়র","টিটিকাকা"],
+answer:1
+},
+
+{
+question:"৪৪. অস্ট্রেলিয়ার রাজধানী কোনটি?",
+options:["সিডনি","মেলবোর্ন","ক্যানবেরা","পার্থ"],
+answer:2
+},
+
+{
+question:"৪৫. কানাডার রাজধানী কোনটি?",
+options:["টরন্টো","অটোয়া","ভ্যাঙ্কুভার","মন্ট্রিয়ল"],
+answer:1
+},
+
+{
+question:"৪৬. রাশিয়ার রাজধানী কোনটি?",
+options:["সেন্ট পিটার্সবার্গ","মস্কো","কাজান","সোচি"],
+answer:1
+},
+
+{
+question:"৪৭. পৃথিবীর প্রায় কত শতাংশ পৃষ্ঠ জল দ্বারা আবৃত?",
+options:["প্রায় ২৯%","প্রায় ৫০%","প্রায় ৭১%","প্রায় ৯০%"],
+answer:2
+},
+
+{
+question:"৪৮. বাংলাদেশের সবচেয়ে বড় সমুদ্রবন্দর কোনটি?",
+options:["মংলা","চট্টগ্রাম","পায়রা","নারায়ণগঞ্জ"],
+answer:1
+},
+
+{
+question:"৪৯. Knowledge World ওয়েবসাইটটি কে তৈরি করেছে?",
+options:["রহিম","করিম","ইয়াছিন","সুমন"],
+answer:2
+},
+
+{
+question:"৫০. মানচিত্রে উত্তর দিক সাধারণত কোন দিকে দেখানো হয়?",
+options:["উপরে","নিচে","ডানে","বামে"],
+answer:0
+}
+
+];
+
+
+let negativeMarking = true;
+
+
+function startQuiz(){
+
+    const selected =
+        document.querySelector('input[name="negative"]:checked');
+
+    negativeMarking =
+        selected ? selected.value === "yes" : true;
+
+    document.getElementById("startScreen")
+        .classList.add("hidden");
+
+    document.getElementById("quizScreen")
+        .classList.remove("hidden");
+
+    showQuestions();
+}
+
+
+function showQuestions(){
+
+    const container =
+        document.getElementById("questionsContainer");
+
+    container.innerHTML = "";
+
+    questions.forEach(function(q,index){
+
+        const card = document.createElement("div");
+
+        card.className = "card";
+
+        let html = `
+            <div class="question">
+                ${q.question}
+            </div>
+        `;
+
+        q.options.forEach(function(option,optionIndex){
+
+            html += `
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="question${index}"
+                        value="${optionIndex}"
+                    >
+                    ${option}
+                </label>
+            `;
+
+        });
+
+        card.innerHTML = html;
+
+        container.appendChild(card);
+
+    });
+}
+
+
+function submitQuiz(){
+
+    let correct = 0;
+    let wrong = 0;
+    let unanswered = 0;
+
+    questions.forEach(function(q,index){
+
+        const selected =
+            document.querySelector(
+                `input[name="question${index}"]:checked`
+            );
+
+        if(!selected){
+
+            unanswered++;
+
+        }else{
+
+            const answer = Number(selected.value);
+
+            if(answer === q.answer){
+
+                correct++;
+
+            }else{
+
+                wrong++;
+
+            }
+        }
+    });
+
+
+    let score = correct;
+
+    if(negativeMarking){
+
+        score = correct - (wrong * 0.25);
+
+    }
+
+
+    document.getElementById("score").textContent =
+        score.toFixed(2);
+
+    document.getElementById("correctCount").textContent =
+        correct;
+
+    document.getElementById("wrongCount").textContent =
+        wrong;
+
+    document.getElementById("unansweredCount").textContent =
+        unanswered;
+
+
+    document.getElementById("quizScreen")
+        .classList.add("hidden");
+
+    document.getElementById("resultScreen")
+        .style.display = "block";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+function restartQuiz(){
+
+    document.getElementById("resultScreen")
+        .style.display = "none";
+
+    document.getElementById("startScreen")
+        .classList.remove("hidden");
+
+    document.getElementById("quizScreen")
+        .classList.add("hidden");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+function goHome(){
+
+    window.location.href = "quiz.html";
+
+}
+
+</script>
+
+</body>
+</html>
