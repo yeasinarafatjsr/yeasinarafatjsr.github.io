@@ -247,8 +247,10 @@ request_type: requestType
 
 if (!response.ok) {
 
+const errorText = await response.text();
+
 throw new Error(
-"Supabase request failed"
+    "Supabase error: " + errorText
 );
 
 }
