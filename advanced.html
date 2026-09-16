@@ -81,6 +81,11 @@ body {
     background: #2563eb;
 }
 
+.option-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 .result {
     margin-top: 30px;
     padding: 20px;
@@ -101,7 +106,6 @@ body {
 </style>
 </head>
 
-
 <body>
 
 <div class="container">
@@ -115,13 +119,11 @@ body {
 Summary, Notes অথবা Audio তৈরি করুন।
 </p>
 
-
 <input
     type="text"
     class="video-input"
     placeholder="🔗 এখানে ভিডিও লিংক দিন..."
 >
-
 
 <div class="options">
 
@@ -139,7 +141,6 @@ Summary, Notes অথবা Audio তৈরি করুন।
 
 </div>
 
-
 <div class="result">
 
 <h3>📄 Result</h3>
@@ -154,15 +155,14 @@ Summary, Notes অথবা Audio তৈরি করুন।
 
 </div>
 
-
 <script>
 
 const SUPABASE_URL =
 "https://jwoajgfajojvyqrxxxen.supabase.co";
 
-
 const SUPABASE_KEY =
 "sb_publishable_CxG0qxqT2-AtiH8w48GDsw_eJEvgQOF";
+
 const FUNCTION_URL =
 "https://jwoajgfajojvyqrxxxen.supabase.co/functions/v1/hyper-responder";
 
@@ -200,169 +200,144 @@ return;
 
 
 buttons.forEach(function(btn) {
-btn.disabled = true;
+    btn.disabled = true;
 });
 
 
 result.innerHTML = `
 <h3>⏳ Processing...</h3>
-<p>Request পাঠানো হচ্ছে...</p>
+<p>ভিডিওর transcript সংগ্রহ করা হচ্ছে...</p>
 `;
-const response = await fetch(FUNCTION_URL, {
-    method: "POST",
 
-    headers: {
-        "Content-Type": "application/json",
-        "apikey": SUPABASE_KEY,
-        "Authorization": "Bearer " + SUPABASE_KEY
-    },
-
-    body: JSON.stringify({
-        video_url: videoLink,
-        request_type: requestType
-    })
-});
-
-const data = await response.json();
-
-if (!response.ok || !data.success) {
-    throw new Error(data.message || "Function request failed");
-}
-
-result.innerHTML = `
-<h3 class="success">✅ Request সফল</h3>
-
-<p>${data.message}</p>
-
-<br>
-
-<p>
-<strong>ভিডিও:</strong><br>
-${data.video_url}
-</p>
-`;
 
 try {
 
-const response = await fetch(
+    // Step 1: Call Edge Function
+    const functionResponse = await fetch(
+        FUNCTION_URL,
+        {
+            method: "POST",
 
-SUPABASE_URL + "/rest/v1/ai_requests",
+            headers: {
+                "Content-Type": "application/json",
+                "apikey": SUPABASE_KEY,
+                "Authorization": "Bearer " + SUPABASE_KEY
+            },
 
-{
+            body: JSON.stringify({
+                video_url: videoLink,
+                request_type: requestType
+            })
+        }
+    );
 
-method: "POST",
 
-headers: {
+    const functionData =
+        await functionResponse.json();
 
-"Content-Type": "application/json",
 
-"apikey": SUPABASE_KEY,
+    if (!functionResponse.ok ||
+        !functionData.success) {
 
-"Authorization":
-"Bearer " + SUPABASE_KEY,
+        throw new Error(
+            functionData.message ||
+            "Function request failed"
+        );
 
-"Prefer": "return=minimal"
+    }
 
-},
 
-body: JSON.stringify({
+    // Step 2: Save request to Supabase
+    const saveResponse = await fetch(
+        SUPABASE_URL + "/rest/v1/ai_requests",
+        {
+            method: "POST",
 
-video_url: videoLink,
+            headers: {
+                "Content-Type": "application/json",
+                "apikey": SUPABASE_KEY,
+                "Authorization":
+                    "Bearer " + SUPABASE_KEY,
+                "Prefer": "return=minimal"
+            },
 
-request_type: requestType
+            body: JSON.stringify({
+                video_url: videoLink,
+                request_type: requestType,
+                result: functionData.message || ""
+            })
+        }
+    );
 
-})
+
+    if (!saveResponse.ok) {
+
+        console.error(
+            "Database save failed:",
+            await saveResponse.text()
+        );
+
+    }
+
+
+    // Step 3: Show Edge Function result
+    let title = "📄 Result";
+
+    if (requestType === "summary") {
+        title = "📝 Summary";
+    }
+
+    if (requestType === "notes") {
+        title = "📚 Notes";
+    }
+
+    if (requestType === "audio") {
+        title = "🎧 Audio";
+    }
+
+
+    result.innerHTML = `
+
+    <h3 class="success">
+        ✅ ${title}
+    </h3>
+
+    <p>
+        ${functionData.message}
+    </p>
+
+    <br>
+
+    <p>
+        <strong>ভিডিও:</strong><br>
+        ${functionData.video_url}
+    </p>
+
+    `;
+
 
 }
-
-);
-
-
-if (!response.ok) {
-
-const errorText = await response.text();
-
-throw new Error(
-    "Supabase error: " + errorText
-);
-
-}
-
-
-let title = "";
-let message = "";
-
-
-if (requestType === "summary") {
-
-title = "📝 Summary";
-
-message =
-"আপনার Summary request সফলভাবে সংরক্ষিত হয়েছে।";
-
-}
-
-
-if (requestType === "notes") {
-
-title = "📚 Notes";
-
-message =
-"আপনার Notes request সফলভাবে সংরক্ষিত হয়েছে।";
-
-}
-
-
-if (requestType === "audio") {
-
-title = "🎧 Audio";
-
-message =
-"আপনার Audio request সফলভাবে সংরক্ষিত হয়েছে।";
-
-}
-
-
-result.innerHTML = `
-
-<h3 class="success">
-✅ ${title}
-</h3>
-
-<p>${message}</p>
-
-<br>
-
-<p>
-<strong>ভিডিও:</strong><br>
-${videoLink}
-</p>
-
-`;
-
-}
-
 catch (error) {
 
-result.innerHTML = `
+    console.error(error);
 
-<h3 class="error">
-❌ সমস্যা হয়েছে
-</h3>
+    result.innerHTML = `
 
-<p>
-Supabase-এর সাথে সংযোগ করা যায়নি।
-</p>
+    <h3 class="error">
+        ❌ সমস্যা হয়েছে
+    </h3>
 
-`;
+    <p>
+        ${error.message}
+    </p>
 
-console.error(error);
+    `;
 
 }
 
 
 buttons.forEach(function(btn) {
-btn.disabled = false;
+    btn.disabled = false;
 });
 
 });
