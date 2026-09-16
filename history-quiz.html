@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ইতিহাস Quiz - Knowledge World</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,"Noto Sans Bengali",sans-serif;
+    background:#f4f7fb;
+    color:#222;
+}
+
+header{
+    background:linear-gradient(135deg,#5b2c83,#8e44ad);
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+}
+
+header h1{
+    margin:0 0 8px;
+}
+
+.container{
+    max-width:900px;
+    margin:20px auto;
+    padding:15px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    margin-bottom:18px;
+    border-radius:14px;
+    box-shadow:0 3px 12px rgba(0,0,0,0.08);
+}
+
+.question{
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.option{
+    display:block;
+    padding:11px;
+    margin:8px 0;
+    background:#f1f3f6;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.option:hover{
+    background:#e5e7eb;
+}
+
+button{
+    border:none;
+    padding:13px 22px;
+    border-radius:9px;
+    cursor:pointer;
+    font-size:16px;
+    margin:5px;
+}
+
+.submit-btn{
+    background:#8e44ad;
+    color:white;
+}
+
+.home-btn{
+    background:#333;
+    color:white;
+}
+
+.result{
+    display:none;
+    text-align:center;
+}
+
+.hidden{
+    display:none;
+}
+
+.warning{
+    background:#fff3cd;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:15px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🏛️ ইতিহাস Quiz</h1>
+    <p>Knowledge World</p>
+</header>
+
+<div class="container">
+
+    <div id="startScreen" class="card">
+        <h2>🏛️ ইতিহাস Quiz-এ স্বাগতম!</h2>
+
+        <div class="warning">
+            💡 তুমি সব প্রশ্নের উত্তর দিতে বাধ্য নও। যেগুলো জানো, শুধু সেগুলোর উত্তর দাও।
+        </div>
+
+        <h3>Negative Marking</h3>
+
+        <label class="option">
+            <input type="radio" name="negative" value="yes" checked>
+            হ্যাঁ — ভুল উত্তরে −0.25
+        </label>
+
+        <label class="option">
+            <input type="radio" name="negative" value="no">
+            না — ভুল উত্তরে কোনো নম্বর কাটা হবে না
+        </label>
+
+        <br>
+
+        <button class="submit-btn" onclick="startQuiz()">
+            🚀 Quiz শুরু করুন
+        </button>
+    </div>
+
+
+    <div id="quizScreen" class="hidden">
+
+        <div class="card">
+            <h3>📚 ইতিহাসের ৫০টি প্রশ্ন</h3>
+            <p>যে প্রশ্নগুলোর উত্তর জানো, সেগুলোর উত্তর দাও।</p>
+        </div>
+
+        <div id="questionsContainer"></div>
+
+        <div class="card" style="text-align:center;">
+            <button class="submit-btn" onclick="submitQuiz()">
+                ✅ Quiz Submit করুন
+            </button>
+        </div>
+
+    </div>
+
+
+    <div id="resultScreen" class="card result">
+
+        <h2>🎉 Quiz Result</h2>
+
+        <h3>তোমার Score: <span id="score">0</span></h3>
+
+        <p>✅ সঠিক উত্তর: <span id="correctCount">0</span></p>
+
+        <p>❌ ভুল উত্তর: <span id="wrongCount">0</span></p>
+
+        <p>⚪ উত্তর দেওয়া হয়নি: <span id="unansweredCount">0</span></p>
+
+        <button class="submit-btn" onclick="restartQuiz()">
+            🔄 আবার খেলুন
+        </button>
+
+        <button class="home-btn" onclick="goHome()">
+            🏠 Quiz Home
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const questions = [
+
+{
+question:"১. বাংলাদেশের স্বাধীনতা যুদ্ধ কোন সালে সংঘটিত হয়?",
+options:["১৯৪৭","১৯৫২","১৯৭১","১৯৭৫"],
+answer:2
+},
+
+{
+question:"২. ভাষা আন্দোলন কোন সালে সংঘটিত হয়?",
+options:["১৯৪৭","১৯৫২","১৯৬৯","১৯৭১"],
+answer:1
+},
+
+{
+question:"৩. বাংলাদেশের স্বাধীনতার ঘোষণার সঙ্গে কার নাম জড়িত?",
+options:["শেরে বাংলা এ কে ফজলুল হক","বঙ্গবন্ধু শেখ মুজিবুর রহমান","হোসেন শহীদ সোহরাওয়ার্দী","এ কে খন্দকার"],
+answer:1
+},
+
+{
+question:"৪. বাংলাদেশের বিজয় দিবস কবে?",
+options:["২৬ মার্চ","২১ ফেব্রুয়ারি","১৬ ডিসেম্বর","১৫ আগস্ট"],
+answer:2
+},
+
+{
+question:"৫. বাংলাদেশের স্বাধীনতা দিবস কবে?",
+options:["২৬ মার্চ","১৬ ডিসেম্বর","২১ ফেব্রুয়ারি","১৪ ডিসেম্বর"],
+answer:0
+},
+
+{
+question:"৬. শহীদ বুদ্ধিজীবী দিবস কবে?",
+options:["১৪ ডিসেম্বর","১৬ ডিসেম্বর","২৬ মার্চ","২১ ফেব্রুয়ারি"],
+answer:0
+},
+
+{
+question:"৭. জাতীয় স্মৃতিসৌধ কোথায় অবস্থিত?",
+options:["ঢাকা","সাভার","চট্টগ্রাম","কুমিল্লা"],
+answer:1
+},
+
+{
+question:"৮. মুঘল সাম্রাজ্যের প্রতিষ্ঠাতা কে?",
+options:["আকবর","বাবর","শাহজাহান","ঔরঙ্গজেব"],
+answer:1
+},
+
+{
+question:"৯. তাজমহল কে নির্মাণ করেন?",
+options:["আকবর","বাবর","শাহজাহান","হুমায়ুন"],
+answer:2
+},
+
+{
+question:"১০. পানিপথের প্রথম যুদ্ধ কোন সালে হয়?",
+options:["১৫২৬","১৫৫৬","১৭৬১","১৮৫৭"],
+answer:0
+},
+
+{
+question:"১১. সম্রাট আকবর কোন বংশের শাসক ছিলেন?",
+options:["মুঘল","লোদি","পাল","সেন"],
+answer:0
+},
+
+{
+question:"১২. ফরাসি বিপ্লব শুরু হয় কোন সালে?",
+options:["১৭৭৬","১৭৮৯","১৮০৪","১৮১৫"],
+answer:1
+},
+
+{
+question:"১৩. আমেরিকার স্বাধীনতার ঘোষণা কোন সালে হয়?",
+options:["১৭৭৬","১৭৮৯","১৮১২","১৮৬৫"],
+answer:0
+},
+
+{
+question:"১৪. দ্বিতীয় বিশ্বযুদ্ধ শুরু হয় কোন সালে?",
+options:["১৯১৪","১৯৩৯","১৯৪১","১৯৪৫"],
+answer:1
+},
+
+{
+question:"১৫. দ্বিতীয় বিশ্বযুদ্ধ শেষ হয় কোন সালে?",
+options:["১৯৩৯","১৯৪২","১৯৪৫","১৯৫০"],
+answer:2
+},
+
+{
+question:"১৬. প্রথম বিশ্বযুদ্ধ শুরু হয় কোন সালে?",
+options:["১৯১৪","১৯১৮","১৯৩৯","১৯৪৫"],
+answer:0
+},
+
+{
+question:"১৭. জাতিসংঘ প্রতিষ্ঠিত হয় কোন সালে?",
+options:["১৯১৯","১৯৩৯","১৯৪৫","১৯৫২"],
+answer:2
+},
+
+{
+question:"১৮. শিল্প বিপ্লব প্রথম কোন দেশে শুরু হয়?",
+options:["ফ্রান্স","জার্মানি","ব্রিটেন","ইতালি"],
+answer:2
+},
+
+{
+question:"১৯. রোমান সাম্রাজ্যের কেন্দ্র কোথায় ছিল?",
+options:["রোম","এথেন্স","কায়রো","ব্যাবিলন"],
+answer:0
+},
+
+{
+question:"২০. প্রাচীন মিশরের শাসকদের কী বলা হতো?",
+options:["সুলতান","ফারাও","সম্রাট","রাজা"],
+answer:1
+},
+
+{
+question:"২১. পিরামিড কোন সভ্যতার বিখ্যাত স্থাপনা?",
+options:["মিশরীয়","রোমান","গ্রিক","চীনা"],
+answer:0
+},
+
+{
+question:"২২. মহেঞ্জোদারো কোন প্রাচীন সভ্যতার অংশ?",
+options:["সিন্ধু সভ্যতা","মিশরীয় সভ্যতা","গ্রিক সভ্যতা","রোমান সভ্যতা"],
+answer:0
+},
+
+{
+question:"২৩. প্রাচীন গ্রিসের বিখ্যাত নগররাষ্ট্র কোনটি?",
+options:["এথেন্স","রোম","প্যারিস","লন্ডন"],
+answer:0
+},
+
+{
+question:"২৪. আলেকজান্ডার দ্য গ্রেট কোন দেশের শাসক ছিলেন?",
+options:["ম্যাসিডোনিয়া","মিশর","রোম","চীন"],
+answer:0
+},
+
+{
+question:"২৫. চীনের মহাপ্রাচীর কোন দেশে অবস্থিত?",
+options:["জাপান","চীন","ভারত","মঙ্গোলিয়া"],
+answer:1
+},
+
+{
+question:"২৬. নেপোলিয়ন বোনাপার্ট কোন দেশের সম্রাট ছিলেন?",
+options:["ফ্রান্স","ইতালি","স্পেন","পর্তুগাল"],
+answer:0
+},
+
+{
+question:"২৭. রেনেসাঁর সূচনা প্রধানত কোন দেশে হয়?",
+options:["ইতালি","জার্মানি","রাশিয়া","ইংল্যান্ড"],
+answer:0
+},
+
+{
+question:"২৮. গুটেনবার্গ কোন আবিষ্কারের সঙ্গে যুক্ত?",
+options:["টেলিফোন","মুদ্রণযন্ত্র","বাষ্পীয় ইঞ্জিন","রেডিও"],
+answer:1
+},
+
+{
+question:"২৯. ক্রিস্টোফার কলম্বাস ১৪৯২ সালে কোন মহাদেশে পৌঁছান?",
+options:["এশিয়া","আফ্রিকা","আমেরিকা","অস্ট্রেলিয়া"],
+answer:2
+},
+
+{
+question:"৩০. ভারতীয় উপমহাদেশে ব্রিটিশ শাসনের অবসান হয় কোন সালে?",
+options:["১৯৪৫","১৯৪৭","১৯৫২","১৯৭১"],
+answer:1
+},
+
+{
+question:"৩১. ভারত ও পাকিস্তান স্বাধীন হয় কোন সালে?",
+options:["১৯৪৫","১৯৪৭","১৯৫২","১৯৭১"],
+answer:1
+},
+
+{
+question:"৩২. পাকিস্তান রাষ্ট্র প্রতিষ্ঠিত হয় কোন সালে?",
+options:["১৯৪৭","১৯৫২","১৯৬৫","১৯৭১"],
+answer:0
+},
+
+{
+question:"৩৩. বাংলাদেশের মুক্তিযুদ্ধ কত মাস স্থায়ী হয়েছিল?",
+options:["৬ মাস","৯ মাস","১২ মাস","১৮ মাস"],
+answer:1
+},
+
+{
+question:"৩৪. বাংলাদেশের মুক্তিযুদ্ধে কতটি সেক্টর ছিল?",
+options:["৭টি","৯টি","১১টি","১৩টি"],
+answer:2
+},
+
+{
+question:"৩৫. মুক্তিযুদ্ধের সময় বাংলাদেশের অস্থায়ী সরকার কোথায় শপথ গ্রহণ করে?",
+options:["মুজিবনগর","ঢাকা","চট্টগ্রাম","সিলেট"],
+answer:0
+},
+
+{
+question:"৩৬. মুজিবনগর সরকার শপথ গ্রহণ করে কোন সালে?",
+options:["১৯৬৯","১৯৭০","১৯৭১","১৯৭২"],
+answer:2
+},
+
+{
+question:"৩৭. ঐতিহাসিক ৭ মার্চের ভাষণ কোন সালে দেওয়া হয়?",
+options:["১৯৬৯","১৯৭০","১৯৭১","১৯৭২"],
+answer:2
+},
+
+{
+question:"৩৮. ৭ মার্চের ভাষণ কোথায় দেওয়া হয়েছিল?",
+options:["রেসকোর্স ময়দান","পল্টন ময়দান","সোহরাওয়ার্দী হল","লালবাগ"],
+answer:0
+},
+
+{
+question:"৩৯. বাংলাদেশের সংবিধান কার্যকর হয় কোন সালে?",
+options:["১৯৭১","১৯৭২","১৯৭৩","১৯৭৫"],
+answer:1
+},
+
+{
+question:"৪০. বাংলাদেশের জাতীয় সংসদ ভবনের স্থপতি কে?",
+options:["লুই আই কান","ফ্র্যাঙ্ক লয়েড রাইট","ল্য করবুজিয়ে","আই এম পেই"],
+answer:0
+},
+
+{
+question:"৪১. লালবাগ কেল্লা কোন শহরে অবস্থিত?",
+options:["ঢাকা","রাজশাহী","চট্টগ্রাম","খুলনা"],
+answer:0
+},
+
+{
+question:"৪২. পাহাড়পুর বৌদ্ধ বিহার কোন জেলায়?",
+options:["নওগাঁ","কুষ্টিয়া","যশোর","সিলেট"],
+answer:0
+},
+
+{
+question:"৪৩. ষাট গম্বুজ মসজিদ কোথায় অবস্থিত?",
+options:["বাগেরহাট","ঢাকা","কুমিল্লা","রাজশাহী"],
+answer:0
+},
+
+{
+question:"৪৪. পাল রাজবংশ প্রধানত কোন অঞ্চলে শাসন করেছিল?",
+options:["বাংলা ও বিহার","কাশ্মীর","দক্ষিণ ভারত","শ্রীলঙ্কা"],
+answer:0
+},
+
+{
+question:"৪৫. সেন রাজবংশের বিখ্যাত শাসক কে?",
+options:["বল্লাল সেন","আকবর","বাবর","শের শাহ"],
+answer:0
+},
+
+{
+question:"৪৬. বাংলার শেষ স্বাধীন নবাব হিসেবে কাকে উল্লেখ করা হয়?",
+options:["সিরাজউদ্দৌলা","আলীবর্দী খান","মীর জাফর","শায়েস্তা খান"],
+answer:0
+},
+
+{
+question:"৪৭. পলাশীর যুদ্ধ কোন সালে হয়?",
+options:["১৭৫৭","১৭৬৪","১৮৫৭","১৯০৫"],
+answer:0
+},
+
+{
+question:"৪৮. সিপাহী বিদ্রোহ কোন সালে সংঘটিত হয়?",
+options:["১৭৫৭","১৮৫৭","১৯০৫","১৯৪৭"],
+answer:1
+},
+
+{
+question:"৪৯. Knowledge World ওয়েবসাইটটি কে তৈরি করেছে?",
+options:["রহিম","করিম","ইয়াছিন","সুমন"],
+answer:2
+},
+
+{
+question:"৫০. ইতিহাস থেকে আমরা কী শিখতে পারি?",
+options:["অতীতের অভিজ্ঞতা","শুধু গল্প","শুধু তারিখ","কিছুই না"],
+answer:0
+}
+
+];
+
+
+let negativeMarking = true;
+
+
+function startQuiz(){
+
+    const selected = document.querySelector(
+        'input[name="negative"]:checked'
+    );
+
+    negativeMarking = selected
+        ? selected.value === "yes"
+        : true;
+
+    document.getElementById("startScreen").classList.add("hidden");
+
+    document.getElementById("quizScreen").classList.remove("hidden");
+
+    showQuestions();
+}
+
+
+function showQuestions(){
+
+    const container =
+        document.getElementById("questionsContainer");
+
+    container.innerHTML = "";
+
+    questions.forEach(function(q,index){
+
+        const card = document.createElement("div");
+
+        card.className = "card";
+
+        let html = `
+            <div class="question">
+                ${q.question}
+            </div>
+        `;
+
+        q.options.forEach(function(option,optionIndex){
+
+            html += `
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="question${index}"
+                        value="${optionIndex}"
+                    >
+                    ${option}
+                </label>
+            `;
+
+        });
+
+        card.innerHTML = html;
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+function submitQuiz(){
+
+    let correct = 0;
+    let wrong = 0;
+    let unanswered = 0;
+
+    questions.forEach(function(q,index){
+
+        const selected =
+            document.querySelector(
+                `input[name="question${index}"]:checked`
+            );
+
+        if(!selected){
+
+            unanswered++;
+
+        }else{
+
+            const answer =
+                Number(selected.value);
+
+            if(answer === q.answer){
+
+                correct++;
+
+            }else{
+
+                wrong++;
+
+            }
+
+        }
+
+    });
+
+
+    let score = correct;
+
+    if(negativeMarking){
+
+        score = correct - (wrong * 0.25);
+
+    }
+
+
+    document.getElementById("score").textContent =
+        score.toFixed(2);
+
+    document.getElementById("correctCount").textContent =
+        correct;
+
+    document.getElementById("wrongCount").textContent =
+        wrong;
+
+    document.getElementById("unansweredCount").textContent =
+        unanswered;
+
+
+    document.getElementById("quizScreen").classList.add("hidden");
+
+    document.getElementById("resultScreen").style.display =
+        "block";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+function restartQuiz(){
+
+    document.getElementById("resultScreen").style.display =
+        "none";
+
+    document.getElementById("startScreen").classList.remove("hidden");
+
+    document.getElementById("quizScreen").classList.add("hidden");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+function goHome(){
+
+    window.location.href = "quiz.html";
+
+}
+
+</script>
+
+</body>
+</html>
