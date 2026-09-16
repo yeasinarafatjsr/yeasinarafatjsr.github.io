@@ -296,24 +296,33 @@ try {
     }
 
 
-    result.innerHTML = `
+result.innerHTML = `
 
-    <h3 class="success">
-        ✅ ${title}
-    </h3>
+<h3 class="success">
+    ✅ ${title}
+</h3>
 
-    <p>
-        ${functionData.message}
-    </p>
+<p>
+    ${functionData.message}
+</p>
 
-    <br>
+<br>
 
-    <p>
-        <strong>ভিডিও:</strong><br>
-        ${functionData.video_url}
-    </p>
+<p>
+    <strong>ভিডিও:</strong><br>
+    ${functionData.video_url}
+</p>
 
-    `;
+<br>
+
+<button
+    class="download-btn"
+    onclick="downloadResult()"
+>
+    📥 Download ${requestType === "summary" ? "Summary" : "Notes"}
+</button>
+
+`;
 
 
 }
