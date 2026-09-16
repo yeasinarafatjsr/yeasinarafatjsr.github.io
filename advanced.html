@@ -145,6 +145,44 @@
         </div>
 
     </div>
+    <script>
+
+    const videoInput = document.querySelector(".video-input");
+    const result = document.querySelector(".result");
+    const buttons = document.querySelectorAll(".option-btn");
+
+    buttons.forEach(function(button) {
+
+        button.addEventListener("click", function() {
+
+            const videoLink = videoInput.value.trim();
+
+            if (videoLink === "") {
+
+                result.innerHTML = `
+                    <h3>⚠️ Video Link দিন</h3>
+                    <p>প্রথমে একটি ভিডিওর লিংক দিন।</p>
+                `;
+
+                return;
+            }
+
+            const option = button.innerText;
+
+            result.innerHTML = `
+                <h3>⏳ Processing...</h3>
+                <p>
+                    আপনার ভিডিও লিংক নেওয়া হয়েছে।
+                    <br><br>
+                    আপনি চেয়েছেন: <strong>${option}</strong>
+                </p>
+            `;
+
+        });
+
+    });
+
+</script>
 
 </body>
 
