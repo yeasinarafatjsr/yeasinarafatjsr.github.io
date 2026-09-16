@@ -208,7 +208,39 @@ result.innerHTML = `
 <h3>⏳ Processing...</h3>
 <p>Request পাঠানো হচ্ছে...</p>
 `;
+const response = await fetch(FUNCTION_URL, {
+    method: "POST",
 
+    headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_KEY,
+        "Authorization": "Bearer " + SUPABASE_KEY
+    },
+
+    body: JSON.stringify({
+        video_url: videoLink,
+        request_type: requestType
+    })
+});
+
+const data = await response.json();
+
+if (!response.ok || !data.success) {
+    throw new Error(data.message || "Function request failed");
+}
+
+result.innerHTML = `
+<h3 class="success">✅ Request সফল</h3>
+
+<p>${data.message}</p>
+
+<br>
+
+<p>
+<strong>ভিডিও:</strong><br>
+${data.video_url}
+</p>
+`;
 
 try {
 
