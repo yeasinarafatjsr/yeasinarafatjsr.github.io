@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Quiz | Knowledge World</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        header p {
+            margin: 8px 0 0;
+            color: #cbd5e1;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .intro {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .intro h2 {
+            margin-top: 0;
+            color: #2563eb;
+        }
+
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .quiz-card {
+            background: white;
+            padding: 22px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .quiz-icon {
+            font-size: 45px;
+        }
+
+        .quiz-card h3 {
+            margin: 12px 0 8px;
+            font-size: 21px;
+        }
+
+        .quiz-card p {
+            color: #64748b;
+            min-height: 45px;
+        }
+
+        .quiz-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 12px 18px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .quiz-button:hover {
+            background: #1d4ed8;
+        }
+
+        .home-button {
+            display: block;
+            width: fit-content;
+            margin: 30px auto;
+            padding: 12px 20px;
+            background: #111827;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+        }
+
+        @media (max-width: 600px) {
+
+            .quiz-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>🧠 Knowledge World Quiz</h1>
+
+    <p>জ্ঞান যাচাই করুন, শিখুন এবং মজা করুন!</p>
+
+</header>
+
+
+<div class="container">
+
+
+    <div class="intro">
+
+        <h2>🎯 আপনার পছন্দের বিষয় নির্বাচন করুন</h2>
+
+        <p>
+            প্রতিটি বিষয়ে বিভিন্ন প্রশ্ন থাকবে।
+            যতগুলো পারেন উত্তর দিন এবং শেষে আপনার স্কোর দেখুন।
+        </p>
+
+    </div>
+
+
+    <div class="quiz-grid">
+
+
+        <!-- মহাকাশ -->
+
+        <div class="quiz-card">
+
+            <div class="quiz-icon">🌌</div>
+
+            <h3>মহাকাশ কুইজ</h3>
+
+            <p>
+                গ্রহ, নক্ষত্র ও মহাবিশ্ব সম্পর্কে আপনার জ্ঞান যাচাই করুন।
+            </p>
+
+            <a href="space-quiz.html"
+               class="quiz-button">
+                Quiz শুরু করুন →
+            </a>
+
+        </div>
+
+
+        <!-- বিজ্ঞান -->
+
+        <div class="quiz-card">
+
+            <div class="quiz-icon">🔬</div>
+
+            <h3>বিজ্ঞান কুইজ</h3>
+
+            <p>
+                বিজ্ঞান ও প্রকৃতি সম্পর্কে বিভিন্ন প্রশ্নের উত্তর দিন।
+            </p>
+
+            <a href="science-quiz.html"
+               class="quiz-button">
+                Quiz শুরু করুন →
+            </a>
+
+        </div>
+
+
+        <!-- প্রযুক্তি -->
+
+        <div class="quiz-card">
+
+            <div class="quiz-icon">💻</div>
+
+            <h3>প্রযুক্তি কুইজ</h3>
+
+            <p>
+                কম্পিউটার, ইন্টারনেট ও প্রযুক্তি সম্পর্কে জানুন।
+            </p>
+
+            <a href="#"
+               class="quiz-button"
+               onclick="comingSoon(event)">
+                শিগগির আসছে
+            </a>
+
+        </div>
+
+
+        <!-- ইতিহাস -->
+
+        <div class="quiz-card">
+
+            <div class="quiz-icon">🏛️</div>
+
+            <h3>ইতিহাস কুইজ</h3>
+
+            <p>
+                ইতিহাসের গুরুত্বপূর্ণ ঘটনা ও ব্যক্তিদের নিয়ে প্রশ্ন।
+            </p>
+
+            <a href="#"
+               class="quiz-button"
+               onclick="comingSoon(event)">
+                শিগগির আসছে
+            </a>
+
+        </div>
+
+
+        <!-- ভূগোল -->
+
+        <div class="quiz-card">
+
+            <div class="quiz-icon">🌍</div>
+
+            <h3>ভূগোল কুইজ</h3>
+
+            <p>
+                পৃথিবী, দেশ, মহাদেশ ও বিভিন্ন স্থান সম্পর্কে প্রশ্ন।
+            </p>
+
+            <a href="#"
+               class="quiz-button"
+               onclick="comingSoon(event)">
+                শিগগির আসছে
+            </a>
+
+        </div>
+
+
+        <!-- সাধারণ জ্ঞান -->
+
+        <div class="quiz-card">
+
+            <div class="quiz-icon">🧠</div>
+
+            <h3>সাধারণ জ্ঞান</h3>
+
+            <p>
+                বিভিন্ন বিষয়ের মজার ও শিক্ষামূলক প্রশ্ন।
+            </p>
+
+            <a href="#"
+               class="quiz-button"
+               onclick="comingSoon(event)">
+                শিগগির আসছে
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <a href="index.html"
+       class="home-button">
+        🏠 Home Page-এ ফিরে যান
+    </a>
+
+
+</div>
+
+
+<footer>
+
+    © 2026 Knowledge World
+
+</footer>
+
+
+<script>
+
+function comingSoon(event) {
+
+    event.preventDefault();
+
+    alert("🚧 এই বিষয়ের Quiz খুব শিগগিরই আসছে!");
+
+}
+
+</script>
+
+
+</body>
+
+</html>
