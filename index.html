@@ -561,10 +561,28 @@ function search() {
 
 <script>
 
+document.addEventListener("DOMContentLoaded", function() {
+
+    const popup = document.getElementById("welcomePopup");
+
+    // আগে দেখা হয়ে থাকলে Popup দেখাবে না
+    if (localStorage.getItem("yasinPopupShown") === "yes") {
+
+        popup.style.display = "none";
+
+    }
+
+});
+
+
 function answerYasin(known) {
 
     const popup = document.getElementById("welcomePopup");
     const message = document.getElementById("welcomeMessage");
+
+    // Popup দেখা হয়েছে বলে মনে রাখবে
+    localStorage.setItem("yasinPopupShown", "yes");
+
 
     if (known) {
 
@@ -578,15 +596,17 @@ function answerYasin(known) {
 
     }
 
+
     setTimeout(function() {
 
         popup.style.display = "none";
 
-    },  7000);
+    }, 5000);
 
 }
 
 </script>
+
 
 
 </body>
