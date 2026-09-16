@@ -248,327 +248,406 @@ footer{
 © Knowledge World | তৈরি করেছেন ইয়াছিন
 </footer>
 
-
 <script>
 
 const questions = [
+    {
+        q: "CPU-এর পূর্ণরূপ কী?",
+        options: [
+            "Central Processing Unit",
+            "Computer Personal Unit",
+            "Central Program Utility",
+            "Computer Processing Utility"
+        ],
+        answer: 0
+    },
+    {
+        q: "RAM-এর পূর্ণরূপ কী?",
+        options: [
+            "Random Access Memory",
+            "Read Access Machine",
+            "Random Application Memory",
+            "Read And Memory"
+        ],
+        answer: 0
+    },
+    {
+        q: "WWW-এর পূর্ণরূপ কী?",
+        options: [
+            "World Wide Web",
+            "World Web Window",
+            "Wide World Web",
+            "Web World Wide"
+        ],
+        answer: 0
+    },
+    {
+        q: "নিচের কোনটি একটি Web Browser?",
+        options: [
+            "Chrome",
+            "Windows",
+            "Android",
+            "Linux"
+        ],
+        answer: 0
+    },
+    {
+        q: "AI-এর পূর্ণরূপ কী?",
+        options: [
+            "Artificial Intelligence",
+            "Automatic Internet",
+            "Advanced Information",
+            "Artificial Internet"
+        ],
+        answer: 0
+    },
+    {
+        q: "GPS কী কাজে ব্যবহার করা হয়?",
+        options: [
+            "অবস্থান নির্ণয় করতে",
+            "ছবি আঁকতে",
+            "গান তৈরি করতে",
+            "কম্পিউটার বন্ধ করতে"
+        ],
+        answer: 0
+    },
+    {
+        q: "Wi-Fi কী?",
+        options: [
+            "তারবিহীন নেটওয়ার্ক প্রযুক্তি",
+            "একটি Operating System",
+            "একটি Printer",
+            "একটি Battery"
+        ],
+        answer: 0
+    },
+    {
+        q: "Keyboard কী ধরনের Device?",
+        options: [
+            "Input Device",
+            "Output Device",
+            "Storage Device",
+            "Network Device"
+        ],
+        answer: 0
+    },
+    {
+        q: "Monitor কী ধরনের Device?",
+        options: [
+            "Input Device",
+            "Output Device",
+            "Storage Device",
+            "Power Device"
+        ],
+        answer: 1
+    },
+    {
+        q: "Android কী?",
+        options: [
+            "একটি Mobile Operating System",
+            "একটি Printer",
+            "একটি Browser",
+            "একটি Keyboard"
+        ],
+        answer: 0
+    },
+    {
+        q: "Password-এর উদ্দেশ্য কী?",
+        options: [
+            "অ্যাকাউন্ট বা তথ্য সুরক্ষায় সাহায্য করা",
+            "কম্পিউটার দ্রুত করা",
+            "স্ক্রিন বড় করা",
+            "ব্যাটারি চার্জ করা"
+        ],
+        answer: 0
+    },
+    {
+        q: "Cloud Storage কী?",
+        options: [
+            "অনলাইনে তথ্য সংরক্ষণের ব্যবস্থা",
+            "কম্পিউটারের Fan",
+            "এক ধরনের Mouse",
+            "এক ধরনের Monitor"
+        ],
+        answer: 0
+    },
+    {
+        q: "YouTube কী ধরনের Platform?",
+        options: [
+            "ভিডিও শেয়ারিং Platform",
+            "Operating System",
+            "Keyboard",
+            "Antivirus"
+        ],
+        answer: 0
+    },
+    {
+        q: "Bluetooth সাধারণত কী কাজে ব্যবহার করা হয়?",
+        options: [
+            "স্বল্প দূরত্বে ডিভাইস সংযোগে",
+            "ইন্টারনেট বন্ধ করতে",
+            "কম্পিউটার ঠান্ডা করতে",
+            "স্ক্রিন পরিষ্কার করতে"
+        ],
+        answer: 0
+    },
+    {
+        q: "USB-এর পূর্ণরূপ কী?",
+        options: [
+            "Universal Serial Bus",
+            "United System Bus",
+            "Universal System Board",
+            "User Serial Board"
+        ],
+        answer: 0
+    },
+    {
+        q: "Printer-এর কাজ কী?",
+        options: [
+            "ডিজিটাল তথ্য কাগজে ছাপানো",
+            "ইন্টারনেট চালানো",
+            "ভিডিও ধারণ করা",
+            "শব্দ রেকর্ড করা"
+        ],
+        answer: 0
+    },
+    {
+        q: "Microsoft Word কী কাজে ব্যবহার করা হয়?",
+        options: [
+            "Document তৈরি ও সম্পাদনা করতে",
+            "শুধু গান শুনতে",
+            "শুধু ছবি তুলতে",
+            "শুধু Internet চালাতে"
+        ],
+        answer: 0
+    },
+    {
+        q: "Excel সাধারণত কী কাজে ব্যবহার করা হয়?",
+        options: [
+            "Spreadsheet ও হিসাবের কাজে",
+            "ভিডিও কল করতে",
+            "গান শুনতে",
+            "ছবি তুলতে"
+        ],
+        answer: 0
+    },
+    {
+        q: "QR Code কী?",
+        options: [
+            "তথ্য ধারণ করা একটি দুই-মাত্রিক Code",
+            "এক ধরনের Keyboard",
+            "এক ধরনের Monitor",
+            "এক ধরনের Battery"
+        ],
+        answer: 0
+    },
+    {
+        q: "এই ওয়েবসাইটের নাম কী?",
+        options: [
+            "Knowledge World",
+            "Technology World",
+            "Quiz World",
+            "Science World"
+        ],
+        answer: 0
+    },
+    {
+        q: "এই ওয়েবসাইট কে তৈরি করেছেন?",
+        options: [
+            "রহিম",
+            "করিম",
+            "ইয়াছিন",
+            "সুমন"
+        ],
+        answer: 2
+    }
+];
 
-{
-q:"CPU-এর পূর্ণরূপ কী?",
-options:[
-"Central Processing Unit",
-"Computer Personal Unit",
-"Central Program Utility",
-"Computer Processing Utility"
-],
-answer:0
-},
 
-{
-q:"কম্পিউটারের প্রধান মেমোরি কোনটি?",
-options:["RAM","Mouse","Keyboard","Monitor"],
-answer:0
-},
+let currentQuestion = 0;
+let answers = [];
+let negativeMarking = true;
 
-{
-q:"RAM-এর পূর্ণরূপ কী?",
-options:[
-"Random Access Memory",
-"Read Access Machine",
-"Random Application Memory",
-"Read And Memory"
-],
-answer:0
-},
 
-{
-q:"ROM-এর পূর্ণরূপ কী?",
-options:[
-"Read Only Memory",
-"Random Only Memory",
-"Read Open Memory",
-"Run Only Machine"
-],
-answer:0
-},
+function startQuiz() {
 
-{
-q:"কম্পিউটারের তথ্য স্থায়ীভাবে সংরক্ষণে কোনটি ব্যবহার করা হয়?",
-options:["Storage","Mouse","Speaker","Webcam"],
-answer:0
-},
+    negativeMarking =
+        document.querySelector(
+            'input[name="negative"]:checked'
+        ).value === "yes";
 
-{
-q:"SSD কী?",
-options:[
-"এক ধরনের Storage Device",
-"এক ধরনের Monitor",
-"এক ধরনের Keyboard",
-"এক ধরনের Printer"
-],
-answer:0
-},
+    currentQuestion = 0;
 
-{
-q:"ইন্টারনেট কী?",
-options:[
-"বিশ্বব্যাপী সংযুক্ত কম্পিউটার নেটওয়ার্ক",
-"একটি Keyboard",
-"একটি Operating System",
-"একটি Game"
-],
-answer:0
-},
+    answers = new Array(questions.length).fill(null);
 
-{
-q:"WWW-এর পূর্ণরূপ কী?",
-options:[
-"World Wide Web",
-"World Web Window",
-"Wide World Web",
-"Web World Wide"
-],
-answer:0
-},
+    document.getElementById("startScreen")
+        .classList.add("hidden");
 
-{
-q:"Website দেখার জন্য কোন Software ব্যবহার করা হয়?",
-options:[
-"Web Browser",
-"Calculator",
-"Paint",
-"Notepad"
-],
-answer:0
-},
+    document.getElementById("quizScreen")
+        .classList.remove("hidden");
 
-{
-q:"নিচের কোনটি Web Browser?",
-options:["Chrome","Windows","Android","Linux"],
-answer:0
-},
+    document.getElementById("resultScreen")
+        .classList.add("hidden");
 
-{
-q:"Google-এর Search Engine-এর নাম কী?",
-options:["Google Search","Chrome","Android","Drive"],
-answer:0
-},
+    showQuestion();
+}
 
-{
-q:"Email কী কাজে ব্যবহার করা হয়?",
-options:[
-"ইলেকট্রনিক বার্তা পাঠাতে",
-"কম্পিউটার পরিষ্কার করতে",
-"ছবি প্রিন্ট করতে",
-"ব্যাটারি চার্জ করতে"
-],
-answer:0
-},
 
-{
-q:"Wi-Fi কী?",
-options:[
-"তারবিহীন নেটওয়ার্ক প্রযুক্তি",
-"একটি Operating System",
-"একটি Printer",
-"একটি Battery"
-],
-answer:0
-},
+function showQuestion() {
 
-{
-q:"Bluetooth সাধারণত কী কাজে ব্যবহার করা হয়?",
-options:[
-"স্বল্প দূরত্বে ডিভাইস সংযোগে",
-"ইন্টারনেট বন্ধ করতে",
-"কম্পিউটার ঠান্ডা করতে",
-"স্ক্রিন পরিষ্কার করতে"
-],
-answer:0
-},
+    const q = questions[currentQuestion];
 
-{
-q:"USB-এর পূর্ণরূপ কী?",
-options:[
-"Universal Serial Bus",
-"United System Bus",
-"Universal System Board",
-"User Serial Board"
-],
-answer:0
-},
+    document.getElementById("progress").innerText =
+        "প্রশ্ন " +
+        (currentQuestion + 1) +
+        " / " +
+        questions.length;
 
-{
-q:"Keyboard কী ধরনের Device?",
-options:["Input Device","Output Device","Storage Device","Network Device"],
-answer:0
-},
+    document.getElementById("question").innerText = q.q;
 
-{
-q:"Monitor কী ধরনের Device?",
-options:["Input Device","Output Device","Storage Device","Power Device"],
-answer:1
-},
+    const optionsDiv =
+        document.getElementById("options");
 
-{
-q:"Mouse কী কাজে ব্যবহার করা হয়?",
-options:[
-"কম্পিউটারে নির্দেশ দিতে ও নির্বাচন করতে",
-"শুধু শব্দ শোনাতে",
-"ছবি প্রিন্ট করতে",
-"ইন্টারনেট তৈরি করতে"
-],
-answer:0
-},
+    optionsDiv.innerHTML = "";
 
-{
-q:"Printer-এর কাজ কী?",
-options:[
-"ডিজিটাল তথ্য কাগজে ছাপানো",
-"ইন্টারনেট চালানো",
-"ভিডিও ধারণ করা",
-"শব্দ রেকর্ড করা"
-],
-answer:0
-},
+    q.options.forEach(function(option, index) {
 
-{
-q:"Operating System-এর উদাহরণ কোনটি?",
-options:["Windows","Google","YouTube","Facebook"],
-answer:0
-},
+        const label =
+            document.createElement("label");
 
-{
-q:"Android কী?",
-options:[
-"একটি Mobile Operating System",
-"একটি Printer",
-"একটি Browser",
-"একটি Keyboard"
-],
-answer:0
-},
+        label.className = "option";
 
-{
-q:"Linux কী?",
-options:[
-"একটি Operating System",
-"একটি Social Media",
-"একটি Search Engine",
-"একটি Camera"
-],
-answer:0
-},
+        label.innerHTML =
+            '<input type="radio" name="answer" value="' +
+            index +
+            '">' +
+            option;
 
-{
-q:"Microsoft Word কী কাজে ব্যবহার করা হয়?",
-options:[
-"Document তৈরি ও সম্পাদনা করতে",
-"শুধু গান শুনতে",
-"শুধু ছবি তুলতে",
-"শুধু Internet চালাতে"
-],
-answer:0
-},
+        optionsDiv.appendChild(label);
+    });
 
-{
-q:"Excel সাধারণত কী কাজে ব্যবহার করা হয়?",
-options:[
-"Spreadsheet ও হিসাবের কাজে",
-"ভিডিও কল করতে",
-"গান শুনতে",
-"ছবি তুলতে"
-],
-answer:0
-},
+    document.getElementById("feedback").innerHTML = "";
+}
 
-{
-q:"PowerPoint কী কাজে ব্যবহার করা হয়?",
-options:[
-"Presentation তৈরি করতে",
-"Virus তৈরি করতে",
-"Internet বন্ধ করতে",
-"File মুছতে"
-],
-answer:0
-},
 
-{
-q:"PDF-এর পূর্ণরূপ কী?",
-options:[
-"Portable Document Format",
-"Personal Data File",
-"Public Document File",
-"Portable Data Folder"
-],
-answer:0
-},
+function nextQuestion() {
 
-{
-q:"Cloud Storage কী?",
-options:[
-"অনলাইনে তথ্য সংরক্ষণের ব্যবস্থা",
-"কম্পিউটারের Fan",
-"এক ধরনের Mouse",
-"এক ধরনের Monitor"
-],
-answer:0
-},
+    const selected =
+        document.querySelector(
+            'input[name="answer"]:checked'
+        );
 
-{
-q:"Google Drive কী?",
-options:[
-"Cloud Storage Service",
-"Web Browser",
-"Operating System",
-"Keyboard"
-],
-answer:0
-},
+    if (selected) {
 
-{
-q:"YouTube কী ধরনের Platform?",
-options:[
-"ভিডিও শেয়ারিং Platform",
-"Operating System",
-"Search Engine মাত্র",
-"Antivirus"
-],
-answer:0
-},
+        answers[currentQuestion] =
+            Number(selected.value);
 
-{
-q:"Social Media-এর উদাহরণ কোনটি?",
-options:["Facebook","Windows","Linux","Excel"],
-answer:0
-},
+    } else {
 
-{
-q:"AI-এর পূর্ণরূপ কী?",
-options:[
-"Artificial Intelligence",
-"Automatic Internet",
-"Advanced Information",
-"Artificial Internet"
-],
-answer:0
-},
+        answers[currentQuestion] = null;
+    }
 
-{
-q:"AI-এর বাংলা অর্থ কী?",
-options:[
-"কৃত্রিম বুদ্ধিমত্তা",
-"স্বয়ংক্রিয় ইন্টারনেট",
-"কম্পিউটার স্মৃতি",
-"ডিজিটাল ছবি"
-],
-answer:0
-},
+    if (currentQuestion < questions.length - 1) {
 
-{
-q:"Machine Learning কী?",
-options:[
-"কম্পিউটারকে তথ্য থেকে শেখানোর একটি পদ্ধতি",
-"এক ধরনের Keyboard",
-"এক ধরনের Printer",
-"
+        currentQuestion++;
+
+        showQuestion();
+
+    } else {
+
+        submitQuiz();
+    }
+}
+
+
+function submitQuiz() {
+
+    const selected =
+        document.querySelector(
+            'input[name="answer"]:checked'
+        );
+
+    if (
+        selected &&
+        answers[currentQuestion] === null
+    ) {
+        answers[currentQuestion] =
+            Number(selected.value);
+    }
+
+
+    let correct = 0;
+    let wrong = 0;
+    let unanswered = 0;
+
+
+    answers.forEach(function(answer, index) {
+
+        if (answer === null) {
+
+            unanswered++;
+
+        } else if (
+            answer === questions[index].answer
+        ) {
+
+            correct++;
+
+        } else {
+
+            wrong++;
+        }
+    });
+
+
+    let score = correct;
+
+    if (negativeMarking) {
+
+        score =
+            correct - (wrong * 0.25);
+    }
+
+
+    score =
+        Math.round(score * 100) / 100;
+
+
+    document.getElementById("quizScreen")
+        .classList.add("hidden");
+
+    document.getElementById("resultScreen")
+        .classList.remove("hidden");
+
+
+    document.getElementById("score").innerText =
+        score;
+
+    document.getElementById("correctCount").innerText =
+        correct;
+
+    document.getElementById("wrongCount").innerText =
+        wrong;
+
+    document.getElementById("unansweredCount").innerText =
+        unanswered;
+}
+
+
+function restartQuiz() {
+
+    document.getElementById("resultScreen")
+        .classList.add("hidden");
+
+    document.getElementById("startScreen")
+        .classList.remove("hidden");
+}
+
+
+function goHome() {
+
+    window.location.href = "quiz.html";
+}
+
+</script>
+
