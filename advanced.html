@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Advanced Feature by Yeasin</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #172554;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .advanced-box {
+            margin-top: 40px;
+            background: white;
+            padding: 35px 25px;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .advanced-box h1 {
+            margin-bottom: 10px;
+        }
+
+        .advanced-box p {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .video-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #dbeafe;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            margin-bottom: 20px;
+        }
+
+        .video-input:focus {
+            border-color: #2563eb;
+        }
+
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .option-btn {
+            border: none;
+            padding: 13px 20px;
+            border-radius: 10px;
+            background: #172554;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .option-btn:hover {
+            transform: translateY(-3px);
+            background: #2563eb;
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            text-align: left;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="advanced-box">
+
+            <h1>🚀 Advanced Feature by Yeasin</h1>
+
+            <p>
+                ভিডিও লিংক দিন এবং আপনার প্রয়োজন অনুযায়ী
+                Summary, Notes অথবা Audio তৈরি করুন।
+            </p>
+
+            <input
+                type="text"
+                class="video-input"
+                placeholder="🔗 এখানে ভিডিও লিংক দিন..."
+            >
+
+            <div class="options">
+
+                <button class="option-btn">
+                    📝 Summary
+                </button>
+
+                <button class="option-btn">
+                    📚 Notes
+                </button>
+
+                <button class="option-btn">
+                    🎧 Audio
+                </button>
+
+            </div>
+
+            <div class="result">
+
+                <h3>📄 Result</h3>
+
+                <p>
+                    এখানে আপনার ফলাফল দেখা যাবে।
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
