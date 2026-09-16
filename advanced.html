@@ -102,6 +102,20 @@ body {
 .error {
     color: #b91c1c;
 }
+    .download-btn {
+    border: none;
+    padding: 13px 22px;
+    border-radius: 10px;
+    background: #16a34a;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.download-btn:hover {
+    background: #15803d;
+}
 
 </style>
 </head>
@@ -352,6 +366,46 @@ buttons.forEach(function(btn) {
 });
 
 });
+    function downloadResult() {
+
+    const text =
+        document.querySelector(".result p").innerText;
+
+    const title =
+        document.querySelector(".result h3").innerText;
+
+    const content =
+        title +
+        "\n\n" +
+        text +
+        "\n\n" +
+        "Knowledge World - Advanced Feature by Yeasin";
+
+    const blob =
+        new Blob(
+            [content],
+            { type: "text/plain;charset=utf-8" }
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const a =
+        document.createElement("a");
+
+    a.href = url;
+
+    a.download =
+        "Knowledge-World-AI-Result.txt";
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(url);
+}
 
 </script>
 
