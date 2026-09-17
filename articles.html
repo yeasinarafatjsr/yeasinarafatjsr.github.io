@@ -383,17 +383,25 @@ const supabaseClient =
     );
 
 
+let allArticles = [];
+let currentPage = 1;
+const articlesPerPage = 6;
+
+
 async function loadArticles() {
 
     const box =
         document.getElementById("articlesList");
+
+    box.innerHTML =
+        "সংবাদ লোড হচ্ছে...";
 
 
     const { data, error } =
         await supabaseClient
         .from("articles")
         .select(
-            "title, content, category, created_at, image_url"
+            "title, content, category, created_at, image_url, video_url"
         )
         .order("created_at", {
             ascending: false
@@ -408,7 +416,6 @@ async function loadArticles() {
             "❌ সংবাদ লোড করা যাচ্ছে না।";
 
         return;
-
     }
 
 
@@ -418,14 +425,138 @@ async function loadArticles() {
             "এখনো কোনো Article প্রকাশিত হয়নি।";
 
         return;
-
     }
+
+
+    allArticles = data;
+
+
+    createCategoryOptions();
+
+    displayArticles();
+}
+
+
+function createCategoryOptions() {
+
+    const filter =
+        document.getElementById("categoryFilter");
+
+
+    const categories =
+        [...new Set(
+            allArticles
+            .map(article => article.category)
+            .filter(Boolean)
+        )];
+
+
+    categories.forEach(category => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = category;
+
+        option.textContent =
+            category;
+
+        filter.appendChild(option);
+
+    });
+
+}
+
+
+function displayArticles() {
+
+    const box =
+        document.getElementById("articlesList");
+
+    const search =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const category =
+        document.getElementById("categoryFilter")
+        .value;
+
+
+    const filtered =
+        allArticles.filter(article => {
+
+            const title =
+                (article.title || "")
+                .toLowerCase();
+
+            const content =
+                (article.content || "")
+                .toLowerCase();
+
+
+            const matchesSearch =
+                title.includes(search) ||
+                content.includes(search);
+
+
+            const matchesCategory =
+                category === "all" ||
+                article.category === category;
+
+
+            return (
+                matchesSearch &&
+                matchesCategory
+            );
+
+        });
+
+
+    const totalPages =
+        Math.ceil(
+            filtered.length /
+            articlesPerPage
+        );
+
+
+    if (currentPage > totalPages) {
+        currentPage = 1;
+    }
+
+
+    const start =
+        (currentPage - 1) *
+        articlesPerPage;
+
+
+    const end =
+        start + articlesPerPage;
+
+
+    const pageArticles =
+        filtered.slice(start, end);
 
 
     box.innerHTML = "";
 
 
-    data.forEach(article => {
+    if (pageArticles.length === 0) {
+
+        box.innerHTML =
+            "🔎 কোনো Article পাওয়া যায়নি।";
+
+        document.getElementById(
+            "pagination"
+        ).innerHTML = "";
+
+        return;
+    }
+
+
+    pageArticles.forEach(article => {
 
         const item =
             document.createElement("div");
@@ -438,7 +569,9 @@ async function loadArticles() {
 
             window.location.href =
                 "article.html?title=" +
-                encodeURIComponent(article.title);
+                encodeURIComponent(
+                    article.title
+                );
 
         };
 
@@ -492,8 +625,10 @@ async function loadArticles() {
         preview.className =
             "article-preview";
 
+
         const text =
             article.content || "";
+
 
         preview.textContent =
             text.length > 140
@@ -502,20 +637,101 @@ async function loadArticles() {
 
 
         info.appendChild(title);
-
         info.appendChild(date);
-
         info.appendChild(preview);
 
         item.appendChild(image);
-
         item.appendChild(info);
 
         box.appendChild(item);
 
     });
 
+
+    createPagination(totalPages);
 }
+
+
+function createPagination(totalPages) {
+
+    const pagination =
+        document.getElementById(
+            "pagination"
+        );
+
+
+    pagination.innerHTML = "";
+
+
+    if (totalPages <= 1) {
+        return;
+    }
+
+
+    for (
+        let i = 1;
+        i <= totalPages;
+        i++
+    ) {
+
+        const button =
+            document.createElement("button");
+
+        button.textContent = i;
+
+
+        if (i === currentPage) {
+            button.style.fontWeight = "bold";
+        }
+
+
+        button.onclick = function() {
+
+            currentPage = i;
+
+            displayArticles();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        };
+
+
+        pagination.appendChild(button);
+
+    }
+
+}
+
+
+document.getElementById(
+    "searchInput"
+).addEventListener(
+    "input",
+    function() {
+
+        currentPage = 1;
+
+        displayArticles();
+
+    }
+);
+
+
+document.getElementById(
+    "categoryFilter"
+).addEventListener(
+    "change",
+    function() {
+
+        currentPage = 1;
+
+        displayArticles();
+
+    }
+);
 
 
 document.addEventListener(
