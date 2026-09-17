@@ -698,7 +698,9 @@ async function loadLatestNews() {
     const { data, error } =
         await supabaseClient
         .from("articles")
-        .select("title, content, category, created_at")
+        .select(
+            "title, content, category, created_at, image_url"
+        )
         .order("created_at", {
             ascending: false
         })
@@ -730,7 +732,58 @@ async function loadLatestNews() {
 
     data.forEach(article => {
 
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "news-item";
+
+
+        item.onclick = function() {
+
+            window.location.href =
+                "article.html?title=" +
+                encodeURIComponent(article.title);
+
+        };
+
+
+        const image =
+            document.createElement("img");
+
+        image.className =
+            "news-image";
+
+        image.src =
+            article.image_url ||
+            "https://placehold.co/300x200?text=Knowledge+World";
+
+        image.alt =
+            article.title;
+
+
+        const info =
+            document.createElement("div");
+
+        info.className =
+            "news-info";
+
+
+        const title =
+            document.createElement("h3");
+
+        title.textContent =
+            article.title;
+
+
         const date =
+            document.createElement("p");
+
+        date.className =
+            "news-date";
+
+        date.textContent =
+            "🕐 " +
             new Date(article.created_at)
             .toLocaleString("bn-BD", {
                 dateStyle: "medium",
@@ -738,22 +791,30 @@ async function loadLatestNews() {
             });
 
 
-        const item =
-            document.createElement("div");
+        const preview =
+            document.createElement("p");
 
-        item.className = "news-item";
+        preview.className =
+            "news-preview";
+
+        const text =
+            article.content || "";
+
+        preview.textContent =
+            text.length > 100
+            ? text.substring(0, 100) + "..."
+            : text;
 
 
-        item.innerHTML = `
+        info.appendChild(title);
 
-            <h3>${article.title}</h3>
+        info.appendChild(date);
 
-            <p class="news-date">
-                🕐 ${date}
-            </p>
+        info.appendChild(preview);
 
-        `;
+        item.appendChild(image);
 
+        item.appendChild(info);
 
         newsBox.appendChild(item);
 
