@@ -291,6 +291,22 @@
     background:#2563eb;
     color:white;
 }
+        .edit-comment-btn{
+    margin-top:10px;
+    border:1px solid #2563eb;
+    background:#eff6ff;
+    color:#2563eb;
+    padding:6px 12px;
+    border-radius:6px;
+    font-size:13px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.edit-comment-btn:hover{
+    background:#2563eb;
+    color:white;
+}
     </style>
 
 </head>
@@ -707,6 +723,53 @@ async function loadComments(showAll=false){
         commentBox.appendChild(name);
         commentBox.appendChild(date);
         commentBox.appendChild(text);
+        if(item.visitor_id === visitorId){
+
+    const editButton=document.createElement("button");
+
+    editButton.textContent="✏️ Edit";
+    editButton.className="edit-comment-btn";
+
+    editButton.addEventListener("click",async function(){
+
+        const newComment=prompt("আপনার নতুন মন্তব্য লিখুন:",item.comment);
+
+        if(newComment === null){
+            return;
+        }
+
+        const updatedComment=newComment.trim();
+
+        if(!updatedComment){
+            alert("⚠️ মন্তব্য খালি রাখা যাবে না।");
+            return;
+        }
+
+        const {error}=await supabaseClient
+            .from("comments")
+            .update({
+                comment:updatedComment,
+                updated_at:new Date().toISOString()
+            })
+            .eq("id",item.id)
+            .eq("visitor_id",visitorId);
+
+        if(error){
+
+            console.error(error);
+            alert("❌ Comment Edit করা যায়নি।");
+
+        }else{
+
+            await loadComments(showAll);
+
+        }
+
+    });
+
+    commentBox.appendChild(editButton);
+
+}
 
         commentsList.appendChild(commentBox);
 
