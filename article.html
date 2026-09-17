@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Article - Knowledge World</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #333;
+        }
+
+        header {
+            background: #172554;
+            color: white;
+            padding: 18px 20px;
+        }
+
+        .header-inner {
+            max-width: 900px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .home-btn {
+            color: white;
+            text-decoration: none;
+            background: #2563eb;
+            padding: 9px 15px;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .article-container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .article {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+        }
+
+        .article-category {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .article h2 {
+            color: #172554;
+            font-size: 30px;
+            line-height: 1.35;
+            margin: 0 0 10px;
+        }
+
+        .article-date {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .article-image {
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 22px;
+        }
+
+        .article-content {
+            color: #333;
+            font-size: 17px;
+            line-height: 1.9;
+            white-space: pre-line;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 25px;
+            color: white;
+            background: #172554;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 7px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            color: #dc2626;
+        }
+
+        @media (max-width: 600px) {
+
+            .header-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .article {
+                padding: 18px;
+            }
+
+            .article h2 {
+                font-size: 24px;
+            }
+
+            .article-content {
+                font-size: 16px;
+                line-height: 1.8;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="header-inner">
+
+        <h1>🌍 Knowledge World</h1>
+
+        <a href="index.html"
+           class="home-btn">
+            🏠 Home
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="article-container">
+
+    <div id="articleBox"
+         class="loading">
+
+        সংবাদ লোড হচ্ছে...
+
+    </div>
+
+</main>
+
+
+<script>
+
+const SUPABASE_URL =
+    "https://jwoajgfajojvyqrxxxen.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_CxG0qxqT2-AtiH8w48GDsw_eJEvgQOF";
+
+const supabaseClient =
+    supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+async function loadArticle() {
+
+    const articleBox =
+        document.getElementById("articleBox");
+
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const title =
+        params.get("title");
+
+
+    if (!title) {
+
+        articleBox.className =
+            "error";
+
+        articleBox.innerHTML =
+            "❌ কোনো Article নির্বাচন করা হয়নি।";
+
+        return;
+
+    }
+
+
+    const { data, error } =
+        await supabaseClient
+        .from("articles")
+        .select(
+            "title, content, category, created_at, image_url"
+        )
+        .eq("title", title)
+        .single();
+
+
+    if (error || !data) {
+
+        console.error(error);
+
+        articleBox.className =
+            "error";
+
+        articleBox.innerHTML =
+            "❌ Article পাওয়া যায়নি।";
+
+        return;
+
+    }
+
+
+    articleBox.className =
+        "article";
+
+
+    let imageHTML = "";
+
+
+    if (data.image_url) {
+
+        imageHTML = `
+            <img
+                src="${data.image_url}"
+                alt="${escapeHTML(data.title)}"
+                class="article-image"
+            >
+        `;
+
+    }
+
+
+    const date =
+        new Date(data.created_at)
+        .toLocaleString("bn-BD", {
+            dateStyle: "full",
+            timeStyle: "short"
+        });
+
+
+    articleBox.innerHTML = `
+
+        <span class="article-category">
+            ${escapeHTML(data.category || "সাধারণ")}
+        </span>
+
+        <h2>
+            ${escapeHTML(data.title)}
+        </h2>
+
+        <div class="article-date">
+            🕐 ${date}
+        </div>
+
+        ${imageHTML}
+
+        <div class="article-content">
+            ${escapeHTML(data.content || "")}
+        </div>
+
+        <a href="index.html"
+           class="back-btn">
+            ← Home-এ ফিরে যান
+        </a>
+
+    `;
+
+}
+
+
+function escapeHTML(text) {
+
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    loadArticle
+);
+
+</script>
+
+
+</body>
+
+</html>
