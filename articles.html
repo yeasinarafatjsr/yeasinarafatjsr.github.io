@@ -168,15 +168,49 @@
 
 <main class="container">
 
-    <h2 class="page-title">
-        📰 সকল Article
-    </h2>
+    <div class="page-title-box">
+
+        <h2 class="page-title">
+            📰 সকল Article
+        </h2>
+
+        <p>
+            Knowledge World-এর সকল প্রকাশিত সংবাদ ও জ্ঞানমূলক লেখা
+        </p>
+
+    </div>
+
+
+    <div class="article-tools">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔎 Article খুঁজুন..."
+        >
+
+
+        <select id="categoryFilter">
+
+            <option value="all">
+                📚 সকল বিষয়
+            </option>
+
+        </select>
+
+    </div>
+
 
     <div id="articlesList"
-         class="loading">
+         class="articles-grid">
 
         সংবাদ লোড হচ্ছে...
 
+    </div>
+
+
+    <div id="pagination"
+         class="pagination">
     </div>
 
 </main>
