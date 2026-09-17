@@ -315,7 +315,97 @@ ${data.video_url ? `
         </iframe>
     </div>
 ` : ""}
+<div class="article-interactions">
 
+    <div class="reaction-section">
+
+        <h3>আপনার প্রতিক্রিয়া</h3>
+
+        <div class="reaction-buttons">
+
+            <button data-reaction="like">
+                👍 <span>Like</span>
+                <b>0</b>
+            </button>
+
+            <button data-reaction="dislike">
+                👎 <span>Dislike</span>
+                <b>0</b>
+            </button>
+
+            <button data-reaction="love">
+                ❤️ <span>Love</span>
+                <b>0</b>
+            </button>
+
+            <button data-reaction="haha">
+                😂 <span>Haha</span>
+                <b>0</b>
+            </button>
+
+            <button data-reaction="wow">
+                😮 <span>Wow</span>
+                <b>0</b>
+            </button>
+
+            <button data-reaction="sad">
+                😢 <span>Sad</span>
+                <b>0</b>
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="share-section">
+
+        <h3>📤 শেয়ার করুন</h3>
+
+        <div class="share-buttons">
+
+            <button id="nativeShareBtn">
+                📤 Share
+            </button>
+
+            <button id="copyLinkBtn">
+                🔗 Copy Link
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="comments-section">
+
+        <h3>💬 Comments</h3>
+
+        <input
+            type="text"
+            id="commentName"
+            placeholder="আপনার নাম"
+        >
+
+        <textarea
+            id="commentText"
+            placeholder="আপনার মন্তব্য লিখুন..."
+            rows="4">
+        </textarea>
+
+        <button id="commentBtn">
+            💬 Comment করুন
+        </button>
+
+        <div id="commentMessage"></div>
+
+        <div id="commentsList">
+            মন্তব্য লোড হচ্ছে...
+        </div>
+
+    </div>
+
+</div>
 <a href="index.html"
    class="back-btn">
     ← Home-এ ফিরে যান
