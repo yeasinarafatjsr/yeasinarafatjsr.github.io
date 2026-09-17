@@ -608,6 +608,146 @@
         alert("✅ Article Delete হয়েছে।");
         loadAdminArticles();
     }
+    async function loadAdminComments(){
+
+    const box=document.getElementById("adminCommentsList");
+
+    box.innerHTML="Comments লোড হচ্ছে...";
+
+    const {data,error}=await supabaseClient
+        .from("comments")
+        .select("id, article_title, name, comment, created_at, is_hidden")
+        .order("created_at",{ascending:false});
+
+    if(error){
+
+        console.error(error);
+        box.innerHTML="❌ Comments লোড করা যাচ্ছে না।";
+        return;
+
+    }
+
+    if(!data || data.length===0){
+
+        box.innerHTML="এখনো কোনো Comment নেই।";
+        return;
+
+    }
+
+    box.innerHTML="";
+
+    data.forEach(item=>{
+
+        const commentBox=document.createElement("div");
+        commentBox.className="admin-comment-item";
+
+        const article=document.createElement("div");
+        article.className="admin-comment-article";
+        article.textContent="📰 "+item.article_title;
+
+        const name=document.createElement("div");
+        name.className="admin-comment-name";
+        name.textContent=item.name;
+
+        const text=document.createElement("div");
+        text.className="admin-comment-text";
+        text.textContent=item.comment;
+
+        const date=document.createElement("div");
+        date.className="admin-comment-date";
+        date.textContent=
+            "🕐 "+new Date(item.created_at).toLocaleString("bn-BD");
+
+        const status=document.createElement("div");
+        status.className="admin-comment-status";
+
+        status.textContent=item.is_hidden
+            ? "🙈 Hidden"
+            : "👁️ Visible";
+
+        const actions=document.createElement("div");
+        actions.className="admin-comment-actions";
+
+        const hideButton=document.createElement("button");
+
+        hideButton.className="hide-comment-btn";
+
+        hideButton.textContent=item.is_hidden
+            ? "👁️ Unhide"
+            : "🙈 Hide";
+
+        hideButton.onclick=function(){
+            toggleCommentVisibility(item.id,item.is_hidden);
+        };
+
+
+        const deleteButton=document.createElement("button");
+
+        deleteButton.className="delete-comment-btn";
+        deleteButton.textContent="🗑️ Delete";
+
+        deleteButton.onclick=function(){
+            deleteAdminComment(item.id);
+        };
+
+
+        actions.appendChild(hideButton);
+        actions.appendChild(deleteButton);
+
+        commentBox.appendChild(article);
+        commentBox.appendChild(name);
+        commentBox.appendChild(text);
+        commentBox.appendChild(date);
+        commentBox.appendChild(status);
+        commentBox.appendChild(actions);
+
+        box.appendChild(commentBox);
+
+    });
+
+}
+    async function toggleCommentVisibility(id, currentStatus) {
+
+    const { error } = await supabaseClient
+        .from("comments")
+        .update({
+            is_hidden: !currentStatus
+        })
+        .eq("id", id);
+
+    if (error) {
+        console.error(error);
+        alert("❌ Comment-এর visibility পরিবর্তন করা যায়নি।");
+        return;
+    }
+
+    loadAdminComments();
+}
+
+
+async function deleteAdminComment(id) {
+
+    const confirmed = confirm(
+        "এই Comment-টি কি সত্যিই Delete করতে চান?"
+    );
+
+    if (!confirmed) return;
+
+    const { error } = await supabaseClient
+        .from("comments")
+        .delete()
+        .eq("id", id);
+
+    if (error) {
+        console.error(error);
+        alert("❌ Comment Delete করা যায়নি।");
+        return;
+    }
+
+    alert("✅ Comment Delete হয়েছে।");
+
+    loadAdminComments();
+}
 
     document.getElementById("cancelEditBtn").onclick = function() {
         editingArticleTitle = null;
