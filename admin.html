@@ -857,6 +857,8 @@ async function loadAdminArticles() {
 
     document.getElementById("publishBtn").textContent =
         "💾 Save Changes";
+        document.getElementById("cancelEditBtn").style.display =
+    "inline-block";
 
     document.getElementById("publishMessage").textContent =
         "✏️ Article Edit mode চালু হয়েছে।";
@@ -908,6 +910,25 @@ document.addEventListener(
         loadAdminArticles();
     }
 );
+    document.getElementById("cancelEditBtn").onclick =
+    function() {
+
+        editingArticleTitle = null;
+
+        document.getElementById("title").value = "";
+        document.getElementById("imageUrl").value = "";
+        document.getElementById("videoUrl").value = "";
+        document.getElementById("content").value = "";
+
+        document.getElementById("publishBtn").textContent =
+            "🚀 Publish Article";
+
+        document.getElementById("cancelEditBtn").style.display =
+            "none";
+
+        document.getElementById("publishMessage").textContent =
+            "";
+    };
 
 </script>
 
