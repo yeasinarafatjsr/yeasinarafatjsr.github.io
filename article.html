@@ -301,13 +301,25 @@ async function loadArticle() {
         ${imageHTML}
 
         <div class="article-content">
-            ${escapeHTML(data.content || "")}
-        </div>
+    ${escapeHTML(data.content || "")}
+</div>
 
-        <a href="index.html"
-           class="back-btn">
-            ← Home-এ ফিরে যান
-        </a>
+${data.video_url ? `
+    <div class="article-video">
+        <iframe
+            src="${getYouTubeEmbedUrl(data.video_url) || data.video_url}"
+            title="Article Video"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </div>
+` : ""}
+
+<a href="index.html"
+   class="back-btn">
+    ← Home-এ ফিরে যান
+</a>
 
     `;
 
