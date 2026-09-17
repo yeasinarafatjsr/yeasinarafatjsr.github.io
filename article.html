@@ -322,6 +322,20 @@ const supabaseClient =
         SUPABASE_URL,
         SUPABASE_KEY
     );
+    function getVisitorId(){
+
+    let visitorId=localStorage.getItem("kw_visitor_id");
+
+    if(!visitorId){
+
+        visitorId=
+            "visitor_"+Date.now()+"_"+Math.random().toString(36).substring(2,12);
+
+        localStorage.setItem("kw_visitor_id",visitorId);
+    }
+
+    return visitorId;
+}
 
 
 async function loadArticle() {
