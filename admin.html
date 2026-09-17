@@ -2,18 +2,13 @@
 <html lang="bn">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - Knowledge World</title>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
-
         * {
             box-sizing: border-box;
         }
@@ -150,769 +145,391 @@
             max-width: 500px;
             margin: 50px auto;
         }
+
         .admin-article-item {
-    background: white;
-    padding: 15px;
-    margin-top: 12px;
-    border-radius: 10px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-}
+            background: white;
+            padding: 15px;
+            margin-top: 12px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
 
-.admin-article-title {
-    color: #172554;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 6px;
-}
+        .admin-article-title {
+            color: #172554;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
 
-.admin-article-info {
-    color: #777;
-    font-size: 13px;
-    margin-bottom: 10px;
-}
+        .admin-article-info {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
 
-.admin-article-actions {
-    display: flex;
-    gap: 8px;
-}
+        .admin-article-actions {
+            display: flex;
+            gap: 8px;
+        }
 
-.edit-btn,
-.delete-btn {
-    border: none;
-    padding: 8px 14px;
-    border-radius: 7px;
-    cursor: pointer;
-    font-weight: bold;
-}
+        .edit-btn,
+        .delete-btn {
+            border: none;
+            padding: 8px 14px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
 
-.edit-btn {
-    background: #dbeafe;
-    color: #1d4ed8;
-}
+        .edit-btn {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
 
-.delete-btn {
-    background: #fee2e2;
-    color: #dc2626;
-}
+        .delete-btn {
+            background: #fee2e2;
+            color: #dc2626;
+        }
 
-.edit-btn:hover {
-    background: #bfdbfe;
-}
+        .edit-btn:hover {
+            background: #bfdbfe;
+        }
 
-.delete-btn:hover {
-    background: #fecaca;
-}
+        .delete-btn:hover {
+            background: #fecaca;
+        }
+
         .cancel-edit-btn {
-    margin-top: 10px;
-    padding: 9px 16px;
-    border: none;
-    border-radius: 7px;
-    background: #e5e7eb;
-    color: #374151;
-    font-weight: bold;
-    cursor: pointer;
-}
-
+            margin-top: 10px;
+            padding: 9px 16px;
+            border: none;
+            border-radius: 7px;
+            background: #e5e7eb;
+            color: #374151;
+            font-weight: bold;
+            cursor: pointer;
+        }
     </style>
-
 </head>
-
 
 <body>
 
-
 <header>
-
     <div class="header-inner">
-
         <h1>🛠️ Knowledge World Admin</h1>
-
         <div>
-
-            <a href="index.html"
-               class="home-btn">
-                🏠 Home
-            </a>
-
-            <button
-                id="logoutBtn"
-                class="logout-btn"
-                style="display:none;">
-                Logout
-            </button>
-
+            <a href="index.html" class="home-btn">🏠 Home</a>
+            <button id="logoutBtn" class="logout-btn" style="display:none;">Logout</button>
         </div>
-
     </div>
-
 </header>
-
 
 <main class="container">
 
-
     <!-- LOGIN -->
-
-    <section id="loginPanel"
-             class="panel">
-
+    <section id="loginPanel" class="panel">
         <h2>🔐 Admin Login</h2>
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="Admin email">
 
-        <label>
-            Email
-        </label>
+        <label>Password</label>
+        <input type="password" id="loginPassword" placeholder="Password">
 
-        <input
-            type="email"
-            id="loginEmail"
-            placeholder="Admin email">
-
-        <label>
-            Password
-        </label>
-
-        <input
-            type="password"
-            id="loginPassword"
-            placeholder="Password">
-
-        <button
-            id="loginBtn"
-            class="publish-btn">
-
-            Login
-
-        </button>
-
-        <div id="loginMessage"
-             class="message">
-        </div>
-
+        <button id="loginBtn" class="publish-btn">Login</button>
+        <div id="loginMessage" class="message"></div>
     </section>
-
 
     <!-- ADMIN PANEL -->
-
-    <section id="adminPanel"
-             class="panel">
-
+    <section id="adminPanel" class="panel">
         <h2>📰 নতুন Article প্রকাশ করুন</h2>
 
+        <label>শিরোনাম</label>
+        <input type="text" id="title" placeholder="সংবাদের শিরোনাম লিখুন">
 
-        <label>
-            শিরোনাম
-        </label>
-
-        <input
-            type="text"
-            id="title"
-            placeholder="সংবাদের শিরোনাম লিখুন">
-
-
-        <label>
-            Category
-        </label>
-
+        <label>Category</label>
         <select id="category">
-
-            <option value="সাধারণ জ্ঞান">
-                সাধারণ জ্ঞান
-            </option>
-
-            <option value="বিজ্ঞান">
-                বিজ্ঞান
-            </option>
-
-            <option value="প্রযুক্তি">
-                প্রযুক্তি
-            </option>
-
-            <option value="মহাকাশ">
-                মহাকাশ
-            </option>
-
-            <option value="ইতিহাস">
-                ইতিহাস
-            </option>
-
-            <option value="ভূগোল">
-                ভূগোল
-            </option>
-
+            <option value="সাধারণ জ্ঞান">সাধারণ জ্ঞান</option>
+            <option value="বিজ্ঞান">বিজ্ঞান</option>
+            <option value="প্রযুক্তি">প্রযুক্তি</option>
+            <option value="মহাকাশ">মহাকাশ</option>
+            <option value="ইতিহাস">ইতিহাস</option>
+            <option value="ভূগোল">ভূগোল</option>
         </select>
 
+        <label>Image URL</label>
+        <input type="url" id="imageUrl" placeholder="https://example.com/image.jpg">
 
-        <label>
-            Image URL
-        </label>
+        <label>Video URL (ঐচ্ছিক)</label>
+        <input type="url" id="videoUrl" placeholder="YouTube ভিডিও লিংক দিন">
 
-        <input
-            type="url"
-            id="imageUrl"
-            placeholder="https://example.com/image.jpg">
+        <label>Article Content</label>
+        <textarea id="content" placeholder="এখানে পুরো সংবাদ লিখুন..."></textarea>
 
-<label>Video URL (ঐচ্ছিক)</label>
+        <button id="publishBtn" class="publish-btn">🚀 Publish Article</button>
+        <button type="button" id="cancelEditBtn" class="cancel-edit-btn" style="display:none;">❌ Cancel Edit</button>
 
-<input
-    type="url"
-    id="videoUrl"
-    placeholder="YouTube ভিডিও লিংক দিন"
->
-        <label>
-            Article Content
-        </label>
+        <div id="publishMessage" class="message"></div>
 
-        <textarea
-            id="content"
-            placeholder="এখানে পুরো সংবাদ লিখুন..."></textarea>
+        <hr style="margin-top: 30px;">
 
-
-        <button
-            id="publishBtn"
-            class="publish-btn">
-
-            🚀 Publish Article
-
-        </button>
-
-
-        <div id="publishMessage"
-             class="message">
-        </div>
-        <button
-    type="button"
-    id="cancelEditBtn"
-    class="cancel-edit-btn"
-    style="display:none;">
-
-    ❌ Cancel Edit
-
-</button>
-        <hr>
-
-<h2>📰 প্রকাশিত Article</h2>
-
-<div id="adminArticlesList">
-    Article লোড হচ্ছে...
-</div>
-
+        <h2>📰 প্রকাশিত Article</h2>
+        <div id="adminArticlesList">Article লোড হচ্ছে...</div>
     </section>
-
 
 </main>
 
-
 <script>
+    const SUPABASE_URL = "https://jwoajgfajojvyqrxxxen.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_CxG0qxqT2-AtiH8w48GDsw_eJEvgQOF";
 
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const SUPABASE_URL =
-    "https://jwoajgfajojvyqrxxxen.supabase.co";
+    const loginPanel = document.getElementById("loginPanel");
+    const adminPanel = document.getElementById("adminPanel");
+    const logoutBtn = document.getElementById("logoutBtn");
 
-const SUPABASE_KEY =
-    "sb_publishable_CxG0qxqT2-AtiH8w48GDsw_eJEvgQOF";
+    let editingArticleTitle = null;
 
-
-const supabaseClient =
-    supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
-
-
-
-const loginPanel =
-    document.getElementById("loginPanel");
-
-const adminPanel =
-    document.getElementById("adminPanel");
-
-const logoutBtn =
-    document.getElementById("logoutBtn");
-
-
-
-function showMessage(element, text, type) {
-
-    element.textContent = text;
-
-    element.className =
-        "message " + type;
-
-}
-
-
-
-async function checkUser() {
-
-    const { data } =
-        await supabaseClient
-        .auth
-        .getSession();
-
-
-    if (data.session) {
-
-        loginPanel.style.display =
-            "none";
-
-        adminPanel.style.display =
-            "block";
-
-        logoutBtn.style.display =
-            "inline-block";
-
-    } else {
-
-        loginPanel.style.display =
-            "block";
-
-        adminPanel.style.display =
-            "none";
-
-        logoutBtn.style.display =
-            "none";
-
+    function showMessage(element, text, type) {
+        element.textContent = text;
+        element.className = "message " + type;
     }
 
-}
+    async function checkUser() {
+        const { data } = await supabaseClient.auth.getSession();
 
-
-
-document
-.getElementById("loginBtn")
-.addEventListener("click", async function() {
-
-    const email =
-        document.getElementById("loginEmail")
-        .value
-        .trim();
-
-    const password =
-        document.getElementById("loginPassword")
-        .value;
-
-
-    const message =
-        document.getElementById("loginMessage");
-
-
-    if (!email || !password) {
-
-        showMessage(
-            message,
-            "Email এবং Password দিন।",
-            "error"
-        );
-
-        return;
-
+        if (data.session) {
+            loginPanel.style.display = "none";
+            adminPanel.style.display = "block";
+            logoutBtn.style.display = "inline-block";
+            loadAdminArticles(); // অ্যাডমিন প্যানেল দৃশ্যমান হলেই আর্টিকেল লোড হবে
+        } else {
+            loginPanel.style.display = "block";
+            adminPanel.style.display = "none";
+            logoutBtn.style.display = "none";
+        }
     }
 
+    document.getElementById("loginBtn").addEventListener("click", async function() {
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value;
+        const message = document.getElementById("loginMessage");
 
-    const { error } =
-        await supabaseClient
-        .auth
-        .signInWithPassword({
+        if (!email || !password) {
+            showMessage(message, "Email এবং Password দিন।", "error");
+            return;
+        }
+
+        const { error } = await supabaseClient.auth.signInWithPassword({
             email: email,
             password: password
         });
 
+        if (error) {
+            console.error(error);
+            showMessage(message, "❌ Login করা যায়নি। Email অথবা Password ঠিক আছে কি না দেখুন।", "error");
+            return;
+        }
 
-    if (error) {
+        showMessage(message, "✅ Login সফল হয়েছে।", "success");
+        checkUser();
+    });
 
-        console.error(error);
+    logoutBtn.addEventListener("click", async function() {
+        await supabaseClient.auth.signOut();
+        checkUser();
+    });
 
-        showMessage(
-            message,
-            "❌ Login করা যায়নি। Email অথবা Password ঠিক আছে কি না দেখুন।",
-            "error"
-        );
+    document.getElementById("publishBtn").addEventListener("click", async function() {
+        const title = document.getElementById("title").value.trim();
+        const category = document.getElementById("category").value;
+        const imageUrl = document.getElementById("imageUrl").value.trim();
+        const videoUrl = document.getElementById("videoUrl").value.trim();
+        const content = document.getElementById("content").value.trim();
+        const message = document.getElementById("publishMessage");
+        const button = document.getElementById("publishBtn");
 
-        return;
+        if (!title || !content) {
+            showMessage(message, "❌ শিরোনাম এবং Article Content অবশ্যই দিতে হবে।", "error");
+            return;
+        }
 
-    }
+        button.disabled = true;
+        button.textContent = "প্রসেস করা হচ্ছে...";
 
+        const { data: userData } = await supabaseClient.auth.getUser();
 
-    showMessage(
-        message,
-        "✅ Login সফল হয়েছে।",
-        "success"
-    );
+        if (!userData.user) {
+            showMessage(message, "❌ আগে Admin Login করুন।", "error");
+            button.disabled = false;
+            button.textContent = editingArticleTitle ? "💾 Save Changes" : "🚀 Publish Article";
+            return;
+        }
 
-
-    checkUser();
-
-});
-
-
-
-logoutBtn
-.addEventListener("click", async function() {
-
-    await supabaseClient
-        .auth
-        .signOut();
-
-    checkUser();
-
-});
-
-
-
-document
-.getElementById("publishBtn")
-.addEventListener("click", async function() {
-
-    const title =
-        document.getElementById("title")
-        .value
-        .trim();
-
-    const category =
-        document.getElementById("category")
-        .value;
-
-    const imageUrl =
-        document.getElementById("imageUrl")
-        .value
-        .trim();
-    const videoUrl =
-    document.getElementById("videoUrl").value.trim();
-
-    const content =
-        document.getElementById("content")
-        .value
-        .trim();
-
-    const message =
-        document.getElementById("publishMessage");
-
-    const button =
-        document.getElementById("publishBtn");
-
-
-    if (!title || !content) {
-
-        showMessage(
-            message,
-            "❌ শিরোনাম এবং Article Content অবশ্যই দিতে হবে।",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    button.disabled = true;
-
-    button.textContent =
-        "প্রকাশ করা হচ্ছে...";
-
-
-    const { data: userData } =
-        await supabaseClient
-        .auth
-        .getUser();
-
-
-    if (!userData.user) {
-
-        showMessage(
-            message,
-            "❌ আগে Admin Login করুন।",
-            "error"
-        );
-
-        button.disabled = false;
-
-        button.textContent =
-            "🚀 Publish Article";
-
-        return;
-
-    }
-
-
-    const { error } =
-        await supabaseClient
         let result;
 
-if (editingArticleTitle) {
+        if (editingArticleTitle) {
+            result = await supabaseClient
+                .from("articles")
+                .update({
+                    title: title,
+                    content: content,
+                    category: category,
+                    image_url: imageUrl || null,
+                    video_url: videoUrl || null
+                })
+                .eq("title", editingArticleTitle);
+        } else {
+            result = await supabaseClient
+                .from("articles")
+                .insert({
+                    title: title,
+                    content: content,
+                    category: category,
+                    image_url: imageUrl || null,
+                    video_url: videoUrl || null
+                });
+        }
 
-    result = await supabaseClient
-        .from("articles")
-        .update({
-            title: title,
-            content: content,
-            category: category,
-            image_url: imageUrl || null,
-            video_url: videoUrl || null
-        })
-        .eq("title", editingArticleTitle);
+        const error = result.error;
 
-} else {
+        if (error) {
+            console.error(error);
+            showMessage(
+                message,
+                editingArticleTitle
+                    ? "❌ Article আপডেট করা যায়নি।"
+                    : "❌ Article প্রকাশ করা যায়নি। একই শিরোনামের Article আগে থেকে আছে কি না দেখুন।",
+                "error"
+            );
+        } else {
+            showMessage(
+                message,
+                editingArticleTitle
+                    ? "✅ Article সফলভাবে আপডেট হয়েছে!"
+                    : "✅ Article সফলভাবে প্রকাশিত হয়েছে!",
+                "success"
+            );
 
-    result = await supabaseClient
-        .from("articles")
-        .insert({
-            title: title,
-            content: content,
-            category: category,
-            image_url: imageUrl || null,
-            video_url: videoUrl || null
-        });
-}
+            // ইনপুট রিসেট
+            document.getElementById("title").value = "";
+            document.getElementById("imageUrl").value = "";
+            document.getElementById("videoUrl").value = "";
+            document.getElementById("content").value = "";
+            document.getElementById("cancelEditBtn").style.display = "none";
 
-const error = result.error;
+            editingArticleTitle = null;
 
-if (error) {
+            loadAdminArticles();
+        }
 
-    console.error(error);
+        button.disabled = false;
+        button.textContent = "🚀 Publish Article";
+    });
 
-    showMessage(
-        message,
-        editingArticleTitle
-            ? "❌ Article আপডেট করা যায়নি।"
-            : "❌ Article প্রকাশ করা যায়নি। একই শিরোনামের Article আগে থেকে আছে কি না দেখুন।",
-        "error"
-    );
+    supabaseClient.auth.onAuthStateChange(function() {
+        checkUser();
+    });
 
-} else {
+    async function loadAdminArticles() {
+        const box = document.getElementById("adminArticlesList");
+        box.innerHTML = "Article লোড হচ্ছে...";
 
-    showMessage(
-        message,
-        editingArticleTitle
-            ? "✅ Article সফলভাবে আপডেট হয়েছে!"
-            : "✅ Article সফলভাবে প্রকাশিত হয়েছে!",
-        "success"
-    );
+        const { data, error } = await supabaseClient
+            .from("articles")
+            .select("title, category, image_url, video_url, content, created_at")
+            .order("created_at", { ascending: false });
 
-    document.getElementById("title").value = "";
-    document.getElementById("imageUrl").value = "";
-    document.getElementById("videoUrl").value = "";
-    document.getElementById("content").value = "";
+        if (error) {
+            console.error(error);
+            box.innerHTML = "❌ Article লোড করা যাচ্ছে না।";
+            return;
+        }
 
-    editingArticleTitle = null;
+        if (!data || data.length === 0) {
+            box.innerHTML = "এখনো কোনো Article প্রকাশিত হয়নি।";
+            return;
+        }
 
-    document.getElementById("publishBtn").textContent =
-        "🚀 Publish Article";
+        box.innerHTML = "";
 
-    loadAdminArticles();
-}
+        data.forEach(article => {
+            const item = document.createElement("div");
+            item.className = "admin-article-item";
 
+            const title = document.createElement("div");
+            title.className = "admin-article-title";
+            title.textContent = article.title;
 
-    button.disabled = false;
+            const info = document.createElement("div");
+            info.className = "admin-article-info";
+            info.textContent = "📚 " + (article.category || "সাধারণ") + " • 🕐 " + new Date(article.created_at).toLocaleString("bn-BD");
 
-    button.textContent =
-        "🚀 Publish Article";
+            const actions = document.createElement("div");
+            actions.className = "admin-article-actions";
 
-});
-
-
-
-supabaseClient
-.auth
-.onAuthStateChange(function() {
-
-    checkUser();
-
-});
-
-
-checkUser();
-    let editingArticleTitle = null;
-
-async function loadAdminArticles() {
-
-    const box =
-        document.getElementById("adminArticlesList");
-
-    box.innerHTML =
-        "Article লোড হচ্ছে...";
-
-    const { data, error } =
-        await supabaseClient
-        .from("articles")
-        .select(
-            "title, category, image_url, video_url, content, created_at"
-        )
-        .order("created_at", {
-            ascending: false
-        });
-
-    if (error) {
-
-        console.error(error);
-
-        box.innerHTML =
-            "❌ Article লোড করা যাচ্ছে না।";
-
-        return;
-    }
-
-    if (!data || data.length === 0) {
-
-        box.innerHTML =
-            "এখনো কোনো Article প্রকাশিত হয়নি।";
-
-        return;
-    }
-
-    box.innerHTML = "";
-
-    data.forEach(article => {
-
-        const item =
-            document.createElement("div");
-
-        item.className =
-            "admin-article-item";
-
-        const title =
-            document.createElement("div");
-
-        title.className =
-            "admin-article-title";
-
-        title.textContent =
-            article.title;
-
-        const info =
-            document.createElement("div");
-
-        info.className =
-            "admin-article-info";
-
-        info.textContent =
-            "📚 " +
-            (article.category || "সাধারণ") +
-            " • 🕐 " +
-            new Date(article.created_at)
-            .toLocaleString("bn-BD");
-
-        const actions =
-            document.createElement("div");
-
-        actions.className =
-            "admin-article-actions";
-
-        const editBtn =
-            document.createElement("button");
-
-        editBtn.className =
-            "edit-btn";
-
-        editBtn.textContent =
-            "✏️ Edit";
-
-        editBtn.onclick =
-            function() {
+            const editBtn = document.createElement("button");
+            editBtn.className = "edit-btn";
+            editBtn.textContent = "✏️ Edit";
+            editBtn.onclick = function() {
                 editArticle(article);
             };
 
-        const deleteBtn =
-            document.createElement("button");
-
-        deleteBtn.className =
-            "delete-btn";
-
-        deleteBtn.textContent =
-            "🗑️ Delete";
-
-        deleteBtn.onclick =
-            function() {
+            const deleteBtn = document.createElement("button");
+            deleteBtn.className = "delete-btn";
+            deleteBtn.textContent = "🗑️ Delete";
+            deleteBtn.onclick = function() {
                 deleteArticle(article.title);
             };
 
-        actions.appendChild(editBtn);
-        actions.appendChild(deleteBtn);
+            actions.appendChild(editBtn);
+            actions.appendChild(deleteBtn);
 
-        item.appendChild(title);
-        item.appendChild(info);
-        item.appendChild(actions);
+            item.appendChild(title);
+            item.appendChild(info);
+            item.appendChild(actions);
 
-        box.appendChild(item);
+            box.appendChild(item);
+        });
+    }
 
-    });
-}
     function editArticle(article) {
+        editingArticleTitle = article.title;
 
-    editingArticleTitle = article.title;
+        document.getElementById("title").value = article.title || "";
+        document.getElementById("category").value = article.category || "";
+        document.getElementById("imageUrl").value = article.image_url || "";
+        document.getElementById("videoUrl").value = article.video_url || "";
+        document.getElementById("content").value = article.content || "";
 
-    document.getElementById("title").value =
-        article.title || "";
+        document.getElementById("publishBtn").textContent = "💾 Save Changes";
+        document.getElementById("cancelEditBtn").style.display = "inline-block";
 
-    document.getElementById("category").value =
-        article.category || "";
+        showMessage(document.getElementById("publishMessage"), "✏️ Article Edit mode চালু হয়েছে।", "success");
 
-    document.getElementById("imageUrl").value =
-        article.image_url || "";
-
-    document.getElementById("videoUrl").value =
-        article.video_url || "";
-
-    document.getElementById("content").value =
-        article.content || "";
-
-    document.getElementById("publishBtn").textContent =
-        "💾 Save Changes";
-        document.getElementById("cancelEditBtn").style.display =
-    "inline-block";
-
-    document.getElementById("publishMessage").textContent =
-        "✏️ Article Edit mode চালু হয়েছে।";
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
-
-
-async function deleteArticle(title) {
-
-    const confirmed =
-        confirm(
-            "এই Article-টি কি সত্যিই Delete করতে চান?"
-        );
-
-    if (!confirmed) {
-        return;
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    const { error } =
-        await supabaseClient
-        .from("articles")
-        .delete()
-        .eq("title", title);
+    async function deleteArticle(title) {
+        const confirmed = confirm("এই Article-টি কি সত্যিই Delete করতে চান?");
+        if (!confirmed) return;
 
-    if (error) {
+        const { error } = await supabaseClient
+            .from("articles")
+            .delete()
+            .eq("title", title);
 
-        console.error(error);
+        if (error) {
+            console.error(error);
+            alert("❌ Article Delete করা যায়নি।");
+            return;
+        }
 
-        alert(
-            "❌ Article Delete করা যায়নি।"
-        );
-
-        return;
-    }
-
-    alert(
-        "✅ Article Delete হয়েছে।"
-    );
-
-    loadAdminArticles();
-}
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
+        alert("✅ Article Delete হয়েছে।");
         loadAdminArticles();
     }
-);
-    document.getElementById("cancelEditBtn").onclick =
-    function() {
 
+    document.getElementById("cancelEditBtn").onclick = function() {
         editingArticleTitle = null;
 
         document.getElementById("title").value = "";
@@ -920,18 +537,14 @@ document.addEventListener(
         document.getElementById("videoUrl").value = "";
         document.getElementById("content").value = "";
 
-        document.getElementById("publishBtn").textContent =
-            "🚀 Publish Article";
-
-        document.getElementById("cancelEditBtn").style.display =
-            "none";
-
-        document.getElementById("publishMessage").textContent =
-            "";
+        document.getElementById("publishBtn").textContent = "🚀 Publish Article";
+        document.getElementById("cancelEditBtn").style.display = "none";
+        document.getElementById("publishMessage").style.display = "none";
     };
 
+    // ইনিশিয়াল রান
+    checkUser();
 </script>
-
 
 </body>
 
