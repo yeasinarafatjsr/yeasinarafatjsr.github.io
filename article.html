@@ -535,6 +535,295 @@ ${data.video_url ? `
 
     `;
 setupInteractions(data.title);
+    async function setupInteractions(articleTitle){
+
+    // =========================
+    // Reactions
+    // =========================
+
+    async function loadReactions(){
+
+        const {data,error}=await supabaseClient
+            .from("reactions")
+            .select("reaction")
+            .eq("article_title",articleTitle);
+
+        if(error){
+            console.error(error);
+            return;
+        }
+
+        const counts={
+            like:0,
+            dislike:0,
+            love:0,
+            haha:0,
+            wow:0,
+            sad:0
+        };
+
+        (data || []).forEach(item=>{
+            if(counts[item.reaction] !== undefined){
+                counts[item.reaction]++;
+            }
+        });
+
+        document.querySelectorAll(".reaction-buttons button").forEach(button=>{
+
+            const type=button.dataset.reaction;
+            const countElement=button.querySelector("b");
+
+            if(countElement){
+                countElement.textContent=counts[type] || 0;
+            }
+
+        });
+    }
+
+
+    document.querySelectorAll(".reaction-buttons button").forEach(button=>{
+
+        button.addEventListener("click",async function(){
+
+            const reaction=this.dataset.reaction;
+
+            this.disabled=true;
+
+            const {error}=await supabaseClient
+                .from("reactions")
+                .insert({
+                    article_title:articleTitle,
+                    reaction:reaction
+                });
+
+            if(error){
+
+                console.error(error);
+                alert("❌ Reaction দেওয়া যায়নি।");
+
+            }else{
+
+                await loadReactions();
+
+            }
+
+            this.disabled=false;
+
+        });
+
+    });
+
+
+    await loadReactions();
+
+
+    // =========================
+    // Comments
+    // =========================
+
+    async function loadComments(){
+
+        const commentsList=document.getElementById("commentsList");
+
+        commentsList.innerHTML="মন্তব্য লোড হচ্ছে...";
+
+        const {data,error}=await supabaseClient
+            .from("comments")
+            .select("name, comment, created_at")
+            .eq("article_title",articleTitle)
+            .order("created_at",{ascending:false});
+
+        if(error){
+
+            console.error(error);
+            commentsList.innerHTML="❌ মন্তব্য লোড করা যাচ্ছে না।";
+            return;
+
+        }
+
+        if(!data || data.length===0){
+
+            commentsList.innerHTML="এখনো কোনো মন্তব্য নেই।";
+            return;
+
+        }
+
+        commentsList.innerHTML="";
+
+        data.forEach(item=>{
+
+            const commentBox=document.createElement("div");
+            commentBox.className="comment-item";
+
+            const name=document.createElement("div");
+            name.className="comment-name";
+            name.textContent=item.name;
+
+            const date=document.createElement("div");
+            date.className="comment-date";
+            date.textContent=
+                "🕐 "+new Date(item.created_at).toLocaleString("bn-BD");
+
+            const text=document.createElement("div");
+            text.className="comment-text";
+            text.textContent=item.comment;
+
+            commentBox.appendChild(name);
+            commentBox.appendChild(date);
+            commentBox.appendChild(text);
+
+            commentsList.appendChild(commentBox);
+
+        });
+    }
+
+
+    // =========================
+    // Comment Submit
+    // =========================
+
+    document.getElementById("commentBtn").addEventListener("click",async function(){
+
+        const nameInput=document.getElementById("commentName");
+        const textInput=document.getElementById("commentText");
+        const message=document.getElementById("commentMessage");
+
+        const name=nameInput.value.trim();
+        const comment=textInput.value.trim();
+
+
+        // নাম অবশ্যই দিতে হবে
+        if(!name){
+
+            message.textContent="⚠️ মন্তব্য করার আগে আপনার নাম লিখুন।";
+            nameInput.focus();
+            return;
+
+        }
+
+
+        // মন্তব্য অবশ্যই দিতে হবে
+        if(!comment){
+
+            message.textContent="⚠️ আপনার মন্তব্য লিখুন।";
+            textInput.focus();
+            return;
+
+        }
+
+
+        this.disabled=true;
+
+        message.textContent="মন্তব্য পাঠানো হচ্ছে...";
+
+
+        const {error}=await supabaseClient
+            .from("comments")
+            .insert({
+                article_title:articleTitle,
+                name:name,
+                comment:comment
+            });
+
+
+        if(error){
+
+            console.error(error);
+
+            message.textContent=
+                "❌ মন্তব্য পাঠানো যায়নি। আবার চেষ্টা করুন।";
+
+        }else{
+
+            message.textContent=
+                "✅ মন্তব্য সফলভাবে যোগ হয়েছে।";
+
+            nameInput.value="";
+            textInput.value="";
+
+            await loadComments();
+
+        }
+
+        this.disabled=false;
+
+    });
+
+
+    await loadComments();
+
+
+    // =========================
+    // Share
+    // =========================
+
+    document.getElementById("nativeShareBtn").addEventListener("click",async function(){
+
+        const shareData={
+            title:articleTitle,
+            text:articleTitle,
+            url:window.location.href
+        };
+
+
+        if(navigator.share){
+
+            try{
+
+                await navigator.share(shareData);
+
+            }catch(error){
+
+                console.log("Share cancelled");
+
+            }
+
+        }else{
+
+            try{
+
+                await navigator.clipboard.writeText(window.location.href);
+
+                alert("🔗 Article link কপি হয়েছে।");
+
+            }catch(error){
+
+                alert("❌ Link কপি করা যায়নি।");
+
+            }
+
+        }
+
+    });
+
+
+    // =========================
+    // Copy Link
+    // =========================
+
+    document.getElementById("copyLinkBtn").addEventListener("click",async function(){
+
+        try{
+
+            await navigator.clipboard.writeText(window.location.href);
+
+            this.textContent="✅ Link Copied!";
+
+            setTimeout(()=>{
+
+                this.textContent="🔗 Copy Link";
+
+            },2000);
+
+        }catch(error){
+
+            alert("❌ Link কপি করা যায়নি।");
+
+        }
+
+    });
+
+}
 }
 
 
