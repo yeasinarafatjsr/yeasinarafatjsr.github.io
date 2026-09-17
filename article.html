@@ -235,7 +235,7 @@ async function loadArticle() {
         await supabaseClient
         .from("articles")
         .select(
-            "title, content, category, created_at, image_url"
+            "title, content, category, created_at, image_url,video_url"
         )
         .eq("title", title)
         .single();
