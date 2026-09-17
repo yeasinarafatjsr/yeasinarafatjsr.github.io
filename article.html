@@ -336,7 +336,44 @@ function escapeHTML(text) {
         .replace(/'/g, "&#039;");
 
 }
+function getYouTubeEmbedUrl(url) {
 
+    try {
+
+        const parsed =
+            new URL(url);
+
+        if (
+            parsed.hostname.includes("youtube.com")
+        ) {
+
+            const videoId =
+                parsed.searchParams.get("v");
+
+            if (videoId) {
+                return "https://www.youtube.com/embed/" + videoId;
+            }
+        }
+
+        if (
+            parsed.hostname === "youtu.be"
+        ) {
+
+            const videoId =
+                parsed.pathname.substring(1);
+
+            if (videoId) {
+                return "https://www.youtube.com/embed/" + videoId;
+            }
+        }
+
+    } catch (error) {
+
+        return null;
+    }
+
+    return null;
+}
 
 document.addEventListener(
     "DOMContentLoaded",
