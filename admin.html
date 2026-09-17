@@ -678,6 +678,121 @@ supabaseClient
 
 
 checkUser();
+    let editingArticleTitle = null;
+
+async function loadAdminArticles() {
+
+    const box =
+        document.getElementById("adminArticlesList");
+
+    box.innerHTML =
+        "Article লোড হচ্ছে...";
+
+    const { data, error } =
+        await supabaseClient
+        .from("articles")
+        .select(
+            "title, category, image_url, video_url, content, created_at"
+        )
+        .order("created_at", {
+            ascending: false
+        });
+
+    if (error) {
+
+        console.error(error);
+
+        box.innerHTML =
+            "❌ Article লোড করা যাচ্ছে না।";
+
+        return;
+    }
+
+    if (!data || data.length === 0) {
+
+        box.innerHTML =
+            "এখনো কোনো Article প্রকাশিত হয়নি।";
+
+        return;
+    }
+
+    box.innerHTML = "";
+
+    data.forEach(article => {
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "admin-article-item";
+
+        const title =
+            document.createElement("div");
+
+        title.className =
+            "admin-article-title";
+
+        title.textContent =
+            article.title;
+
+        const info =
+            document.createElement("div");
+
+        info.className =
+            "admin-article-info";
+
+        info.textContent =
+            "📚 " +
+            (article.category || "সাধারণ") +
+            " • 🕐 " +
+            new Date(article.created_at)
+            .toLocaleString("bn-BD");
+
+        const actions =
+            document.createElement("div");
+
+        actions.className =
+            "admin-article-actions";
+
+        const editBtn =
+            document.createElement("button");
+
+        editBtn.className =
+            "edit-btn";
+
+        editBtn.textContent =
+            "✏️ Edit";
+
+        editBtn.onclick =
+            function() {
+                editArticle(article);
+            };
+
+        const deleteBtn =
+            document.createElement("button");
+
+        deleteBtn.className =
+            "delete-btn";
+
+        deleteBtn.textContent =
+            "🗑️ Delete";
+
+        deleteBtn.onclick =
+            function() {
+                deleteArticle(article.title);
+            };
+
+        actions.appendChild(editBtn);
+        actions.appendChild(deleteBtn);
+
+        item.appendChild(title);
+        item.appendChild(info);
+        item.appendChild(actions);
+
+        box.appendChild(item);
+
+    });
+}
 
 
 </script>
