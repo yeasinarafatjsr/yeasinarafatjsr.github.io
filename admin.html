@@ -793,6 +793,72 @@ async function loadAdminArticles() {
 
     });
 }
+    function editArticle(article) {
+
+    editingArticleTitle = article.title;
+
+    document.getElementById("title").value =
+        article.title || "";
+
+    document.getElementById("category").value =
+        article.category || "";
+
+    document.getElementById("imageUrl").value =
+        article.image_url || "";
+
+    document.getElementById("videoUrl").value =
+        article.video_url || "";
+
+    document.getElementById("content").value =
+        article.content || "";
+
+    document.getElementById("publishBtn").textContent =
+        "💾 Save Changes";
+
+    document.getElementById("publishMessage").textContent =
+        "✏️ Article Edit mode চালু হয়েছে।";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+async function deleteArticle(title) {
+
+    const confirmed =
+        confirm(
+            "এই Article-টি কি সত্যিই Delete করতে চান?"
+        );
+
+    if (!confirmed) {
+        return;
+    }
+
+    const { error } =
+        await supabaseClient
+        .from("articles")
+        .delete()
+        .eq("title", title);
+
+    if (error) {
+
+        console.error(error);
+
+        alert(
+            "❌ Article Delete করা যায়নি।"
+        );
+
+        return;
+    }
+
+    alert(
+        "✅ Article Delete হয়েছে।"
+    );
+
+    loadAdminArticles();
+}
 
 
 </script>
