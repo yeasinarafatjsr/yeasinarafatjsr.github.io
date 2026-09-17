@@ -560,16 +560,13 @@ document
         await supabaseClient
         .from("articles")
         .insert({
-
-            title: title,
-
-            content: content,
-
-            category: category,
-
-            image_url: imageUrl || null
-
-        });
+    title: title,
+    content: content,
+    category: category,
+    image_url: imageUrl || null,
+    video_url: videoUrl || null
+});
+    
 
 
     if (error) {
