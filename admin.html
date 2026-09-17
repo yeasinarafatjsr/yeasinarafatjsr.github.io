@@ -617,46 +617,70 @@ document
 
     const { error } =
         await supabaseClient
+        let result;
+
+if (editingArticleTitle) {
+
+    result = await supabaseClient
+        .from("articles")
+        .update({
+            title: title,
+            content: content,
+            category: category,
+            image_url: imageUrl || null,
+            video_url: videoUrl || null
+        })
+        .eq("title", editingArticleTitle);
+
+} else {
+
+    result = await supabaseClient
         .from("articles")
         .insert({
-    title: title,
-    content: content,
-    category: category,
-    image_url: imageUrl || null,
-    video_url: videoUrl || null
-});
-    
+            title: title,
+            content: content,
+            category: category,
+            image_url: imageUrl || null,
+            video_url: videoUrl || null
+        });
+}
 
+const error = result.error;
 
-    if (error) {
+if (error) {
 
-        console.error(error);
+    console.error(error);
 
-        showMessage(
-            message,
-            "❌ Article প্রকাশ করা যায়নি। একই শিরোনামের Article আগে থেকে আছে কি না দেখুন।",
-            "error"
-        );
+    showMessage(
+        message,
+        editingArticleTitle
+            ? "❌ Article আপডেট করা যায়নি।"
+            : "❌ Article প্রকাশ করা যায়নি। একই শিরোনামের Article আগে থেকে আছে কি না দেখুন।",
+        "error"
+    );
 
-    } else {
+} else {
 
-        showMessage(
-            message,
-            "✅ Article সফলভাবে প্রকাশিত হয়েছে!",
-            "success"
-        );
+    showMessage(
+        message,
+        editingArticleTitle
+            ? "✅ Article সফলভাবে আপডেট হয়েছে!"
+            : "✅ Article সফলভাবে প্রকাশিত হয়েছে!",
+        "success"
+    );
 
+    document.getElementById("title").value = "";
+    document.getElementById("imageUrl").value = "";
+    document.getElementById("videoUrl").value = "";
+    document.getElementById("content").value = "";
 
-        document.getElementById("title")
-        .value = "";
+    editingArticleTitle = null;
 
-        document.getElementById("imageUrl")
-        .value = "";
+    document.getElementById("publishBtn").textContent =
+        "🚀 Publish Article";
 
-        document.getElementById("content")
-        .value = "";
-
-    }
+    loadAdminArticles();
+}
 
 
     button.disabled = false;
