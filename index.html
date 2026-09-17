@@ -298,8 +298,27 @@
     box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
     
-        
+       .news-item {
+    background: white;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    border-left: 5px solid #2563eb;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.news-item h3 {
+    color: #172554;
+    font-size: 19px;
+    margin-bottom: 5px;
+}
+
+.news-date {
+    color: #777;
+    font-size: 14px;
+} 
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
@@ -654,7 +673,103 @@ function answerYasin(known) {
 
 </script>
 
+<script>
 
+const SUPABASE_URL =
+    "https://jwoajgfajojvyqrxxxen.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_CxG0qxqT2-AtiH8w48GDsw_eJEvgQOF";
+
+const supabaseClient =
+    supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+async function loadLatestNews() {
+
+    const newsBox =
+        document.getElementById("latestNewsList");
+
+    newsBox.innerHTML =
+        "সংবাদ লোড হচ্ছে...";
+
+
+    const { data, error } =
+        await supabaseClient
+        .from("articles")
+        .select("title, content, category, created_at")
+        .order("created_at", {
+            ascending: false
+        })
+        .limit(5);
+
+
+    if (error) {
+
+        console.error(error);
+
+        newsBox.innerHTML =
+            "❌ সংবাদ লোড করা যাচ্ছে না।";
+
+        return;
+    }
+
+
+    if (!data || data.length === 0) {
+
+        newsBox.innerHTML =
+            "এখনো কোনো সংবাদ প্রকাশিত হয়নি।";
+
+        return;
+    }
+
+
+    newsBox.innerHTML = "";
+
+
+    data.forEach(article => {
+
+        const date =
+            new Date(article.created_at)
+            .toLocaleString("bn-BD", {
+                dateStyle: "medium",
+                timeStyle: "short"
+            });
+
+
+        const item =
+            document.createElement("div");
+
+        item.className = "news-item";
+
+
+        item.innerHTML = `
+
+            <h3>${article.title}</h3>
+
+            <p class="news-date">
+                🕐 ${date}
+            </p>
+
+        `;
+
+
+        newsBox.appendChild(item);
+
+    });
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    loadLatestNews
+);
+
+</script>
 
 </body>
 </html>
