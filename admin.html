@@ -382,7 +382,9 @@
             loginPanel.style.display = "none";
             adminPanel.style.display = "block";
             logoutBtn.style.display = "inline-block";
-            loadAdminArticles(); // অ্যাডমিন প্যানেল দৃশ্যমান হলেই আর্টিকেল লোড হবে
+            loadAdminArticles(); 
+            // অ্যাডমিন প্যানেল দৃশ্যমান হলেই আর্টিকেল লোড হবে
+            loadAdminComments(); // Comments Management লোড হবে
         } else {
             loginPanel.style.display = "block";
             adminPanel.style.display = "none";
