@@ -684,6 +684,7 @@ async function loadComments(showAll=false){
     commentsList.innerHTML="";
 
     const commentsToShow=showAll ? data : data.slice(0,5);
+    const visitorId=getVisitorId();
 
     commentsToShow.forEach(item=>{
 
