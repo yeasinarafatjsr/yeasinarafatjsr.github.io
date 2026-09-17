@@ -701,9 +701,27 @@ setupInteractions(data.title);
         const nameInput=document.getElementById("commentName");
         const textInput=document.getElementById("commentText");
         const message=document.getElementById("commentMessage");
+        const visitorId=getVisitorId();
 
         const name=nameInput.value.trim();
         const comment=textInput.value.trim();
+        const {data:existingComment,error:checkError}=await supabaseClient
+    .from("comments")
+    .select("id")
+    .eq("article_title",articleTitle)
+    .eq("visitor_id",visitorId)
+    .maybeSingle();
+
+if(checkError){
+    console.error(checkError);
+    message.textContent="❌ Comment যাচাই করা যাচ্ছে না।";
+    return;
+}
+
+if(existingComment){
+    message.textContent="⚠️ আপনি এই Article-এ ইতিমধ্যে Comment করেছেন।";
+    return;
+}
 
 
         // নাম অবশ্যই দিতে হবে
