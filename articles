@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Articles - Knowledge World</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #333;
+        }
+
+        header {
+            background: #172554;
+            color: white;
+            padding: 20px;
+        }
+
+        .header-inner {
+            max-width: 950px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 25px;
+        }
+
+        .home-btn {
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 9px 15px;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .page-title {
+            color: #172554;
+            border-bottom: 2px solid #172554;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .article-item {
+            display: flex;
+            gap: 16px;
+            background: white;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .article-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .article-image {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
+            background: #e5e7eb;
+        }
+
+        .article-info {
+            flex: 1;
+        }
+
+        .article-info h2 {
+            color: #172554;
+            font-size: 20px;
+            margin: 0 0 5px;
+        }
+
+        .article-date {
+            color: #777;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .article-preview {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        @media (max-width: 600px) {
+
+            .header-inner {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+            .article-image {
+                width: 100px;
+                height: 75px;
+            }
+
+            .article-info h2 {
+                font-size: 17px;
+            }
+
+            .article-preview {
+                font-size: 13px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="header-inner">
+
+        <h1>🌍 Knowledge World</h1>
+
+        <a href="index.html"
+           class="home-btn">
+            🏠 Home
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <h2 class="page-title">
+        📰 সকল Article
+    </h2>
+
+    <div id="articlesList"
+         class="loading">
+
+        সংবাদ লোড হচ্ছে...
+
+    </div>
+
+</main>
+
+
+<script>
+
+const SUPABASE_URL =
+    "https://jwoajgfajojvyqrxxxen.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_CxG0qxqT2-AtiH8w48GDsw_eJEvgQOF";
+
+const supabaseClient =
+    supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+async function loadArticles() {
+
+    const box =
+        document.getElementById("articlesList");
+
+
+    const { data, error } =
+        await supabaseClient
+        .from("articles")
+        .select(
+            "title, content, category, created_at, image_url"
+        )
+        .order("created_at", {
+            ascending: false
+        });
+
+
+    if (error) {
+
+        console.error(error);
+
+        box.innerHTML =
+            "❌ সংবাদ লোড করা যাচ্ছে না।";
+
+        return;
+
+    }
+
+
+    if (!data || data.length === 0) {
+
+        box.innerHTML =
+            "এখনো কোনো Article প্রকাশিত হয়নি।";
+
+        return;
+
+    }
+
+
+    box.innerHTML = "";
+
+
+    data.forEach(article => {
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "article-item";
+
+
+        item.onclick = function() {
+
+            window.location.href =
+                "article.html?title=" +
+                encodeURIComponent(article.title);
+
+        };
+
+
+        const image =
+            document.createElement("img");
+
+        image.className =
+            "article-image";
+
+        image.src =
+            article.image_url ||
+            "https://placehold.co/300x200?text=Knowledge+World";
+
+        image.alt =
+            article.title;
+
+
+        const info =
+            document.createElement("div");
+
+        info.className =
+            "article-info";
+
+
+        const title =
+            document.createElement("h2");
+
+        title.textContent =
+            article.title;
+
+
+        const date =
+            document.createElement("div");
+
+        date.className =
+            "article-date";
+
+        date.textContent =
+            "🕐 " +
+            new Date(article.created_at)
+            .toLocaleString("bn-BD", {
+                dateStyle: "medium",
+                timeStyle: "short"
+            });
+
+
+        const preview =
+            document.createElement("div");
+
+        preview.className =
+            "article-preview";
+
+        const text =
+            article.content || "";
+
+        preview.textContent =
+            text.length > 140
+            ? text.substring(0, 140) + "..."
+            : text;
+
+
+        info.appendChild(title);
+
+        info.appendChild(date);
+
+        info.appendChild(preview);
+
+        item.appendChild(image);
+
+        item.appendChild(info);
+
+        box.appendChild(item);
+
+    });
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    loadArticles
+);
+
+</script>
+
+
+</body>
+
+</html>
