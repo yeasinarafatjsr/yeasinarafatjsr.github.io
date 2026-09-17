@@ -293,6 +293,21 @@
     }
 
 }
+        .article-category {
+    display: inline-block;
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.video-badge {
+    display: inline-block;
+    margin-top: 7px;
+    font-size: 12px;
+    color: #dc2626;
+    font-weight: bold;
+}
 
     </style>
 
@@ -634,6 +649,34 @@ function displayArticles() {
             text.length > 140
             ? text.substring(0, 140) + "..."
             : text;
+        if (article.category) {
+
+    const category =
+        document.createElement("div");
+
+    category.className =
+        "article-category";
+
+    category.textContent =
+        "📚 " + article.category;
+
+    info.appendChild(category);
+}
+
+
+if (article.video_url) {
+
+    const videoBadge =
+        document.createElement("div");
+
+    videoBadge.className =
+        "video-badge";
+
+    videoBadge.textContent =
+        "🎥 ভিডিও আছে";
+
+    info.appendChild(videoBadge);
+}
 
 
         info.appendChild(title);
