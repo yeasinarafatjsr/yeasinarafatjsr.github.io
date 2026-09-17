@@ -273,6 +273,24 @@
         font-size:13px;
     }
 }
+        .more-comments-btn{
+    display:block;
+    margin:18px auto 0;
+    padding:10px 20px;
+    border:1px solid #2563eb;
+    background:white;
+    color:#2563eb;
+    border-radius:8px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.more-comments-btn:hover{
+    background:#2563eb;
+    color:white;
+}
     </style>
 
 </head>
@@ -635,61 +653,84 @@ setupInteractions(data.title);
     // Comments
     // =========================
 
-    async function loadComments(){
+async function loadComments(showAll=false){
 
-        const commentsList=document.getElementById("commentsList");
+    const commentsList=document.getElementById("commentsList");
 
-        commentsList.innerHTML="মন্তব্য লোড হচ্ছে...";
+    commentsList.innerHTML="মন্তব্য লোড হচ্ছে...";
 
-        const {data,error}=await supabaseClient
-            .from("comments")
-            .select("name, comment, created_at")
-            .eq("article_title",articleTitle)
-            .order("created_at",{ascending:false});
+    const {data,error}=await supabaseClient
+        .from("comments")
+        .select("id, name, comment, created_at, visitor_id")
+        .eq("article_title",articleTitle)
+        .eq("is_hidden",false)
+        .order("created_at",{ascending:false});
 
-        if(error){
+    if(error){
 
-            console.error(error);
-            commentsList.innerHTML="❌ মন্তব্য লোড করা যাচ্ছে না।";
-            return;
+        console.error(error);
+        commentsList.innerHTML="❌ মন্তব্য লোড করা যাচ্ছে না।";
+        return;
 
-        }
+    }
 
-        if(!data || data.length===0){
+    if(!data || data.length===0){
 
-            commentsList.innerHTML="এখনো কোনো মন্তব্য নেই।";
-            return;
+        commentsList.innerHTML="এখনো কোনো মন্তব্য নেই।";
+        return;
 
-        }
+    }
 
-        commentsList.innerHTML="";
+    commentsList.innerHTML="";
 
-        data.forEach(item=>{
+    const commentsToShow=showAll ? data : data.slice(0,5);
 
-            const commentBox=document.createElement("div");
-            commentBox.className="comment-item";
+    commentsToShow.forEach(item=>{
 
-            const name=document.createElement("div");
-            name.className="comment-name";
-            name.textContent=item.name;
+        const commentBox=document.createElement("div");
+        commentBox.className="comment-item";
 
-            const date=document.createElement("div");
-            date.className="comment-date";
-            date.textContent=
-                "🕐 "+new Date(item.created_at).toLocaleString("bn-BD");
+        const name=document.createElement("div");
+        name.className="comment-name";
+        name.textContent=item.name;
 
-            const text=document.createElement("div");
-            text.className="comment-text";
-            text.textContent=item.comment;
+        const date=document.createElement("div");
+        date.className="comment-date";
+        date.textContent=
+            "🕐 "+new Date(item.created_at).toLocaleString("bn-BD");
 
-            commentBox.appendChild(name);
-            commentBox.appendChild(date);
-            commentBox.appendChild(text);
+        const text=document.createElement("div");
+        text.className="comment-text";
+        text.textContent=item.comment;
 
-            commentsList.appendChild(commentBox);
+        commentBox.appendChild(name);
+        commentBox.appendChild(date);
+        commentBox.appendChild(text);
+
+        commentsList.appendChild(commentBox);
+
+    });
+
+
+    // ৫টির বেশি Comment থাকলে "আরও দেখুন" দেখাবে
+    if(data.length > 5 && !showAll){
+
+        const moreButton=document.createElement("button");
+
+        moreButton.textContent="আরও দেখুন →";
+        moreButton.className="more-comments-btn";
+
+        moreButton.addEventListener("click",function(){
+
+            loadComments(true);
 
         });
+
+        commentsList.appendChild(moreButton);
+
     }
+
+}
 
 
     // =========================
