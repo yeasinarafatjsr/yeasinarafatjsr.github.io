@@ -491,15 +491,11 @@ ${data.video_url ? `
 
         <h3>আপনার প্রতিক্রিয়া</h3>
 
+        <!-- শুধুমাত্র Like এবং Love-এ কাউন্টার রাখা হয়েছে -->
         <div class="reaction-buttons">
 
             <button data-reaction="like">
                 👍 <span>Like</span>
-                <b>0</b>
-            </button>
-
-            <button data-reaction="dislike">
-                👎 <span>Dislike</span>
                 <b>0</b>
             </button>
 
@@ -508,22 +504,24 @@ ${data.video_url ? `
                 <b>0</b>
             </button>
 
+            <button data-reaction="dislike">
+                👎 <span>Dislike</span>
+            </button>
+
             <button data-reaction="haha">
                 😂 <span>Haha</span>
-                <b>0</b>
             </button>
 
             <button data-reaction="wow">
                 😮 <span>Wow</span>
-                <b>0</b>
             </button>
 
             <button data-reaction="sad">
                 😢 <span>Sad</span>
-                <b>0</b>
             </button>
 
         </div>
+        <div id="reactionMessage" style="margin-top: 8px; font-size: 13px; color: #dc2626;"></div>
 
     </div>
 
@@ -586,15 +584,17 @@ setupInteractions(data.title);
     async function setupInteractions(articleTitle){
 
     // =========================
-    // Reactions
+    // Reactions (Updated Logic)
     // =========================
 
     async function loadReactions(){
 
+        // শুধুমাত্র Like এবং Love-এর কাউন্ট লোড করা হচ্ছে
         const {data,error}=await supabaseClient
             .from("reactions")
             .select("reaction")
-            .eq("article_title",articleTitle);
+            .eq("article_title",articleTitle)
+            .in("reaction", ["like", "love"]);
 
         if(error){
             console.error(error);
@@ -603,11 +603,7 @@ setupInteractions(data.title);
 
         const counts={
             like:0,
-            dislike:0,
-            love:0,
-            haha:0,
-            wow:0,
-            sad:0
+            love:0
         };
 
         (data || []).forEach(item=>{
@@ -621,8 +617,8 @@ setupInteractions(data.title);
             const type=button.dataset.reaction;
             const countElement=button.querySelector("b");
 
-            if(countElement){
-                countElement.textContent=counts[type] || 0;
+            if(countElement && counts[type] !== undefined){
+                countElement.textContent=counts[type];
             }
 
         });
@@ -632,6 +628,17 @@ setupInteractions(data.title);
     document.querySelectorAll(".reaction-buttons button").forEach(button=>{
 
         button.addEventListener("click",async function(){
+
+            const reactionMessage = document.getElementById("reactionMessage");
+            const reactionKey = "kw_reaction_" + articleTitle;
+
+            // চেক করা হচ্ছে ভিজিটর আগে যেকোনো রিঅ্যাকশন দিয়েছে কি না
+            if(localStorage.getItem(reactionKey)){
+                if(reactionMessage){
+                    reactionMessage.textContent = "⚠️ আপনি ইতিমধ্যে এই Article-এ একটি প্রতিক্রিয়া দিয়েছেন!";
+                }
+                return;
+            }
 
             const reaction=this.dataset.reaction;
 
@@ -651,6 +658,12 @@ setupInteractions(data.title);
 
             }else{
 
+                // একবার দিলে ব্রাউজারে সেভ হয়ে যাবে
+                localStorage.setItem(reactionKey, reaction);
+                if(reactionMessage){
+                    reactionMessage.style.color = "#166534";
+                    reactionMessage.textContent = "✅ প্রতিক্রিয়া সফলভাবে জমা হয়েছে!";
+                }
                 await loadReactions();
 
             }
