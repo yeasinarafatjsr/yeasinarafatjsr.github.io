@@ -299,24 +299,68 @@
 }
     
        .news-item {
+    display: flex;
+    gap: 15px;
     background: white;
-    padding: 18px 20px;
-    margin-bottom: 12px;
-    border-left: 5px solid #2563eb;
+    padding: 14px;
+    margin-bottom: 10px;
     border-radius: 10px;
     box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.news-item:hover {
+    transform: translateY(-2px);
+}
+
+.news-image {
+    width: 115px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+    background: #e5e7eb;
+}
+
+.news-info {
+    flex: 1;
 }
 
 .news-item h3 {
     color: #172554;
-    font-size: 19px;
-    margin-bottom: 5px;
+    font-size: 18px;
+    margin-bottom: 3px;
 }
 
 .news-date {
     color: #777;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+.news-preview {
+    color: #555;
     font-size: 14px;
-} 
+    line-height: 1.5;
+}
+
+@media (max-width: 650px) {
+
+    .news-image {
+        width: 95px;
+        height: 70px;
+    }
+
+    .news-item h3 {
+        font-size: 16px;
+    }
+
+    .news-preview {
+        font-size: 13px;
+    }
+
+}
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
