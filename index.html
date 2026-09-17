@@ -372,6 +372,111 @@
     font-weight: bold;
     font-size: 16px;
 }
+        /* Professional Latest News */
+
+#latest-news {
+    margin-top: 30px;
+}
+
+#latestNewsList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.news-item {
+    display: flex;
+    gap: 16px;
+    background: #fff;
+    padding: 14px;
+    margin-bottom: 0;
+    border-radius: 12px;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: 0.2s;
+    border-left: 4px solid #2563eb;
+}
+
+.news-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+}
+
+.news-image {
+    width: 125px;
+    height: 85px;
+    object-fit: cover;
+    border-radius: 9px;
+    flex-shrink: 0;
+}
+
+.news-info {
+    flex: 1;
+}
+
+.news-item h3 {
+    color: #172554;
+    font-size: 18px;
+    line-height: 1.35;
+    margin: 0 0 4px;
+}
+
+.news-date {
+    color: #777;
+    font-size: 12px;
+    margin: 0 0 4px;
+}
+
+.news-preview {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.more-news {
+    text-align: center;
+    margin-top: 22px;
+}
+
+.more-news a {
+    display: inline-block;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: 1px solid #2563eb;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.more-news a:hover {
+    background: #2563eb;
+    color: white;
+}
+
+@media (max-width: 650px) {
+
+    .news-item {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .news-image {
+        width: 95px;
+        height: 72px;
+    }
+
+    .news-item h3 {
+        font-size: 16px;
+    }
+
+    .news-preview {
+        font-size: 13px;
+    }
+
+}
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
