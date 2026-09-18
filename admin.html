@@ -85,8 +85,7 @@
         }
 
         input,
-        select,
-        textarea {
+        select {
             width: 100%;
             padding: 12px;
             border: 1px solid #cbd5e1;
@@ -95,9 +94,84 @@
             font-family: inherit;
         }
 
-        textarea {
-            min-height: 220px;
-            resize: vertical;
+        /* =========================
+           ARTICLE EDITOR
+        ========================= */
+
+        .editor-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            padding: 10px;
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-bottom: none;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .editor-toolbar button {
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: #e2e8f0;
+            color: #172554;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .editor-toolbar button:hover {
+            background: #cbd5e1;
+        }
+
+        .image-upload-btn {
+            background: #dbeafe !important;
+            color: #1d4ed8 !important;
+        }
+
+        #content {
+            width: 100%;
+            min-height: 300px;
+            padding: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 0 0 8px 8px;
+            font-size: 16px;
+            line-height: 1.7;
+            font-family: inherit;
+            outline: none;
+            background: white;
+        }
+
+        #content:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px rgba(37,99,235,0.1);
+        }
+
+        #content:empty::before {
+            content: "এখানে পুরো সংবাদ লিখুন...";
+            color: #94a3b8;
+            pointer-events: none;
+        }
+
+        #content img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 15px auto;
+            border-radius: 8px;
+        }
+
+        .editor-help {
+            margin-top: 8px;
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .upload-status {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #2563eb;
+            display: none;
         }
 
         .publish-btn {
@@ -209,79 +283,158 @@
             font-weight: bold;
             cursor: pointer;
         }
-        .admin-comment-item{
-    background:white;
-    padding:15px;
-    margin-top:12px;
-    border-radius:10px;
-    box-shadow:0 3px 12px rgba(0,0,0,0.08);
-    border-left:4px solid #2563eb;
-}
 
-.admin-comment-article{
-    color:#2563eb;
-    font-size:13px;
-    font-weight:bold;
-    margin-bottom:6px;
-}
+        /* =========================
+           COMMENTS MANAGEMENT
+        ========================= */
 
-.admin-comment-name{
-    color:#172554;
-    font-size:16px;
-    font-weight:bold;
-}
+        .admin-comment-item {
+            background: white;
+            padding: 15px;
+            margin-top: 12px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            border-left: 4px solid #2563eb;
+        }
 
-.admin-comment-text{
-    margin-top:7px;
-    line-height:1.6;
-    color:#444;
-}
+        .admin-comment-article {
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
 
-.admin-comment-date{
-    color:#777;
-    font-size:12px;
-    margin-top:6px;
-}
+        .admin-comment-name {
+            color: #172554;
+            font-size: 16px;
+            font-weight: bold;
+        }
 
-.admin-comment-status{
-    margin-top:8px;
-    font-size:13px;
-    font-weight:bold;
-}
+        .admin-comment-text {
+            margin-top: 7px;
+            line-height: 1.6;
+            color: #444;
+        }
 
-.admin-comment-actions{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-top:12px;
-}
+        .admin-comment-date {
+            color: #777;
+            font-size: 12px;
+            margin-top: 6px;
+        }
 
-.hide-comment-btn,
-.delete-comment-btn{
-    border:none;
-    padding:8px 13px;
-    border-radius:7px;
-    cursor:pointer;
-    font-weight:bold;
-}
+        .admin-comment-status {
+            margin-top: 8px;
+            font-size: 13px;
+            font-weight: bold;
+        }
 
-.hide-comment-btn{
-    background:#fef3c7;
-    color:#92400e;
-}
+        .admin-comment-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
 
-.delete-comment-btn{
-    background:#fee2e2;
-    color:#dc2626;
-}
+        .hide-comment-btn,
+        .delete-comment-btn {
+            border: none;
+            padding: 8px 13px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
 
-.hide-comment-btn:hover{
-    background:#fde68a;
-}
+        .hide-comment-btn {
+            background: #fef3c7;
+            color: #92400e;
+        }
 
-.delete-comment-btn:hover{
-    background:#fecaca;
-}
+        .delete-comment-btn {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .hide-comment-btn:hover {
+            background: #fde68a;
+        }
+
+        .delete-comment-btn:hover {
+            background: #fecaca;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 14px 10px;
+            }
+
+            .header-inner {
+                align-items: flex-start;
+            }
+
+            header h1 {
+                font-size: 19px;
+            }
+
+            .home-btn,
+            .logout-btn {
+                padding: 7px 9px;
+                font-size: 12px;
+            }
+
+            .container {
+                margin: 15px auto;
+                padding: 0 10px;
+            }
+
+            .panel {
+                padding: 16px;
+                border-radius: 10px;
+            }
+
+            .panel h2 {
+                font-size: 19px;
+            }
+
+            input,
+            select {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .editor-toolbar {
+                gap: 5px;
+                padding: 8px;
+            }
+
+            .editor-toolbar button {
+                padding: 7px 9px;
+                font-size: 12px;
+            }
+
+            #content {
+                min-height: 260px;
+                padding: 11px;
+                font-size: 15px;
+            }
+
+            .publish-btn {
+                font-size: 15px;
+                padding: 12px;
+            }
+
+            .admin-article-title {
+                font-size: 16px;
+            }
+
+            .admin-article-actions {
+                flex-wrap: wrap;
+            }
+        }
     </style>
 </head>
 
@@ -289,483 +442,1875 @@
 
 <header>
     <div class="header-inner">
+
         <h1>🛠️ Knowledge World Admin</h1>
+
         <div>
             <a href="index.html" class="home-btn">🏠 Home</a>
-            <button id="logoutBtn" class="logout-btn" style="display:none;">Logout</button>
+
+            <button
+                id="logoutBtn"
+                class="logout-btn"
+                style="display:none;">
+                Logout
+            </button>
         </div>
+
     </div>
 </header>
 
 <main class="container">
 
-    <!-- LOGIN -->
+    <!-- =========================
+         LOGIN
+    ========================= -->
+
     <section id="loginPanel" class="panel">
+
         <h2>🔐 Admin Login</h2>
+
         <label>Email</label>
-        <input type="email" id="loginEmail" placeholder="Admin email">
+
+        <input
+            type="email"
+            id="loginEmail"
+            placeholder="Admin email">
 
         <label>Password</label>
-        <input type="password" id="loginPassword" placeholder="Password">
 
-        <button id="loginBtn" class="publish-btn">Login</button>
-        <div id="loginMessage" class="message"></div>
+        <input
+            type="password"
+            id="loginPassword"
+            placeholder="Password">
+
+        <button
+            id="loginBtn"
+            class="publish-btn">
+            Login
+        </button>
+
+        <div
+            id="loginMessage"
+            class="message">
+        </div>
+
     </section>
 
-    <!-- ADMIN PANEL -->
+
+    <!-- =========================
+         ADMIN PANEL
+    ========================= -->
+
     <section id="adminPanel" class="panel">
+
         <h2>📰 নতুন Article প্রকাশ করুন</h2>
 
+
+        <!-- TITLE -->
+
         <label>শিরোনাম</label>
-        <input type="text" id="title" placeholder="সংবাদের শিরোনাম লিখুন">
+
+        <input
+            type="text"
+            id="title"
+            placeholder="সংবাদের শিরোনাম লিখুন">
+
+
+        <!-- CATEGORY -->
 
         <label>Category</label>
+
         <select id="category">
-            <option value="সাধারণ জ্ঞান">সাধারণ জ্ঞান</option>
-            <option value="বিজ্ঞান">বিজ্ঞান</option>
-            <option value="প্রযুক্তি">প্রযুক্তি</option>
-            <option value="মহাকাশ">মহাকাশ</option>
-            <option value="ইতিহাস">ইতিহাস</option>
-            <option value="ভূগোল">ভূগোল</option>
+
+            <option value="সাধারণ জ্ঞান">
+                সাধারণ জ্ঞান
+            </option>
+
+            <option value="বিজ্ঞান">
+                বিজ্ঞান
+            </option>
+
+            <option value="প্রযুক্তি">
+                প্রযুক্তি
+            </option>
+
+            <option value="মহাকাশ">
+                মহাকাশ
+            </option>
+
+            <option value="ইতিহাস">
+                ইতিহাস
+            </option>
+
+            <option value="ভূগোল">
+                ভূগোল
+            </option>
+
         </select>
 
+
+        <!-- TOP IMAGE URL -->
+
         <label>Image URL</label>
-        <input type="url" id="imageUrl" placeholder="https://example.com/image.jpg">
+
+        <input
+            type="url"
+            id="imageUrl"
+            placeholder="https://example.com/image.jpg">
+
+
+        <!-- VIDEO -->
 
         <label>Video URL (ঐচ্ছিক)</label>
-        <input type="url" id="videoUrl" placeholder="YouTube ভিডিও লিংক দিন">
+
+        <input
+            type="url"
+            id="videoUrl"
+            placeholder="YouTube ভিডিও লিংক দিন">
+
+
+        <!-- =========================
+             ARTICLE CONTENT EDITOR
+        ========================= -->
 
         <label>Article Content</label>
-        <textarea id="content" placeholder="এখানে পুরো সংবাদ লিখুন..."></textarea>
 
-        <button id="publishBtn" class="publish-btn">🚀 Publish Article</button>
-        <button type="button" id="cancelEditBtn" class="cancel-edit-btn" style="display:none;">❌ Cancel Edit</button>
+        <div class="editor-toolbar">
 
-        <div id="publishMessage" class="message"></div>
+            <button
+                type="button"
+                onclick="formatText('bold')">
+                <b>B</b>
+            </button>
+
+            <button
+                type="button"
+                onclick="formatText('italic')">
+                <i>I</i>
+            </button>
+
+            <button
+                type="button"
+                onclick="formatText('underline')">
+                <u>U</u>
+            </button>
+
+            <button
+                type="button"
+                onclick="formatText('insertUnorderedList')">
+                • List
+            </button>
+
+            <button
+                type="button"
+                onclick="formatText('insertOrderedList')">
+                1. List
+            </button>
+
+            <button
+                type="button"
+                class="image-upload-btn"
+                onclick="document.getElementById('imageFileInput').click()">
+                🖼️ Image
+            </button>
+
+        </div>
+
+
+        <div
+            id="content"
+            contenteditable="true"
+            spellcheck="true">
+        </div>
+
+
+        <!-- Hidden image input -->
+
+        <input
+            type="file"
+            id="imageFileInput"
+            accept="image/*"
+            style="display:none;">
+
+
+        <div class="editor-help">
+            💡 লেখা লিখুন। যেখানে ছবি দিতে চান সেখানে Cursor রাখুন।
+            তারপর 🖼️ Image চাপুন অথবা Copy করা ছবি সরাসরি Paste করুন।
+        </div>
+
+
+        <div
+            id="uploadStatus"
+            class="upload-status">
+        </div>
+
+
+        <!-- PUBLISH -->
+
+        <button
+            id="publishBtn"
+            class="publish-btn">
+            🚀 Publish Article
+        </button>
+
+
+        <button
+            type="button"
+            id="cancelEditBtn"
+            class="cancel-edit-btn"
+            style="display:none;">
+            ❌ Cancel Edit
+        </button>
+
+
+        <div
+            id="publishMessage"
+            class="message">
+        </div>
+
+
+        <!-- =========================
+             PUBLISHED ARTICLES
+        ========================= -->
 
         <hr style="margin-top: 30px;">
 
         <h2>📰 প্রকাশিত Article</h2>
-        <div id="adminArticlesList">Article লোড হচ্ছে...</div>
+
+        <div id="adminArticlesList">
+            Article লোড হচ্ছে...
+        </div>
+
+
+        <!-- =========================
+             COMMENTS
+        ========================= -->
+
         <hr>
 
-<h2>💬 Comments Management</h2>
+        <h2>💬 Comments Management</h2>
 
-<div id="adminCommentsList">
-    Comments লোড হচ্ছে...
-</div>
+        <div id="adminCommentsList">
+            Comments লোড হচ্ছে...
+        </div>
+
     </section>
 
 </main>
 
+
 <script>
-    const SUPABASE_URL = "https://jwoajgfajojvyqrxxxen.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_CxG0qxqT2-AtiH8w48GDsw_eJEvgQOF";
 
-    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    /* ==========================================
+       SUPABASE
+    ========================================== */
 
-    const loginPanel = document.getElementById("loginPanel");
-    const adminPanel = document.getElementById("adminPanel");
-    const logoutBtn = document.getElementById("logoutBtn");
+    const SUPABASE_URL =
+        "https://jwoajgfajojvyqrxxxen.supabase.co";
+
+    const SUPABASE_KEY =
+        "sb_publishable_CxG0qxqT2-AtiH8w48GDsw_eJEvgQOF";
+
+    const supabaseClient =
+        supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+    /* ==========================================
+       ELEMENTS
+    ========================================== */
+
+    const loginPanel =
+        document.getElementById("loginPanel");
+
+    const adminPanel =
+        document.getElementById("adminPanel");
+
+    const logoutBtn =
+        document.getElementById("logoutBtn");
+
+
+    /* ==========================================
+       EDIT MODE
+    ========================================== */
 
     let editingArticleTitle = null;
 
+
+    /* ==========================================
+       MESSAGE
+    ========================================== */
+
     function showMessage(element, text, type) {
+
         element.textContent = text;
-        element.className = "message " + type;
+
+        element.className =
+            "message " + type;
     }
+
+
+    /* ==========================================
+       CHECK USER
+    ========================================== */
 
     async function checkUser() {
-        const { data } = await supabaseClient.auth.getSession();
+
+        const { data } =
+            await supabaseClient.auth.getSession();
+
 
         if (data.session) {
+
             loginPanel.style.display = "none";
+
             adminPanel.style.display = "block";
-            logoutBtn.style.display = "inline-block";
-            loadAdminArticles(); 
-            // অ্যাডমিন প্যানেল দৃশ্যমান হলেই আর্টিকেল লোড হবে
-            loadAdminComments(); // Comments Management লোড হবে
+
+            logoutBtn.style.display =
+                "inline-block";
+
+
+            loadAdminArticles();
+
+            loadAdminComments();
+
         } else {
-            loginPanel.style.display = "block";
-            adminPanel.style.display = "none";
-            logoutBtn.style.display = "none";
+
+            loginPanel.style.display =
+                "block";
+
+            adminPanel.style.display =
+                "none";
+
+            logoutBtn.style.display =
+                "none";
         }
     }
 
-    document.getElementById("loginBtn").addEventListener("click", async function() {
-        const email = document.getElementById("loginEmail").value.trim();
-        const password = document.getElementById("loginPassword").value;
-        const message = document.getElementById("loginMessage");
 
-        if (!email || !password) {
-            showMessage(message, "Email এবং Password দিন।", "error");
+    /* ==========================================
+       LOGIN
+    ========================================== */
+
+    document
+        .getElementById("loginBtn")
+        .addEventListener(
+            "click",
+            async function() {
+
+                const email =
+                    document
+                        .getElementById("loginEmail")
+                        .value
+                        .trim();
+
+                const password =
+                    document
+                        .getElementById("loginPassword")
+                        .value;
+
+                const message =
+                    document
+                        .getElementById("loginMessage");
+
+
+                if (!email || !password) {
+
+                    showMessage(
+                        message,
+                        "Email এবং Password দিন।",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                const { error } =
+                    await supabaseClient.auth
+                        .signInWithPassword({
+
+                            email: email,
+
+                            password: password
+
+                        });
+
+
+                if (error) {
+
+                    console.error(error);
+
+                    showMessage(
+                        message,
+                        "❌ Login করা যায়নি। Email অথবা Password ঠিক আছে কি না দেখুন।",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                showMessage(
+                    message,
+                    "✅ Login সফল হয়েছে।",
+                    "success"
+                );
+
+
+                checkUser();
+            }
+        );
+
+
+    /* ==========================================
+       LOGOUT
+    ========================================== */
+
+    logoutBtn.addEventListener(
+        "click",
+        async function() {
+
+            await supabaseClient.auth.signOut();
+
+            checkUser();
+
+        }
+    );
+
+
+    /* ==========================================
+       TEXT FORMAT
+    ========================================== */
+
+    function formatText(command) {
+
+        document
+            .getElementById("content")
+            .focus();
+
+        document.execCommand(
+            command,
+            false,
+            null
+        );
+    }
+
+
+    /* ==========================================
+       SAVE CURSOR POSITION
+    ========================================== */
+
+    function saveSelection() {
+
+        const selection =
+            window.getSelection();
+
+        if (!selection.rangeCount) {
+            return null;
+        }
+
+        return selection
+            .getRangeAt(0)
+            .cloneRange();
+    }
+
+
+    /* ==========================================
+       RESTORE CURSOR
+    ========================================== */
+
+    function restoreSelection(range) {
+
+        if (!range) {
             return;
         }
 
-        const { error } = await supabaseClient.auth.signInWithPassword({
-            email: email,
-            password: password
-        });
+        const selection =
+            window.getSelection();
+
+        selection.removeAllRanges();
+
+        selection.addRange(range);
+    }
+
+
+    /* ==========================================
+       IMAGE UPLOAD
+    ========================================== */
+
+    async function uploadImage(file) {
+
+        if (!file) {
+            return null;
+        }
+
+
+        if (!file.type.startsWith("image/")) {
+
+            alert(
+                "❌ শুধু Image file দেওয়া যাবে।"
+            );
+
+            return null;
+        }
+
+
+        const uploadStatus =
+            document.getElementById(
+                "uploadStatus"
+            );
+
+
+        uploadStatus.style.display =
+            "block";
+
+        uploadStatus.textContent =
+            "🖼️ Image Upload হচ্ছে...";
+
+
+        const fileExtension =
+            file.name
+                .split(".")
+                .pop()
+                .toLowerCase();
+
+
+        const fileName =
+            "article_" +
+            Date.now() +
+            "_" +
+            Math.random()
+                .toString(36)
+                .substring(2, 10) +
+            "." +
+            fileExtension;
+
+
+        const filePath =
+            fileName;
+
+
+        const { data, error } =
+            await supabaseClient
+                .storage
+                .from("article-images")
+                .upload(
+                    filePath,
+                    file,
+                    {
+                        cacheControl: "3600",
+                        upsert: false
+                    }
+                );
+
 
         if (error) {
+
             console.error(error);
-            showMessage(message, "❌ Login করা যায়নি। Email অথবা Password ঠিক আছে কি না দেখুন।", "error");
+
+            uploadStatus.textContent =
+                "❌ Image Upload করা যায়নি।";
+
+            setTimeout(function() {
+
+                uploadStatus.style.display =
+                    "none";
+
+            }, 3000);
+
+            return null;
+        }
+
+
+        const { data: publicData } =
+            supabaseClient
+                .storage
+                .from("article-images")
+                .getPublicUrl(filePath);
+
+
+        if (!publicData.publicUrl) {
+
+            uploadStatus.textContent =
+                "❌ Image URL পাওয়া যায়নি।";
+
+            return null;
+        }
+
+
+        uploadStatus.textContent =
+            "✅ Image Upload হয়েছে।";
+
+
+        setTimeout(function() {
+
+            uploadStatus.style.display =
+                "none";
+
+        }, 2000);
+
+
+        return publicData.publicUrl;
+    }
+
+
+    /* ==========================================
+       INSERT IMAGE INTO EDITOR
+    ========================================== */
+
+    async function insertImageFile(
+        file,
+        savedRange = null
+    ) {
+
+        if (!file) {
             return;
         }
 
-        showMessage(message, "✅ Login সফল হয়েছে।", "success");
-        checkUser();
-    });
 
-    logoutBtn.addEventListener("click", async function() {
-        await supabaseClient.auth.signOut();
-        checkUser();
-    });
-
-    document.getElementById("publishBtn").addEventListener("click", async function() {
-        const title = document.getElementById("title").value.trim();
-        const category = document.getElementById("category").value;
-        const imageUrl = document.getElementById("imageUrl").value.trim();
-        const videoUrl = document.getElementById("videoUrl").value.trim();
-        const content = document.getElementById("content").value.trim();
-        const message = document.getElementById("publishMessage");
-        const button = document.getElementById("publishBtn");
-
-        if (!title || !content) {
-            showMessage(message, "❌ শিরোনাম এবং Article Content অবশ্যই দিতে হবে।", "error");
-            return;
-        }
-
-        button.disabled = true;
-        button.textContent = "প্রসেস করা হচ্ছে...";
-
-        const { data: userData } = await supabaseClient.auth.getUser();
-
-        if (!userData.user) {
-            showMessage(message, "❌ আগে Admin Login করুন।", "error");
-            button.disabled = false;
-            button.textContent = editingArticleTitle ? "💾 Save Changes" : "🚀 Publish Article";
-            return;
-        }
-
-        let result;
-
-        if (editingArticleTitle) {
-            result = await supabaseClient
-                .from("articles")
-                .update({
-                    title: title,
-                    content: content,
-                    category: category,
-                    image_url: imageUrl || null,
-                    video_url: videoUrl || null
-                })
-                .eq("title", editingArticleTitle);
-        } else {
-            result = await supabaseClient
-                .from("articles")
-                .insert({
-                    title: title,
-                    content: content,
-                    category: category,
-                    image_url: imageUrl || null,
-                    video_url: videoUrl || null
-                });
-        }
-
-        const error = result.error;
-
-        if (error) {
-            console.error(error);
-            showMessage(
-                message,
-                editingArticleTitle
-                    ? "❌ Article আপডেট করা যায়নি।"
-                    : "❌ Article প্রকাশ করা যায়নি। একই শিরোনামের Article আগে থেকে আছে কি না দেখুন।",
-                "error"
-            );
-        } else {
-            showMessage(
-                message,
-                editingArticleTitle
-                    ? "✅ Article সফলভাবে আপডেট হয়েছে!"
-                    : "✅ Article সফলভাবে প্রকাশিত হয়েছে!",
-                "success"
+        const editor =
+            document.getElementById(
+                "content"
             );
 
-            // ইনপুট রিসেট
-            document.getElementById("title").value = "";
-            document.getElementById("imageUrl").value = "";
-            document.getElementById("videoUrl").value = "";
-            document.getElementById("content").value = "";
-            document.getElementById("cancelEditBtn").style.display = "none";
 
-            editingArticleTitle = null;
+        if (savedRange) {
 
-            loadAdminArticles();
+            editor.focus();
+
+            restoreSelection(
+                savedRange
+            );
+
+        } else {
+
+            editor.focus();
+
         }
 
-        button.disabled = false;
-        button.textContent = "🚀 Publish Article";
-    });
 
-    supabaseClient.auth.onAuthStateChange(function() {
-        checkUser();
-    });
+        const imageUrl =
+            await uploadImage(file);
+
+
+        if (!imageUrl) {
+            return;
+        }
+
+
+        const img =
+            document.createElement("img");
+
+
+        img.src = imageUrl;
+
+        img.alt =
+            "Article Image";
+
+        img.loading =
+            "lazy";
+
+
+        const selection =
+            window.getSelection();
+
+
+        if (
+            selection.rangeCount &&
+            editor.contains(
+                selection.anchorNode
+            )
+        ) {
+
+            const range =
+                selection.getRangeAt(0);
+
+            range.deleteContents();
+
+            range.insertNode(img);
+
+            range.setStartAfter(img);
+
+            range.collapse(true);
+
+            selection.removeAllRanges();
+
+            selection.addRange(range);
+
+        } else {
+
+            editor.appendChild(img);
+
+        }
+
+
+        /* ছবির পরে নতুন লেখার জায়গা */
+
+        const br =
+            document.createElement("br");
+
+        img.parentNode.insertBefore(
+            br,
+            img.nextSibling
+        );
+
+
+        const newRange =
+            document.createRange();
+
+        newRange.setStartAfter(br);
+
+        newRange.collapse(true);
+
+        selection.removeAllRanges();
+
+        selection.addRange(newRange);
+
+    }
+
+
+    /* ==========================================
+       IMAGE FILE BUTTON
+    ========================================== */
+
+    document
+        .getElementById("imageFileInput")
+        .addEventListener(
+            "change",
+            async function(event) {
+
+                const file =
+                    event.target.files[0];
+
+
+                const range =
+                    saveSelection();
+
+
+                await insertImageFile(
+                    file,
+                    range
+                );
+
+
+                event.target.value = "";
+
+            }
+        );
+
+
+    /* ==========================================
+       COPY / PASTE IMAGE
+    ========================================== */
+
+    document
+        .getElementById("content")
+        .addEventListener(
+            "paste",
+            async function(event) {
+
+                const items =
+                    event.clipboardData.items;
+
+
+                let imageFile = null;
+
+
+                for (
+                    let i = 0;
+                    i < items.length;
+                    i++
+                ) {
+
+                    const item =
+                        items[i];
+
+
+                    if (
+                        item.kind === "file" &&
+                        item.type.startsWith(
+                            "image/"
+                        )
+                    ) {
+
+                        imageFile =
+                            item.getAsFile();
+
+                        break;
+                    }
+                }
+
+
+                if (!imageFile) {
+
+                    return;
+                }
+
+
+                event.preventDefault();
+
+
+                const range =
+                    saveSelection();
+
+
+                await insertImageFile(
+                    imageFile,
+                    range
+                );
+
+            }
+        );
+
+
+    /* ==========================================
+       PUBLISH / UPDATE ARTICLE
+    ========================================== */
+
+    document
+        .getElementById("publishBtn")
+        .addEventListener(
+            "click",
+            async function() {
+
+
+                const title =
+                    document
+                        .getElementById("title")
+                        .value
+                        .trim();
+
+
+                const category =
+                    document
+                        .getElementById("category")
+                        .value;
+
+
+                const imageUrl =
+                    document
+                        .getElementById("imageUrl")
+                        .value
+                        .trim();
+
+
+                const videoUrl =
+                    document
+                        .getElementById("videoUrl")
+                        .value
+                        .trim();
+
+
+                const contentElement =
+                    document
+                        .getElementById("content");
+
+
+                /*
+                 * contenteditable থেকে
+                 * HTML নেওয়া হচ্ছে
+                 */
+
+                const content =
+                    contentElement.innerHTML.trim();
+
+
+                const message =
+                    document
+                        .getElementById(
+                            "publishMessage"
+                        );
+
+
+                const button =
+                    document
+                        .getElementById(
+                            "publishBtn"
+                        );
+
+
+                if (
+                    !title ||
+                    !content ||
+                    content === "<br>"
+                ) {
+
+                    showMessage(
+                        message,
+                        "❌ শিরোনাম এবং Article Content অবশ্যই দিতে হবে।",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                button.disabled = true;
+
+                button.textContent =
+                    "প্রসেস করা হচ্ছে...";
+
+
+                const {
+                    data: userData
+                } =
+                    await supabaseClient.auth
+                        .getUser();
+
+
+                if (!userData.user) {
+
+                    showMessage(
+                        message,
+                        "❌ আগে Admin Login করুন।",
+                        "error"
+                    );
+
+
+                    button.disabled =
+                        false;
+
+
+                    button.textContent =
+                        editingArticleTitle
+                            ? "💾 Save Changes"
+                            : "🚀 Publish Article";
+
+
+                    return;
+                }
+
+
+                let result;
+
+
+                /* ==========================
+                   UPDATE
+                ========================== */
+
+                if (editingArticleTitle) {
+
+                    result =
+                        await supabaseClient
+                            .from("articles")
+                            .update({
+
+                                title: title,
+
+                                content: content,
+
+                                category: category,
+
+                                image_url:
+                                    imageUrl ||
+                                    null,
+
+                                video_url:
+                                    videoUrl ||
+                                    null
+
+                            })
+                            .eq(
+                                "title",
+                                editingArticleTitle
+                            );
+
+
+                } else {
+
+                    /* ==========================
+                       INSERT
+                    ========================== */
+
+                    result =
+                        await supabaseClient
+                            .from("articles")
+                            .insert({
+
+                                title: title,
+
+                                content: content,
+
+                                category: category,
+
+                                image_url:
+                                    imageUrl ||
+                                    null,
+
+                                video_url:
+                                    videoUrl ||
+                                    null
+
+                            });
+
+                }
+
+
+                const error =
+                    result.error;
+
+
+                if (error) {
+
+                    console.error(error);
+
+
+                    showMessage(
+                        message,
+
+                        editingArticleTitle
+                            ? "❌ Article আপডেট করা যায়নি।"
+                            : "❌ Article প্রকাশ করা যায়নি। একই শিরোনামের Article আগে থেকে আছে কি না দেখুন।",
+
+                        "error"
+                    );
+
+
+                } else {
+
+                    showMessage(
+
+                        message,
+
+                        editingArticleTitle
+                            ? "✅ Article সফলভাবে আপডেট হয়েছে!"
+                            : "✅ Article সফলভাবে প্রকাশিত হয়েছে!",
+
+                        "success"
+
+                    );
+
+
+                    /* ==========================
+                       RESET
+                    ========================== */
+
+                    document
+                        .getElementById(
+                            "title"
+                        )
+                        .value = "";
+
+
+                    document
+                        .getElementById(
+                            "imageUrl"
+                        )
+                        .value = "";
+
+
+                    document
+                        .getElementById(
+                            "videoUrl"
+                        )
+                        .value = "";
+
+
+                    document
+                        .getElementById(
+                            "content"
+                        )
+                        .innerHTML = "";
+
+
+                    document
+                        .getElementById(
+                            "cancelEditBtn"
+                        )
+                        .style.display =
+                        "none";
+
+
+                    editingArticleTitle =
+                        null;
+
+
+                    loadAdminArticles();
+
+                }
+
+
+                button.disabled =
+                    false;
+
+
+                button.textContent =
+                    "🚀 Publish Article";
+
+            }
+        );
+
+
+    /* ==========================================
+       AUTH STATE
+    ========================================== */
+
+    supabaseClient.auth
+        .onAuthStateChange(
+            function() {
+
+                checkUser();
+
+            }
+        );
+
+
+    /* ==========================================
+       LOAD ARTICLES
+    ========================================== */
 
     async function loadAdminArticles() {
-        const box = document.getElementById("adminArticlesList");
-        box.innerHTML = "Article লোড হচ্ছে...";
 
-        const { data, error } = await supabaseClient
-            .from("articles")
-            .select("title, category, image_url, video_url, content, created_at")
-            .order("created_at", { ascending: false });
+        const box =
+            document.getElementById(
+                "adminArticlesList"
+            );
+
+
+        box.innerHTML =
+            "Article লোড হচ্ছে...";
+
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("articles")
+                .select(
+                    "title, category, image_url, video_url, content, created_at"
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending: false
+                    }
+                );
+
 
         if (error) {
+
             console.error(error);
-            box.innerHTML = "❌ Article লোড করা যাচ্ছে না।";
+
+            box.innerHTML =
+                "❌ Article লোড করা যাচ্ছে না।";
+
             return;
         }
 
-        if (!data || data.length === 0) {
-            box.innerHTML = "এখনো কোনো Article প্রকাশিত হয়নি।";
+
+        if (
+            !data ||
+            data.length === 0
+        ) {
+
+            box.innerHTML =
+                "এখনো কোনো Article প্রকাশিত হয়নি।";
+
             return;
         }
+
 
         box.innerHTML = "";
 
-        data.forEach(article => {
-            const item = document.createElement("div");
-            item.className = "admin-article-item";
 
-            const title = document.createElement("div");
-            title.className = "admin-article-title";
-            title.textContent = article.title;
+        data.forEach(
+            article => {
 
-            const info = document.createElement("div");
-            info.className = "admin-article-info";
-            info.textContent = "📚 " + (article.category || "সাধারণ") + " • 🕐 " + new Date(article.created_at).toLocaleString("bn-BD");
+                const item =
+                    document.createElement(
+                        "div"
+                    );
 
-            const actions = document.createElement("div");
-            actions.className = "admin-article-actions";
+                item.className =
+                    "admin-article-item";
 
-            const editBtn = document.createElement("button");
-            editBtn.className = "edit-btn";
-            editBtn.textContent = "✏️ Edit";
-            editBtn.onclick = function() {
-                editArticle(article);
-            };
 
-            const deleteBtn = document.createElement("button");
-            deleteBtn.className = "delete-btn";
-            deleteBtn.textContent = "🗑️ Delete";
-            deleteBtn.onclick = function() {
-                deleteArticle(article.title);
-            };
+                const title =
+                    document.createElement(
+                        "div"
+                    );
 
-            actions.appendChild(editBtn);
-            actions.appendChild(deleteBtn);
+                title.className =
+                    "admin-article-title";
 
-            item.appendChild(title);
-            item.appendChild(info);
-            item.appendChild(actions);
+                title.textContent =
+                    article.title;
 
-            box.appendChild(item);
-        });
+
+                const info =
+                    document.createElement(
+                        "div"
+                    );
+
+                info.className =
+                    "admin-article-info";
+
+                info.textContent =
+                    "📚 " +
+                    (
+                        article.category ||
+                        "সাধারণ"
+                    ) +
+                    " • 🕐 " +
+                    new Date(
+                        article.created_at
+                    ).toLocaleString(
+                        "bn-BD"
+                    );
+
+
+                const actions =
+                    document.createElement(
+                        "div"
+                    );
+
+                actions.className =
+                    "admin-article-actions";
+
+
+                /* EDIT */
+
+                const editBtn =
+                    document.createElement(
+                        "button"
+                    );
+
+                editBtn.className =
+                    "edit-btn";
+
+                editBtn.textContent =
+                    "✏️ Edit";
+
+
+                editBtn.onclick =
+                    function() {
+
+                        editArticle(
+                            article
+                        );
+
+                    };
+
+
+                /* DELETE */
+
+                const deleteBtn =
+                    document.createElement(
+                        "button"
+                    );
+
+                deleteBtn.className =
+                    "delete-btn";
+
+                deleteBtn.textContent =
+                    "🗑️ Delete";
+
+
+                deleteBtn.onclick =
+                    function() {
+
+                        deleteArticle(
+                            article.title
+                        );
+
+                    };
+
+
+                actions.appendChild(
+                    editBtn
+                );
+
+                actions.appendChild(
+                    deleteBtn
+                );
+
+
+                item.appendChild(
+                    title
+                );
+
+                item.appendChild(
+                    info
+                );
+
+                item.appendChild(
+                    actions
+                );
+
+
+                box.appendChild(
+                    item
+                );
+
+            }
+        );
+
     }
+
+
+    /* ==========================================
+       EDIT ARTICLE
+    ========================================== */
 
     function editArticle(article) {
-        editingArticleTitle = article.title;
 
-        document.getElementById("title").value = article.title || "";
-        document.getElementById("category").value = article.category || "";
-        document.getElementById("imageUrl").value = article.image_url || "";
-        document.getElementById("videoUrl").value = article.video_url || "";
-        document.getElementById("content").value = article.content || "";
+        editingArticleTitle =
+            article.title;
 
-        document.getElementById("publishBtn").textContent = "💾 Save Changes";
-        document.getElementById("cancelEditBtn").style.display = "inline-block";
 
-        showMessage(document.getElementById("publishMessage"), "✏️ Article Edit mode চালু হয়েছে।", "success");
+        document
+            .getElementById(
+                "title"
+            )
+            .value =
+            article.title || "";
 
-        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        document
+            .getElementById(
+                "category"
+            )
+            .value =
+            article.category ||
+            "সাধারণ জ্ঞান";
+
+
+        document
+            .getElementById(
+                "imageUrl"
+            )
+            .value =
+            article.image_url ||
+            "";
+
+
+        document
+            .getElementById(
+                "videoUrl"
+            )
+            .value =
+            article.video_url ||
+            "";
+
+
+        /*
+         * গুরুত্বপূর্ণ:
+         * আগের plain text নয়,
+         * HTML content ফিরিয়ে আনা হচ্ছে।
+         */
+
+        document
+            .getElementById(
+                "content"
+            )
+            .innerHTML =
+            article.content ||
+            "";
+
+
+        document
+            .getElementById(
+                "publishBtn"
+            )
+            .textContent =
+            "💾 Save Changes";
+
+
+        document
+            .getElementById(
+                "cancelEditBtn"
+            )
+            .style.display =
+            "inline-block";
+
+
+        showMessage(
+
+            document.getElementById(
+                "publishMessage"
+            ),
+
+            "✏️ Article Edit mode চালু হয়েছে.",
+
+            "success"
+
+        );
+
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
     }
 
+
+    /* ==========================================
+       DELETE ARTICLE
+    ========================================== */
+
     async function deleteArticle(title) {
-        const confirmed = confirm("এই Article-টি কি সত্যিই Delete করতে চান?");
-        if (!confirmed) return;
 
-        const { error } = await supabaseClient
-            .from("articles")
-            .delete()
-            .eq("title", title);
+        const confirmed =
+            confirm(
+                "এই Article-টি কি সত্যিই Delete করতে চান?"
+            );
 
-        if (error) {
-            console.error(error);
-            alert("❌ Article Delete করা যায়নি।");
+
+        if (!confirmed) {
             return;
         }
 
-        alert("✅ Article Delete হয়েছে।");
+
+        const { error } =
+            await supabaseClient
+                .from("articles")
+                .delete()
+                .eq(
+                    "title",
+                    title
+                );
+
+
+        if (error) {
+
+            console.error(error);
+
+            alert(
+                "❌ Article Delete করা যায়নি।"
+            );
+
+            return;
+        }
+
+
+        alert(
+            "✅ Article Delete হয়েছে।"
+        );
+
+
         loadAdminArticles();
-    }
-    async function loadAdminComments(){
-
-    const box=document.getElementById("adminCommentsList");
-
-    box.innerHTML="Comments লোড হচ্ছে...";
-
-    const {data,error}=await supabaseClient
-        .from("comments")
-        .select("id, article_title, name, comment, created_at, is_hidden")
-        .order("created_at",{ascending:false});
-
-    if(error){
-
-        console.error(error);
-        box.innerHTML="❌ Comments লোড করা যাচ্ছে না।";
-        return;
 
     }
 
-    if(!data || data.length===0){
 
-        box.innerHTML="এখনো কোনো Comment নেই।";
-        return;
+    /* ==========================================
+       LOAD ADMIN COMMENTS
+    ========================================== */
+
+    async function loadAdminComments() {
+
+        const box =
+            document.getElementById(
+                "adminCommentsList"
+            );
+
+
+        box.innerHTML =
+            "Comments লোড হচ্ছে...";
+
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("comments")
+                .select(
+                    "id, article_title, name, comment, created_at, is_hidden"
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending: false
+                    }
+                );
+
+
+        if (error) {
+
+            console.error(error);
+
+            box.innerHTML =
+                "❌ Comments লোড করা যাচ্ছে না।";
+
+            return;
+        }
+
+
+        if (
+            !data ||
+            data.length === 0
+        ) {
+
+            box.innerHTML =
+                "এখনো কোনো Comment নেই।";
+
+            return;
+        }
+
+
+        box.innerHTML = "";
+
+
+        data.forEach(
+            item => {
+
+                const commentBox =
+                    document.createElement(
+                        "div"
+                    );
+
+                commentBox.className =
+                    "admin-comment-item";
+
+
+                const article =
+                    document.createElement(
+                        "div"
+                    );
+
+                article.className =
+                    "admin-comment-article";
+
+                article.textContent =
+                    "📰 " +
+                    item.article_title;
+
+
+                const name =
+                    document.createElement(
+                        "div"
+                    );
+
+                name.className =
+                    "admin-comment-name";
+
+                name.textContent =
+                    item.name;
+
+
+                const text =
+                    document.createElement(
+                        "div"
+                    );
+
+                text.className =
+                    "admin-comment-text";
+
+                text.textContent =
+                    item.comment;
+
+
+                const date =
+                    document.createElement(
+                        "div"
+                    );
+
+                date.className =
+                    "admin-comment-date";
+
+                date.textContent =
+                    "🕐 " +
+                    new Date(
+                        item.created_at
+                    ).toLocaleString(
+                        "bn-BD"
+                    );
+
+
+                const status =
+                    document.createElement(
+                        "div"
+                    );
+
+                status.className =
+                    "admin-comment-status";
+
+
+                status.textContent =
+                    item.is_hidden
+                        ? "🙈 Hidden"
+                        : "👁️ Visible";
+
+
+                const actions =
+                    document.createElement(
+                        "div"
+                    );
+
+                actions.className =
+                    "admin-comment-actions";
+
+
+                /* HIDE / UNHIDE */
+
+                const hideButton =
+                    document.createElement(
+                        "button"
+                    );
+
+                hideButton.className =
+                    "hide-comment-btn";
+
+
+                hideButton.textContent =
+                    item.is_hidden
+                        ? "👁️ Unhide"
+                        : "🙈 Hide";
+
+
+                hideButton.onclick =
+                    function() {
+
+                        toggleCommentVisibility(
+                            item.id,
+                            item.is_hidden
+                        );
+
+                    };
+
+
+                /* DELETE COMMENT */
+
+                const deleteButton =
+                    document.createElement(
+                        "button"
+                    );
+
+                deleteButton.className =
+                    "delete-comment-btn";
+
+                deleteButton.textContent =
+                    "🗑️ Delete";
+
+
+                deleteButton.onclick =
+                    function() {
+
+                        deleteAdminComment(
+                            item.id
+                        );
+
+                    };
+
+
+                actions.appendChild(
+                    hideButton
+                );
+
+                actions.appendChild(
+                    deleteButton
+                );
+
+
+                commentBox.appendChild(
+                    article
+                );
+
+                commentBox.appendChild(
+                    name
+                );
+
+                commentBox.appendChild(
+                    text
+                );
+
+                commentBox.appendChild(
+                    date
+                );
+
+                commentBox.appendChild(
+                    status
+                );
+
+                commentBox.appendChild(
+                    actions
+                );
+
+
+                box.appendChild(
+                    commentBox
+                );
+
+            }
+        );
 
     }
 
-    box.innerHTML="";
 
-    data.forEach(item=>{
+    /* ==========================================
+       COMMENT VISIBILITY
+    ========================================== */
 
-        const commentBox=document.createElement("div");
-        commentBox.className="admin-comment-item";
+    async function toggleCommentVisibility(
+        id,
+        currentStatus
+    ) {
 
-        const article=document.createElement("div");
-        article.className="admin-comment-article";
-        article.textContent="📰 "+item.article_title;
+        const { error } =
+            await supabaseClient
+                .from("comments")
+                .update({
 
-        const name=document.createElement("div");
-        name.className="admin-comment-name";
-        name.textContent=item.name;
+                    is_hidden:
+                        !currentStatus
 
-        const text=document.createElement("div");
-        text.className="admin-comment-text";
-        text.textContent=item.comment;
+                })
+                .eq(
+                    "id",
+                    id
+                );
 
-        const date=document.createElement("div");
-        date.className="admin-comment-date";
-        date.textContent=
-            "🕐 "+new Date(item.created_at).toLocaleString("bn-BD");
 
-        const status=document.createElement("div");
-        status.className="admin-comment-status";
+        if (error) {
 
-        status.textContent=item.is_hidden
-            ? "🙈 Hidden"
-            : "👁️ Visible";
+            console.error(error);
 
-        const actions=document.createElement("div");
-        actions.className="admin-comment-actions";
+            alert(
+                "❌ Comment-এর visibility পরিবর্তন করা যায়নি।"
+            );
 
-        const hideButton=document.createElement("button");
+            return;
+        }
 
-        hideButton.className="hide-comment-btn";
 
-        hideButton.textContent=item.is_hidden
-            ? "👁️ Unhide"
-            : "🙈 Hide";
+        loadAdminComments();
 
-        hideButton.onclick=function(){
-            toggleCommentVisibility(item.id,item.is_hidden);
+    }
+
+
+    /* ==========================================
+       DELETE COMMENT
+    ========================================== */
+
+    async function deleteAdminComment(id) {
+
+        const confirmed =
+            confirm(
+                "এই Comment-টি কি সত্যিই Delete করতে চান?"
+            );
+
+
+        if (!confirmed) {
+            return;
+        }
+
+
+        const { error } =
+            await supabaseClient
+                .from("comments")
+                .delete()
+                .eq(
+                    "id",
+                    id
+                );
+
+
+        if (error) {
+
+            console.error(error);
+
+            alert(
+                "❌ Comment Delete করা যায়নি।"
+            );
+
+            return;
+        }
+
+
+        alert(
+            "✅ Comment Delete হয়েছে।"
+        );
+
+
+        loadAdminComments();
+
+    }
+
+
+    /* ==========================================
+       CANCEL EDIT
+    ========================================== */
+
+    document
+        .getElementById(
+            "cancelEditBtn"
+        )
+        .onclick =
+        function() {
+
+            editingArticleTitle =
+                null;
+
+
+            document
+                .getElementById(
+                    "title"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "imageUrl"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "videoUrl"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "content"
+                )
+                .innerHTML = "";
+
+
+            document
+                .getElementById(
+                    "publishBtn"
+                )
+                .textContent =
+                "🚀 Publish Article";
+
+
+            document
+                .getElementById(
+                    "cancelEditBtn"
+                )
+                .style.display =
+                "none";
+
+
+            document
+                .getElementById(
+                    "publishMessage"
+                )
+                .style.display =
+                "none";
+
         };
 
 
-        const deleteButton=document.createElement("button");
+    /* ==========================================
+       INITIAL RUN
+    ========================================== */
 
-        deleteButton.className="delete-comment-btn";
-        deleteButton.textContent="🗑️ Delete";
-
-        deleteButton.onclick=function(){
-            deleteAdminComment(item.id);
-        };
-
-
-        actions.appendChild(hideButton);
-        actions.appendChild(deleteButton);
-
-        commentBox.appendChild(article);
-        commentBox.appendChild(name);
-        commentBox.appendChild(text);
-        commentBox.appendChild(date);
-        commentBox.appendChild(status);
-        commentBox.appendChild(actions);
-
-        box.appendChild(commentBox);
-
-    });
-
-}
-    async function toggleCommentVisibility(id, currentStatus) {
-
-    const { error } = await supabaseClient
-        .from("comments")
-        .update({
-            is_hidden: !currentStatus
-        })
-        .eq("id", id);
-
-    if (error) {
-        console.error(error);
-        alert("❌ Comment-এর visibility পরিবর্তন করা যায়নি।");
-        return;
-    }
-
-    loadAdminComments();
-}
-
-
-async function deleteAdminComment(id) {
-
-    const confirmed = confirm(
-        "এই Comment-টি কি সত্যিই Delete করতে চান?"
-    );
-
-    if (!confirmed) return;
-
-    const { error } = await supabaseClient
-        .from("comments")
-        .delete()
-        .eq("id", id);
-
-    if (error) {
-        console.error(error);
-        alert("❌ Comment Delete করা যায়নি।");
-        return;
-    }
-
-    alert("✅ Comment Delete হয়েছে।");
-
-    loadAdminComments();
-}
-
-    document.getElementById("cancelEditBtn").onclick = function() {
-        editingArticleTitle = null;
-
-        document.getElementById("title").value = "";
-        document.getElementById("imageUrl").value = "";
-        document.getElementById("videoUrl").value = "";
-        document.getElementById("content").value = "";
-
-        document.getElementById("publishBtn").textContent = "🚀 Publish Article";
-        document.getElementById("cancelEditBtn").style.display = "none";
-        document.getElementById("publishMessage").style.display = "none";
-    };
-
-    // ইনিশিয়াল রান
     checkUser();
+
 </script>
 
 </body>
