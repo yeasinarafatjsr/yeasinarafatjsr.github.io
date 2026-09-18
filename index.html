@@ -422,26 +422,6 @@
             color: white;
         }
 
-        @media (max-width: 650px) {
-
-            .news-item {
-                padding: 12px;
-                gap: 12px;
-            }
-
-            .news-image {
-                width: 95px;
-                height: 72px;
-            }
-
-            .news-item h3 {
-                font-size: 16px;
-            }
-
-            .news-preview {
-                font-size: 13px;
-            }
-
         }
             #searchResults {
     max-width: 700px;
@@ -586,14 +566,75 @@
     .news-date {
         font-size: 11px;
     }
+@media (max-width: 600px) {
 
-    .news-preview {
+    body {
+        font-size: 15px;
+        overflow-x: hidden;
+    }
+
+    header {
+        padding: 12px 10px;
+    }
+
+    .nav {
+        gap: 10px;
+    }
+
+    .logo {
+        font-size: 21px;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    nav a {
+        margin: 0;
+        padding: 6px 8px;
         font-size: 12px;
-        line-height: 1.45;
+    }
+
+    .hero {
+        padding: 25px 12px;
+    }
+
+    .hero h1 {
+        font-size: 22px;
+    }
+
+    .hero p {
+        font-size: 13px;
+        margin-bottom: 14px;
+    }
+
+    .search {
+        width: 100%;
+    }
+
+    .search input {
+        min-width: 0;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .search button {
+        padding: 10px 13px;
+        font-size: 13px;
+    }
+
+    #searchResults {
+        width: 100%;
+        margin-top: 12px;
     }
 
     .search-result-item {
-        padding: 11px;
+        padding: 10px 12px;
+        margin-bottom: 8px;
+        border-radius: 10px;
     }
 
     .search-result-item h3 {
@@ -601,14 +642,135 @@
         line-height: 1.4;
     }
 
+    .search-result-item p {
+        font-size: 12px;
+    }
+
+    .container {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .advanced-feature {
+        padding: 18px 12px;
+        border-radius: 13px;
+    }
+
+    .advanced-feature h2 {
+        font-size: 19px;
+    }
+
+    .advanced-feature p {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .advanced-feature-btn {
+        padding: 9px 15px;
+        font-size: 13px;
+    }
+
+    .title {
+        margin-bottom: 18px;
+    }
+
+    .title h2 {
+        font-size: 23px;
+    }
+
+    .title p {
+        font-size: 13px;
+    }
+
+    .categories {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .category {
+        padding: 18px 8px;
+        border-radius: 11px;
+        font-size: 16px;
+    }
+
+    .quiz-category {
+        min-height: 105px;
+        padding: 12px 8px;
+        border-radius: 13px;
+        font-size: 18px;
+    }
+
+    #latest-news {
+        margin-top: 18px;
+    }
+
+    #latestNewsList {
+        gap: 8px;
+    }
+
+    .news-item {
+        gap: 9px;
+        padding: 9px;
+        border-radius: 10px;
+    }
+
+    .news-image {
+        width: 82px;
+        height: 65px;
+        border-radius: 7px;
+    }
+
+    .news-item h3 {
+        font-size: 14px;
+        line-height: 1.35;
+    }
+
+    .news-date {
+        font-size: 10px;
+    }
+
+    .news-preview {
+        font-size: 11px;
+        line-height: 1.45;
+    }
+
+    .more-news {
+        margin-top: 16px;
+    }
+
     .more-news a {
         font-size: 14px;
-        padding: 8px 16px;
+        padding: 8px 15px;
+    }
+
+    .about {
+        padding: 22px 14px;
+        border-radius: 11px;
+    }
+
+    .about p {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .contact a {
+        padding: 10px 18px;
+        font-size: 14px;
     }
 
     footer {
-        padding: 25px 12px;
+        padding: 24px 12px;
         font-size: 13px;
+    }
+
+    button,
+    a {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    button:active,
+    a:active {
+        transform: scale(0.97);
     }
 }
     </style>
