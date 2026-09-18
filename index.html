@@ -679,48 +679,70 @@
 
 
 <script>
-
-async function search() {
-
+ async function search() {
     const text = document
         .getElementById("searchBox")
         .value
         .trim();
 
+    const resultsBox = document.getElementById("searchResults");
+
     if (text === "") {
-        alert("দয়া করে কোনো Article-এর নাম বা শব্দ লিখে Search করুন।");
+        resultsBox.innerHTML =
+            '<div class="search-no-result">দয়া করে কোনো Article-এর নাম বা শব্দ লিখে Search করুন।</div>';
         return;
     }
 
+    resultsBox.innerHTML = "🔎 Search করা হচ্ছে...";
+
     const { data, error } = await supabaseClient
         .from("articles")
-        .select("title")
+        .select("title, category, created_at")
         .ilike("title", "%" + text + "%")
         .order("created_at", {
             ascending: false
-        })
-        .limit(1);
+        });
 
     if (error) {
-
         console.error(error);
-
-        alert("❌ Search করা যাচ্ছে না। আবার চেষ্টা করুন।");
-
+        resultsBox.innerHTML =
+            '<div class="search-no-result">❌ Search করা যাচ্ছে না। আবার চেষ্টা করুন।</div>';
         return;
     }
 
     if (!data || data.length === 0) {
-
-        alert("🔎 এই শব্দের সাথে কোনো Article পাওয়া যায়নি।");
-
+        resultsBox.innerHTML =
+            '<div class="search-no-result">🔎 এই শব্দের সাথে কোনো Article পাওয়া যায়নি।</div>';
         return;
     }
 
-    window.location.href =
-        "article.html?title=" +
-        encodeURIComponent(data[0].title);
-}
+    resultsBox.innerHTML = "";
+
+    data.forEach(article => {
+        const item = document.createElement("div");
+        item.className = "search-result-item";
+
+        const title = document.createElement("h3");
+        title.textContent = article.title;
+
+        const info = document.createElement("p");
+        info.textContent =
+            (article.category || "Article") +
+            " • " +
+            new Date(article.created_at).toLocaleDateString("bn-BD");
+
+        item.appendChild(title);
+        item.appendChild(info);
+
+        item.onclick = function () {
+            window.location.href =
+                "article.html?title=" +
+                encodeURIComponent(article.title);
+        };
+
+        resultsBox.appendChild(item);
+    });
+} 
 
 </script>
     <div id="welcomePopup" class="welcome-popup">
