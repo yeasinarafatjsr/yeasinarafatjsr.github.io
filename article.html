@@ -90,7 +90,12 @@
             margin-bottom: 20px;
         }
 
+        /* =========================
+           TOP IMAGE
+        ========================= */
+
         .article-image {
+            display: block;
             width: 100%;
             max-height: 450px;
             object-fit: cover;
@@ -98,11 +103,67 @@
             margin-bottom: 22px;
         }
 
+        /* =========================
+           ARTICLE CONTENT
+        ========================= */
+
         .article-content {
             color: #333;
             font-size: 17px;
             line-height: 1.9;
-            white-space: pre-line;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .article-content p {
+            margin: 0 0 18px;
+        }
+
+        .article-content div {
+            margin-bottom: 8px;
+        }
+
+        .article-content br {
+            line-height: 1.9;
+        }
+
+        .article-content strong,
+        .article-content b {
+            font-weight: bold;
+        }
+
+        .article-content em,
+        .article-content i {
+            font-style: italic;
+        }
+
+        .article-content u {
+            text-decoration: underline;
+        }
+
+        /* =========================
+           INLINE ARTICLE IMAGES
+        ========================= */
+
+        .article-content img {
+            display: block;
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            max-height: 650px;
+            margin: 22px auto;
+            border-radius: 10px;
+            object-fit: contain;
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin: 12px 0 18px;
+            padding-left: 28px;
+        }
+
+        .article-content li {
+            margin-bottom: 6px;
         }
 
         .back-btn {
@@ -129,6 +190,192 @@
             color: #dc2626;
         }
 
+        /* =========================
+           VIDEO
+        ========================= */
+
+        .article-video {
+            margin-top: 25px;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+        }
+
+        .article-video iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+
+        /* =========================
+           INTERACTIONS
+        ========================= */
+
+        .article-interactions {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .article-interactions h3 {
+            color: #172554;
+            margin: 0 0 15px;
+            font-size: 20px;
+        }
+
+        .reaction-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .reaction-buttons button,
+        .share-buttons button {
+            border: 1px solid #d1d5db;
+            background: #fff;
+            padding: 9px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: .2s;
+        }
+
+        .reaction-buttons button:hover,
+        .share-buttons button:hover {
+            background: #eff6ff;
+            border-color: #2563eb;
+        }
+
+        .reaction-buttons button:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
+        .reaction-buttons button b {
+            margin-left: 4px;
+            color: #2563eb;
+        }
+
+        .share-section {
+            margin-top: 30px;
+        }
+
+        .share-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* =========================
+           COMMENTS
+        ========================= */
+
+        .comments-section {
+            margin-top: 30px;
+        }
+
+        #commentName,
+        #commentText {
+            width: 100%;
+            padding: 11px;
+            margin-bottom: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 15px;
+        }
+
+        #commentText {
+            resize: vertical;
+        }
+
+        #commentBtn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #commentBtn:hover {
+            background: #1d4ed8;
+        }
+
+        #commentMessage {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        #commentsList {
+            margin-top: 20px;
+        }
+
+        .comment-item {
+            background: #f8fafc;
+            padding: 13px;
+            margin-top: 10px;
+            border-radius: 9px;
+            border-left: 3px solid #2563eb;
+        }
+
+        .comment-name {
+            font-weight: bold;
+            color: #172554;
+        }
+
+        .comment-date {
+            font-size: 12px;
+            color: #777;
+            margin-top: 3px;
+        }
+
+        .comment-text {
+            margin-top: 7px;
+            line-height: 1.6;
+        }
+
+        .more-comments-btn {
+            display: block;
+            margin: 18px auto 0;
+            padding: 10px 20px;
+            border: 1px solid #2563eb;
+            background: white;
+            color: #2563eb;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .more-comments-btn:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        .edit-comment-btn {
+            margin-top: 10px;
+            border: 1px solid #2563eb;
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .edit-comment-btn:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
         @media (max-width: 600px) {
 
             .header-inner {
@@ -136,8 +383,18 @@
                 align-items: flex-start;
             }
 
+            header h1 {
+                font-size: 21px;
+            }
+
+            .article-container {
+                margin: 15px auto;
+                padding: 0 10px;
+            }
+
             .article {
                 padding: 18px;
+                border-radius: 10px;
             }
 
             .article h2 {
@@ -149,164 +406,24 @@
                 line-height: 1.8;
             }
 
+            .article-content img {
+                width: 100%;
+                max-height: 500px;
+                margin: 18px auto;
+            }
+
+            .article-image {
+                max-height: 350px;
+            }
+
+            .reaction-buttons button,
+            .share-buttons button {
+                padding: 8px 11px;
+                font-size: 13px;
+            }
+
         }
-.article-interactions{
-    margin-top:30px;
-    padding-top:25px;
-    border-top:1px solid #e5e7eb;
-}
 
-.article-interactions h3{
-    color:#172554;
-    margin:0 0 15px;
-    font-size:20px;
-}
-
-.reaction-buttons{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-}
-
-.reaction-buttons button,
-.share-buttons button{
-    border:1px solid #d1d5db;
-    background:#fff;
-    padding:9px 14px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:14px;
-    transition:.2s;
-}
-
-.reaction-buttons button:hover,
-.share-buttons button:hover{
-    background:#eff6ff;
-    border-color:#2563eb;
-}
-
-.reaction-buttons button b{
-    margin-left:4px;
-    color:#2563eb;
-}
-
-.share-section{
-    margin-top:30px;
-}
-
-.share-buttons{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-}
-
-.comments-section{
-    margin-top:30px;
-}
-
-#commentName,
-#commentText{
-    width:100%;
-    padding:11px;
-    margin-bottom:10px;
-    border:1px solid #d1d5db;
-    border-radius:8px;
-    font-family:inherit;
-    font-size:15px;
-}
-
-#commentText{
-    resize:vertical;
-}
-
-#commentBtn{
-    border:none;
-    background:#2563eb;
-    color:white;
-    padding:10px 18px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-#commentBtn:hover{
-    background:#1d4ed8;
-}
-
-#commentMessage{
-    margin-top:10px;
-    font-size:14px;
-}
-
-#commentsList{
-    margin-top:20px;
-}
-
-.comment-item{
-    background:#f8fafc;
-    padding:13px;
-    margin-top:10px;
-    border-radius:9px;
-    border-left:3px solid #2563eb;
-}
-
-.comment-name{
-    font-weight:bold;
-    color:#172554;
-}
-
-.comment-date{
-    font-size:12px;
-    color:#777;
-    margin-top:3px;
-}
-
-.comment-text{
-    margin-top:7px;
-    line-height:1.6;
-}
-
-@media(max-width:600px){
-    .reaction-buttons button,
-    .share-buttons button{
-        padding:8px 11px;
-        font-size:13px;
-    }
-}
-        .more-comments-btn{
-    display:block;
-    margin:18px auto 0;
-    padding:10px 20px;
-    border:1px solid #2563eb;
-    background:white;
-    color:#2563eb;
-    border-radius:8px;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.more-comments-btn:hover{
-    background:#2563eb;
-    color:white;
-}
-        .edit-comment-btn{
-    margin-top:10px;
-    border:1px solid #2563eb;
-    background:#eff6ff;
-    color:#2563eb;
-    padding:6px 12px;
-    border-radius:6px;
-    font-size:13px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.edit-comment-btn:hover{
-    background:#2563eb;
-    color:white;
-}
     </style>
 
 </head>
@@ -345,6 +462,11 @@
 
 <script>
 
+
+/* ==========================================
+   SUPABASE
+========================================== */
+
 const SUPABASE_URL =
     "https://jwoajgfajojvyqrxxxen.supabase.co";
 
@@ -356,26 +478,217 @@ const supabaseClient =
         SUPABASE_URL,
         SUPABASE_KEY
     );
-    function getVisitorId(){
 
-    let visitorId=localStorage.getItem("kw_visitor_id");
 
-    if(!visitorId){
+/* ==========================================
+   VISITOR ID
+========================================== */
 
-        visitorId=
-            "visitor_"+Date.now()+"_"+Math.random().toString(36).substring(2,12);
+function getVisitorId() {
 
-        localStorage.setItem("kw_visitor_id",visitorId);
+    let visitorId =
+        localStorage.getItem(
+            "kw_visitor_id"
+        );
+
+
+    if (!visitorId) {
+
+        visitorId =
+            "visitor_" +
+            Date.now() +
+            "_" +
+            Math.random()
+                .toString(36)
+                .substring(2, 12);
+
+
+        localStorage.setItem(
+            "kw_visitor_id",
+            visitorId
+        );
+
     }
+
 
     return visitorId;
 }
 
 
+/* ==========================================
+   ESCAPE HTML
+========================================== */
+
+function escapeHTML(text) {
+
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* ==========================================
+   CLEAN ARTICLE HTML
+========================================== */
+
+function cleanArticleHTML(html) {
+
+    const parser =
+        new DOMParser();
+
+    const doc =
+        parser.parseFromString(
+            html || "",
+            "text/html"
+        );
+
+
+    /*
+     * নিরাপত্তার জন্য Script এবং
+     * কিছু dangerous element বাদ দেওয়া হচ্ছে।
+     */
+
+    const dangerousTags = [
+        "script",
+        "iframe",
+        "object",
+        "embed",
+        "form",
+        "input",
+        "button",
+        "style",
+        "link",
+        "meta"
+    ];
+
+
+    dangerousTags.forEach(tag => {
+
+        doc.querySelectorAll(tag)
+            .forEach(element => {
+                element.remove();
+            });
+
+    });
+
+
+    /*
+     * শুধু দরকারি attributes রাখা হচ্ছে।
+     */
+
+    doc.querySelectorAll("*")
+        .forEach(element => {
+
+            [...element.attributes]
+                .forEach(attribute => {
+
+                    const name =
+                        attribute.name.toLowerCase();
+
+
+                    if (
+                        name.startsWith("on") ||
+                        name === "srcdoc"
+                    ) {
+
+                        element.removeAttribute(
+                            attribute.name
+                        );
+
+                    }
+
+                });
+
+
+            /*
+             * Image URL শুধুমাত্র http/https
+             * অথবা একই origin-এর URL হবে।
+             */
+
+            if (
+                element.tagName === "IMG"
+            ) {
+
+                const src =
+                    element.getAttribute(
+                        "src"
+                    );
+
+
+                if (!src) {
+
+                    element.remove();
+
+                    return;
+
+                }
+
+
+                try {
+
+                    const parsed =
+                        new URL(
+                            src,
+                            window.location.href
+                        );
+
+
+                    if (
+                        parsed.protocol !== "https:" &&
+                        parsed.protocol !== "http:"
+                    ) {
+
+                        element.remove();
+
+                        return;
+
+                    }
+
+                } catch (error) {
+
+                    element.remove();
+
+                    return;
+
+                }
+
+
+                element.setAttribute(
+                    "loading",
+                    "lazy"
+                );
+
+
+                element.setAttribute(
+                    "alt",
+                    element.getAttribute("alt") ||
+                    "Article Image"
+                );
+
+            }
+
+        });
+
+
+    return doc.body.innerHTML;
+
+}
+
+
+/* ==========================================
+   LOAD ARTICLE
+========================================== */
+
 async function loadArticle() {
 
     const articleBox =
-        document.getElementById("articleBox");
+        document.getElementById(
+            "articleBox"
+        );
 
 
     const params =
@@ -393,33 +706,44 @@ async function loadArticle() {
         articleBox.className =
             "error";
 
+
         articleBox.innerHTML =
             "❌ কোনো Article নির্বাচন করা হয়নি।";
+
 
         return;
 
     }
 
 
-    const { data, error } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
-        .from("articles")
-        .select(
-            "title, content, category, created_at, image_url,video_url"
-        )
-        .eq("title", title)
-        .single();
+            .from("articles")
+            .select(
+                "title, content, category, created_at, image_url, video_url"
+            )
+            .eq(
+                "title",
+                title
+            )
+            .single();
 
 
     if (error || !data) {
 
         console.error(error);
 
+
         articleBox.className =
             "error";
 
+
         articleBox.innerHTML =
             "❌ Article পাওয়া যায়নি।";
+
 
         return;
 
@@ -430,6 +754,10 @@ async function loadArticle() {
         "article";
 
 
+    /* ==========================================
+       TOP IMAGE
+    ========================================== */
+
     let imageHTML = "";
 
 
@@ -437,595 +765,1199 @@ async function loadArticle() {
 
         imageHTML = `
             <img
-                src="${data.image_url}"
+                src="${escapeHTML(data.image_url)}"
                 alt="${escapeHTML(data.title)}"
                 class="article-image"
+                loading="lazy"
             >
         `;
 
     }
 
 
-    const date =
-        new Date(data.created_at)
-        .toLocaleString("bn-BD", {
-            dateStyle: "full",
-            timeStyle: "short"
-        });
+    /* ==========================================
+       DATE
+    ========================================== */
 
+    const date =
+        new Date(
+            data.created_at
+        )
+        .toLocaleString(
+            "bn-BD",
+            {
+                dateStyle: "full",
+                timeStyle: "short"
+            }
+        );
+
+
+    /* ==========================================
+       ARTICLE CONTENT
+    ========================================== */
+
+    const articleContent =
+        cleanArticleHTML(
+            data.content || ""
+        );
+
+
+    /* ==========================================
+       ARTICLE HTML
+    ========================================== */
 
     articleBox.innerHTML = `
 
         <span class="article-category">
-            ${escapeHTML(data.category || "সাধারণ")}
+            ${escapeHTML(
+                data.category ||
+                "সাধারণ"
+            )}
         </span>
 
+
         <h2>
-            ${escapeHTML(data.title)}
+            ${escapeHTML(
+                data.title
+            )}
         </h2>
+
 
         <div class="article-date">
             🕐 ${date}
         </div>
 
+
         ${imageHTML}
 
+
         <div class="article-content">
-    ${escapeHTML(data.content || "")}
-</div>
-
-${data.video_url ? `
-    <div class="article-video">
-        <iframe
-            src="${getYouTubeEmbedUrl(data.video_url) || data.video_url}"
-            title="Article Video"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-    </div>
-` : ""}
-<div class="article-interactions">
-
-    <div class="reaction-section">
-
-        <h3>আপনার প্রতিক্রিয়া</h3>
-
-        <!-- শুধুমাত্র Like এবং Love-এ কাউন্টার রাখা হয়েছে -->
-        <div class="reaction-buttons">
-
-            <button data-reaction="like">
-                👍 <span>Like</span>
-                <b>0</b>
-            </button>
-
-            <button data-reaction="love">
-                ❤️ <span>Love</span>
-                <b>0</b>
-            </button>
-
-            <button data-reaction="dislike">
-                👎 <span>Dislike</span>
-            </button>
-
-            <button data-reaction="haha">
-                😂 <span>Haha</span>
-            </button>
-
-            <button data-reaction="wow">
-                😮 <span>Wow</span>
-            </button>
-
-            <button data-reaction="sad">
-                😢 <span>Sad</span>
-            </button>
-
-        </div>
-        <div id="reactionMessage" style="margin-top: 8px; font-size: 13px; color: #dc2626;"></div>
-
-    </div>
-
-
-    <div class="share-section">
-
-        <h3>📤 শেয়ার করুন</h3>
-
-        <div class="share-buttons">
-
-            <button id="nativeShareBtn">
-                📤 Share
-            </button>
-
-            <button id="copyLinkBtn">
-                🔗 Copy Link
-            </button>
-
+            ${articleContent}
         </div>
 
-    </div>
 
+        ${
+            data.video_url
+            ? `
+                <div class="article-video">
 
-    <div class="comments-section">
+                    <iframe
+                        src="${
+                            escapeHTML(
+                                getYouTubeEmbedUrl(
+                                    data.video_url
+                                ) ||
+                                data.video_url
+                            )
+                        }"
+                        title="Article Video"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
 
-        <h3>💬 Comments</h3>
-
-        <input
-            type="text"
-            id="commentName"
-            placeholder="আপনার নাম"
-        >
-
-        <textarea
-            id="commentText"
-            placeholder="আপনার মন্তব্য লিখুন..."
-            rows="4">
-        </textarea>
-
-        <button id="commentBtn">
-            💬 Comment করুন
-        </button>
-
-        <div id="commentMessage"></div>
-
-        <div id="commentsList">
-            মন্তব্য লোড হচ্ছে...
-        </div>
-
-    </div>
-
-</div>
-<a href="index.html"
-   class="back-btn">
-    ← Home-এ ফিরে যান
-</a>
-
-    `;
-setupInteractions(data.title);
-    async function setupInteractions(articleTitle){
-
-    // =========================
-    // Reactions (Updated Logic)
-    // =========================
-
-    async function loadReactions(){
-
-        // শুধুমাত্র Like এবং Love-এর কাউন্ট লোড করা হচ্ছে
-        const {data,error}=await supabaseClient
-            .from("reactions")
-            .select("reaction")
-            .eq("article_title",articleTitle)
-            .in("reaction", ["like", "love"]);
-
-        if(error){
-            console.error(error);
-            return;
+                </div>
+            `
+            : ""
         }
 
-        const counts={
-            like:0,
-            love:0
+
+        <div class="article-interactions">
+
+
+            <!-- =========================
+                 REACTIONS
+            ========================= -->
+
+            <div class="reaction-section">
+
+                <h3>
+                    আপনার প্রতিক্রিয়া
+                </h3>
+
+
+                <div class="reaction-buttons">
+
+                    <button
+                        data-reaction="like">
+
+                        👍
+                        <span>Like</span>
+                        <b>0</b>
+
+                    </button>
+
+
+                    <button
+                        data-reaction="love">
+
+                        ❤️
+                        <span>Love</span>
+                        <b>0</b>
+
+                    </button>
+
+
+                    <button
+                        data-reaction="dislike">
+
+                        👎
+                        <span>Dislike</span>
+
+                    </button>
+
+
+                    <button
+                        data-reaction="haha">
+
+                        😂
+                        <span>Haha</span>
+
+                    </button>
+
+
+                    <button
+                        data-reaction="wow">
+
+                        😮
+                        <span>Wow</span>
+
+                    </button>
+
+
+                    <button
+                        data-reaction="sad">
+
+                        😢
+                        <span>Sad</span>
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="reactionMessage"
+                    style="margin-top:8px; font-size:13px; color:#dc2626;">
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 SHARE
+            ========================= -->
+
+            <div class="share-section">
+
+                <h3>
+                    📤 শেয়ার করুন
+                </h3>
+
+
+                <div class="share-buttons">
+
+                    <button id="nativeShareBtn">
+                        📤 Share
+                    </button>
+
+
+                    <button id="copyLinkBtn">
+                        🔗 Copy Link
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 COMMENTS
+            ========================= -->
+
+            <div class="comments-section">
+
+                <h3>
+                    💬 Comments
+                </h3>
+
+
+                <input
+                    type="text"
+                    id="commentName"
+                    placeholder="আপনার নাম"
+                >
+
+
+                <textarea
+                    id="commentText"
+                    placeholder="আপনার মন্তব্য লিখুন..."
+                    rows="4">
+                </textarea>
+
+
+                <button id="commentBtn">
+                    💬 Comment করুন
+                </button>
+
+
+                <div id="commentMessage"></div>
+
+
+                <div id="commentsList">
+                    মন্তব্য লোড হচ্ছে...
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <a
+            href="index.html"
+            class="back-btn">
+
+            ← Home-এ ফিরে যান
+
+        </a>
+
+    `;
+
+
+    setupInteractions(
+        data.title
+    );
+
+}
+
+
+/* ==========================================
+   INTERACTIONS
+========================================== */
+
+async function setupInteractions(
+    articleTitle
+) {
+
+
+    /* ==========================================
+       REACTIONS
+    ========================================== */
+
+    async function loadReactions() {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("reactions")
+                .select("reaction")
+                .eq(
+                    "article_title",
+                    articleTitle
+                )
+                .in(
+                    "reaction",
+                    [
+                        "like",
+                        "love"
+                    ]
+                );
+
+
+        if (error) {
+
+            console.error(error);
+
+            return;
+
+        }
+
+
+        const counts = {
+
+            like: 0,
+
+            love: 0
+
         };
 
-        (data || []).forEach(item=>{
-            if(counts[item.reaction] !== undefined){
-                counts[item.reaction]++;
-            }
-        });
 
-        document.querySelectorAll(".reaction-buttons button").forEach(button=>{
+        (data || [])
+            .forEach(item => {
 
-            const type=button.dataset.reaction;
-            const countElement=button.querySelector("b");
+                if (
+                    counts[item.reaction] !==
+                    undefined
+                ) {
 
-            if(countElement && counts[type] !== undefined){
-                countElement.textContent=counts[type];
-            }
+                    counts[item.reaction]++;
 
-        });
+                }
+
+            });
+
+
+        document
+            .querySelectorAll(
+                ".reaction-buttons button"
+            )
+            .forEach(button => {
+
+                const type =
+                    button.dataset.reaction;
+
+
+                const countElement =
+                    button.querySelector("b");
+
+
+                if (
+                    countElement &&
+                    counts[type] !== undefined
+                ) {
+
+                    countElement.textContent =
+                        counts[type];
+
+                }
+
+            });
+
     }
 
 
-    document.querySelectorAll(".reaction-buttons button").forEach(button=>{
+    document
+        .querySelectorAll(
+            ".reaction-buttons button"
+        )
+        .forEach(button => {
 
-        button.addEventListener("click",async function(){
+            button.addEventListener(
+                "click",
+                async function() {
 
-            const reactionMessage = document.getElementById("reactionMessage");
-            const reactionKey = "kw_reaction_" + articleTitle;
+                    const reactionMessage =
+                        document.getElementById(
+                            "reactionMessage"
+                        );
 
-            // চেক করা হচ্ছে ভিজিটর আগে যেকোনো রিঅ্যাকশন দিয়েছে কি না
-            if(localStorage.getItem(reactionKey)){
-                if(reactionMessage){
-                    reactionMessage.textContent = "⚠️ আপনি ইতিমধ্যে এই Article-এ একটি প্রতিক্রিয়া দিয়েছেন!";
+
+                    const reactionKey =
+                        "kw_reaction_" +
+                        articleTitle;
+
+
+                    if (
+                        localStorage.getItem(
+                            reactionKey
+                        )
+                    ) {
+
+                        if (reactionMessage) {
+
+                            reactionMessage.textContent =
+                                "⚠️ আপনি ইতিমধ্যে এই Article-এ একটি প্রতিক্রিয়া দিয়েছেন!";
+
+                        }
+
+                        return;
+
+                    }
+
+
+                    const reaction =
+                        this.dataset.reaction;
+
+
+                    this.disabled = true;
+
+
+                    const { error } =
+                        await supabaseClient
+                            .from("reactions")
+                            .insert({
+
+                                article_title:
+                                    articleTitle,
+
+                                reaction:
+                                    reaction
+
+                            });
+
+
+                    if (error) {
+
+                        console.error(error);
+
+                        alert(
+                            "❌ Reaction দেওয়া যায়নি।"
+                        );
+
+                    } else {
+
+                        localStorage.setItem(
+                            reactionKey,
+                            reaction
+                        );
+
+
+                        if (
+                            reactionMessage
+                        ) {
+
+                            reactionMessage.style.color =
+                                "#166534";
+
+
+                            reactionMessage.textContent =
+                                "✅ প্রতিক্রিয়া সফলভাবে জমা হয়েছে!";
+
+                        }
+
+
+                        await loadReactions();
+
+                    }
+
+
+                    this.disabled =
+                        false;
+
                 }
-                return;
-            }
-
-            const reaction=this.dataset.reaction;
-
-            this.disabled=true;
-
-            const {error}=await supabaseClient
-                .from("reactions")
-                .insert({
-                    article_title:articleTitle,
-                    reaction:reaction
-                });
-
-            if(error){
-
-                console.error(error);
-                alert("❌ Reaction দেওয়া যায়নি।");
-
-            }else{
-
-                // একবার দিলে ব্রাউজারে সেভ হয়ে যাবে
-                localStorage.setItem(reactionKey, reaction);
-                if(reactionMessage){
-                    reactionMessage.style.color = "#166534";
-                    reactionMessage.textContent = "✅ প্রতিক্রিয়া সফলভাবে জমা হয়েছে!";
-                }
-                await loadReactions();
-
-            }
-
-            this.disabled=false;
+            );
 
         });
-
-    });
 
 
     await loadReactions();
 
 
-    // =========================
-    // Comments
-    // =========================
+    /* ==========================================
+       COMMENTS
+    ========================================== */
 
-async function loadComments(showAll=false){
+    async function loadComments(
+        showAll = false
+    ) {
 
-    const commentsList=document.getElementById("commentsList");
+        const commentsList =
+            document.getElementById(
+                "commentsList"
+            );
 
-    commentsList.innerHTML="মন্তব্য লোড হচ্ছে...";
 
-    const {data,error}=await supabaseClient
-        .from("comments")
-        .select("id, name, comment, created_at, visitor_id")
-        .eq("article_title",articleTitle)
-        .eq("is_hidden",false)
-        .order("created_at",{ascending:false});
+        commentsList.innerHTML =
+            "মন্তব্য লোড হচ্ছে...";
 
-    if(error){
 
-        console.error(error);
-        commentsList.innerHTML="❌ মন্তব্য লোড করা যাচ্ছে না।";
-        return;
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("comments")
+                .select(
+                    "id, name, comment, created_at, visitor_id"
+                )
+                .eq(
+                    "article_title",
+                    articleTitle
+                )
+                .eq(
+                    "is_hidden",
+                    false
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending: false
+                    }
+                );
 
-    }
 
-    if(!data || data.length===0){
-
-        commentsList.innerHTML="এখনো কোনো মন্তব্য নেই।";
-        return;
-
-    }
-
-    commentsList.innerHTML="";
-
-    const commentsToShow=showAll ? data : data.slice(0,5);
-    const visitorId=getVisitorId();
-
-    commentsToShow.forEach(item=>{
-
-        const commentBox=document.createElement("div");
-        commentBox.className="comment-item";
-
-        const name=document.createElement("div");
-        name.className="comment-name";
-        name.textContent=item.name;
-
-        const date=document.createElement("div");
-        date.className="comment-date";
-        date.textContent=
-            "🕐 "+new Date(item.created_at).toLocaleString("bn-BD");
-
-        const text=document.createElement("div");
-        text.className="comment-text";
-        text.textContent=item.comment;
-
-        commentBox.appendChild(name);
-        commentBox.appendChild(date);
-        commentBox.appendChild(text);
-        if(item.visitor_id === visitorId){
-
-    const editButton=document.createElement("button");
-
-    editButton.textContent="✏️ Edit";
-    editButton.className="edit-comment-btn";
-
-    editButton.addEventListener("click",async function(){
-
-        const newComment=prompt("আপনার নতুন মন্তব্য লিখুন:",item.comment);
-
-        if(newComment === null){
-            return;
-        }
-
-        const updatedComment=newComment.trim();
-
-        if(!updatedComment){
-            alert("⚠️ মন্তব্য খালি রাখা যাবে না।");
-            return;
-        }
-
-        const {error}=await supabaseClient
-            .from("comments")
-            .update({
-                comment:updatedComment,
-                updated_at:new Date().toISOString()
-            })
-            .eq("id",item.id)
-            .eq("visitor_id",visitorId);
-
-        if(error){
+        if (error) {
 
             console.error(error);
-            alert("❌ Comment Edit করা যায়নি।");
 
-        }else{
+            commentsList.innerHTML =
+                "❌ মন্তব্য লোড করা যাচ্ছে না।";
 
-            await loadComments(showAll);
+            return;
 
         }
 
-    });
 
-    commentBox.appendChild(editButton);
+        if (
+            !data ||
+            data.length === 0
+        ) {
 
-}
+            commentsList.innerHTML =
+                "এখনো কোনো মন্তব্য নেই।";
 
-        commentsList.appendChild(commentBox);
+            return;
 
-    });
+        }
 
 
-    // ৫টির বেশি Comment থাকলে "আরও দেখুন" দেখাবে
-    if(data.length > 5 && !showAll){
+        commentsList.innerHTML =
+            "";
 
-        const moreButton=document.createElement("button");
 
-        moreButton.textContent="আরও দেখুন →";
-        moreButton.className="more-comments-btn";
+        const commentsToShow =
+            showAll
+                ? data
+                : data.slice(0, 5);
 
-        moreButton.addEventListener("click",function(){
 
-            loadComments(true);
+        const visitorId =
+            getVisitorId();
 
-        });
 
-        commentsList.appendChild(moreButton);
+        commentsToShow.forEach(
+            item => {
+
+                const commentBox =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                commentBox.className =
+                    "comment-item";
+
+
+                const name =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                name.className =
+                    "comment-name";
+
+
+                name.textContent =
+                    item.name;
+
+
+                const date =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                date.className =
+                    "comment-date";
+
+
+                date.textContent =
+                    "🕐 " +
+                    new Date(
+                        item.created_at
+                    ).toLocaleString(
+                        "bn-BD"
+                    );
+
+
+                const text =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                text.className =
+                    "comment-text";
+
+
+                text.textContent =
+                    item.comment;
+
+
+                commentBox.appendChild(
+                    name
+                );
+
+
+                commentBox.appendChild(
+                    date
+                );
+
+
+                commentBox.appendChild(
+                    text
+                );
+
+
+                /* =========================
+                   EDIT OWN COMMENT
+                ========================= */
+
+                if (
+                    item.visitor_id ===
+                    visitorId
+                ) {
+
+                    const editButton =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    editButton.textContent =
+                        "✏️ Edit";
+
+
+                    editButton.className =
+                        "edit-comment-btn";
+
+
+                    editButton.addEventListener(
+                        "click",
+                        async function() {
+
+                            const newComment =
+                                prompt(
+                                    "আপনার নতুন মন্তব্য লিখুন:",
+                                    item.comment
+                                );
+
+
+                            if (
+                                newComment ===
+                                null
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            const updatedComment =
+                                newComment.trim();
+
+
+                            if (
+                                !updatedComment
+                            ) {
+
+                                alert(
+                                    "⚠️ মন্তব্য খালি রাখা যাবে না।"
+                                );
+
+                                return;
+
+                            }
+
+
+                            const {
+                                error
+                            } =
+                                await supabaseClient
+                                    .from("comments")
+                                    .update({
+
+                                        comment:
+                                            updatedComment,
+
+                                        updated_at:
+                                            new Date()
+                                                .toISOString()
+
+                                    })
+                                    .eq(
+                                        "id",
+                                        item.id
+                                    )
+                                    .eq(
+                                        "visitor_id",
+                                        visitorId
+                                    );
+
+
+                            if (error) {
+
+                                console.error(
+                                    error
+                                );
+
+                                alert(
+                                    "❌ Comment Edit করা যায়নি।"
+                                );
+
+                            } else {
+
+                                await loadComments(
+                                    showAll
+                                );
+
+                            }
+
+                        }
+                    );
+
+
+                    commentBox.appendChild(
+                        editButton
+                    );
+
+                }
+
+
+                commentsList.appendChild(
+                    commentBox
+                );
+
+            }
+        );
+
+
+        /* =========================
+           MORE COMMENTS
+        ========================= */
+
+        if (
+            data.length > 5 &&
+            !showAll
+        ) {
+
+            const moreButton =
+                document.createElement(
+                    "button"
+                );
+
+
+            moreButton.textContent =
+                "আরও দেখুন →";
+
+
+            moreButton.className =
+                "more-comments-btn";
+
+
+            moreButton.addEventListener(
+                "click",
+                function() {
+
+                    loadComments(true);
+
+                }
+            );
+
+
+            commentsList.appendChild(
+                moreButton
+            );
+
+        }
 
     }
 
-}
+
+    /* ==========================================
+       COMMENT SUBMIT
+    ========================================== */
+
+    document
+        .getElementById(
+            "commentBtn"
+        )
+        .addEventListener(
+            "click",
+            async function() {
+
+                const nameInput =
+                    document.getElementById(
+                        "commentName"
+                    );
 
 
-    // =========================
-    // Comment Submit
-    // =========================
-
-    document.getElementById("commentBtn").addEventListener("click",async function(){
-
-        const nameInput=document.getElementById("commentName");
-        const textInput=document.getElementById("commentText");
-        const message=document.getElementById("commentMessage");
-        const visitorId=getVisitorId();
-
-        const name=nameInput.value.trim();
-        const comment=textInput.value.trim();
-        const {data:existingComment,error:checkError}=await supabaseClient
-    .from("comments")
-    .select("id")
-    .eq("article_title",articleTitle)
-    .eq("visitor_id",visitorId)
-    .maybeSingle();
-
-if(checkError){
-    console.error(checkError);
-    message.textContent="❌ Comment যাচাই করা যাচ্ছে না।";
-    return;
-}
-
-if(existingComment){
-    message.textContent="⚠️ আপনি এই Article-এ ইতিমধ্যে Comment করেছেন।";
-    return;
-}
+                const textInput =
+                    document.getElementById(
+                        "commentText"
+                    );
 
 
-        // নাম অবশ্যই দিতে হবে
-        if(!name){
-
-            message.textContent="⚠️ মন্তব্য করার আগে আপনার নাম লিখুন।";
-            nameInput.focus();
-            return;
-
-        }
+                const message =
+                    document.getElementById(
+                        "commentMessage"
+                    );
 
 
-        // মন্তব্য অবশ্যই দিতে হবে
-        if(!comment){
-
-            message.textContent="⚠️ আপনার মন্তব্য লিখুন।";
-            textInput.focus();
-            return;
-
-        }
+                const visitorId =
+                    getVisitorId();
 
 
-        this.disabled=true;
-
-        message.textContent="মন্তব্য পাঠানো হচ্ছে...";
-
-
-        const {error}=await supabaseClient
-            .from("comments")
-            .insert({
-                article_title:articleTitle,
-                name:name,
-                comment:comment,
-                visitor_id : visitorId
-            });
+                const name =
+                    nameInput.value.trim();
 
 
-        if(error){
+                const comment =
+                    textInput.value.trim();
 
-            console.error(error);
 
-            message.textContent=
-                "❌ মন্তব্য পাঠানো যায়নি। আবার চেষ্টা করুন।";
+                /* =========================
+                   CHECK EXISTING COMMENT
+                ========================= */
 
-        }else{
+                const {
+                    data: existingComment,
+                    error: checkError
+                } =
+                    await supabaseClient
+                        .from("comments")
+                        .select("id")
+                        .eq(
+                            "article_title",
+                            articleTitle
+                        )
+                        .eq(
+                            "visitor_id",
+                            visitorId
+                        )
+                        .maybeSingle();
 
-            message.textContent=
-                "✅ মন্তব্য সফলভাবে যোগ হয়েছে।";
 
-            nameInput.value="";
-            textInput.value="";
+                if (checkError) {
 
-            await loadComments();
+                    console.error(
+                        checkError
+                    );
 
-        }
 
-        this.disabled=false;
+                    message.textContent =
+                        "❌ Comment যাচাই করা যাচ্ছে না।";
 
-    });
+
+                    return;
+
+                }
+
+
+                if (existingComment) {
+
+                    message.textContent =
+                        "⚠️ আপনি এই Article-এ ইতিমধ্যে Comment করেছেন।";
+
+
+                    return;
+
+                }
+
+
+                /* =========================
+                   NAME CHECK
+                ========================= */
+
+                if (!name) {
+
+                    message.textContent =
+                        "⚠️ মন্তব্য করার আগে আপনার নাম লিখুন।";
+
+
+                    nameInput.focus();
+
+
+                    return;
+
+                }
+
+
+                /* =========================
+                   COMMENT CHECK
+                ========================= */
+
+                if (!comment) {
+
+                    message.textContent =
+                        "⚠️ আপনার মন্তব্য লিখুন।";
+
+
+                    textInput.focus();
+
+
+                    return;
+
+                }
+
+
+                this.disabled =
+                    true;
+
+
+                message.textContent =
+                    "মন্তব্য পাঠানো হচ্ছে...";
+
+
+                /* =========================
+                   INSERT COMMENT
+                ========================= */
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                        .from("comments")
+                        .insert({
+
+                            article_title:
+                                articleTitle,
+
+                            name:
+                                name,
+
+                            comment:
+                                comment,
+
+                            visitor_id:
+                                visitorId
+
+                        });
+
+
+                if (error) {
+
+                    console.error(
+                        error
+                    );
+
+
+                    message.textContent =
+                        "❌ মন্তব্য পাঠানো যায়নি। আবার চেষ্টা করুন।";
+
+
+                } else {
+
+                    message.textContent =
+                        "✅ মন্তব্য সফলভাবে যোগ হয়েছে।";
+
+
+                    nameInput.value =
+                        "";
+
+
+                    textInput.value =
+                        "";
+
+
+                    await loadComments();
+
+                }
+
+
+                this.disabled =
+                    false;
+
+            }
+        );
 
 
     await loadComments();
 
 
-    // =========================
-    // Share
-    // =========================
+    /* ==========================================
+       NATIVE SHARE
+    ========================================== */
 
-    document.getElementById("nativeShareBtn").addEventListener("click",async function(){
+    document
+        .getElementById(
+            "nativeShareBtn"
+        )
+        .addEventListener(
+            "click",
+            async function() {
 
-        const shareData={
-            title:articleTitle,
-            text:articleTitle,
-            url:window.location.href
-        };
+                const shareData = {
+
+                    title:
+                        articleTitle,
+
+                    text:
+                        articleTitle,
+
+                    url:
+                        window.location.href
+
+                };
 
 
-        if(navigator.share){
+                if (
+                    navigator.share
+                ) {
 
-            try{
+                    try {
 
-                await navigator.share(shareData);
+                        await navigator.share(
+                            shareData
+                        );
 
-            }catch(error){
+                    } catch (error) {
 
-                console.log("Share cancelled");
+                        console.log(
+                            "Share cancelled"
+                        );
+
+                    }
+
+                } else {
+
+                    try {
+
+                        await navigator
+                            .clipboard
+                            .writeText(
+                                window.location.href
+                            );
+
+
+                        alert(
+                            "🔗 Article link কপি হয়েছে।"
+                        );
+
+                    } catch (error) {
+
+                        alert(
+                            "❌ Link কপি করা যায়নি।"
+                        );
+
+                    }
+
+                }
 
             }
+        );
 
-        }else{
 
-            try{
+    /* ==========================================
+       COPY LINK
+    ========================================== */
 
-                await navigator.clipboard.writeText(window.location.href);
+    document
+        .getElementById(
+            "copyLinkBtn"
+        )
+        .addEventListener(
+            "click",
+            async function() {
 
-                alert("🔗 Article link কপি হয়েছে।");
+                try {
 
-            }catch(error){
+                    await navigator
+                        .clipboard
+                        .writeText(
+                            window.location.href
+                        );
 
-                alert("❌ Link কপি করা যায়নি।");
+
+                    this.textContent =
+                        "✅ Link Copied!";
+
+
+                    setTimeout(
+                        () => {
+
+                            this.textContent =
+                                "🔗 Copy Link";
+
+                        },
+                        2000
+                    );
+
+
+                } catch (error) {
+
+                    alert(
+                        "❌ Link কপি করা যায়নি।"
+                    );
+
+                }
 
             }
-
-        }
-
-    });
-
-
-    // =========================
-    // Copy Link
-    // =========================
-
-    document.getElementById("copyLinkBtn").addEventListener("click",async function(){
-
-        try{
-
-            await navigator.clipboard.writeText(window.location.href);
-
-            this.textContent="✅ Link Copied!";
-
-            setTimeout(()=>{
-
-                this.textContent="🔗 Copy Link";
-
-            },2000);
-
-        }catch(error){
-
-            alert("❌ Link কপি করা যায়নি।");
-
-        }
-
-    });
+        );
 
 }
-}
 
 
-function escapeHTML(text) {
+/* ==========================================
+   YOUTUBE EMBED
+========================================== */
 
-    return String(text)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-}
-function getYouTubeEmbedUrl(url) {
+function getYouTubeEmbedUrl(
+    url
+) {
 
     try {
 
         const parsed =
             new URL(url);
 
+
         if (
-            parsed.hostname.includes("youtube.com")
+            parsed.hostname.includes(
+                "youtube.com"
+            )
         ) {
 
             const videoId =
-                parsed.searchParams.get("v");
+                parsed.searchParams.get(
+                    "v"
+                );
+
 
             if (videoId) {
-                return "https://www.youtube.com/embed/" + videoId;
+
+                return (
+                    "https://www.youtube.com/embed/" +
+                    videoId
+                );
+
             }
+
         }
 
+
         if (
-            parsed.hostname === "youtu.be"
+            parsed.hostname ===
+            "youtu.be"
         ) {
 
             const videoId =
-                parsed.pathname.substring(1);
+                parsed.pathname.substring(
+                    1
+                );
+
 
             if (videoId) {
-                return "https://www.youtube.com/embed/" + videoId;
+
+                return (
+                    "https://www.youtube.com/embed/" +
+                    videoId
+                );
+
             }
+
         }
+
 
     } catch (error) {
 
         return null;
+
     }
 
+
     return null;
+
 }
+
+
+/* ==========================================
+   START
+========================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
